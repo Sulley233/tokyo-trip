@@ -502,7 +502,7 @@
 <div class="sheet" id="tipsSheet">
   <div class="grip"></div>
   <h3>东京旅行贴士</h3>
-  <div class="sub">当前行程版本 <b style="color:#C2433D">v65</b> · 2026.09.09 08:05 更新</div>
+  <div class="sub">当前行程版本 <b style="color:#C2433D">v66</b> · 2026.09.09 13:30 更新</div>
   <div class="tips-list">
     <div class="tip"><span class="emo">✈️</span><div><b>航班信息</b>：去程 <b>HX606</b> 香港 01:50 → 成田 07:15（4h25m）；回程成田 20:25 → 香港 00:50+1（5h25m）。<span>香港航空 · 成田 T1 航站楼</span>。</div></div>
     <div class="tip"><span class="emo">🏠</span><div><b>民宿</b>：中央区日本桥小伝馬町 16-6（〒103-0001）；最近车站：日比谷线「小伝馬町」步行 3 分钟、JR「新日本桥」5 分钟、都营浅草线「东日本桥」7 分钟。</div></div>
@@ -575,7 +575,7 @@ function lighten(hex, t){
 
 /* ================= 默认行程数据 ================= */
 const DEFAULT_DATA = {
-  version: 56,
+  version: 57,
   todos: [
     {id:'t1', text:'抢三鹰吉卜力美术馆 11 月门票', tag:'每月 10 日开售下月票 → 10/10 上午放票，需官网注册+手速', urgent:true, done:false},
     {id:'t2', text:'生化危机展览门票', tag:'官网购票，留意场馆与入场场次（11.22）', urgent:false, done:false},
@@ -948,6 +948,8 @@ const PRICE_UPDATES = [
 /* ================= 状态管理 ================= */
 const STORAGE_KEY = 'tokyo-trip-v2';
 let state = load() || JSON.parse(JSON.stringify(DEFAULT_DATA));
+/* v66: 無論新用戶還是舊資料，都確保每天行程依時間升序（曾出現 11:05 排在 10:15 前面） */
+state.days.forEach(day=>{ (day.items||[]).sort((a,b)=> String(a.time).localeCompare(String(b.time))); });
 let currentDay = 0;
 let expandedIds = new Set();
 let editing = null;          // {day, idx|null}
@@ -1200,6 +1202,8 @@ function load(){
         d.days.forEach(day=>{ if(wxMap[day.date]){ if(!day.wx) day.wx = JSON.parse(JSON.stringify(wxMap[day.date].wx)); if(!day.wear) day.wear = wxMap[day.date].wear; } });
         try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }catch(e){}
       }
+      /* v66: 回傳前一律依時間排序，避免任何來源的順序錯誤 */
+      d.days.forEach(day=>{ (day.items||[]).sort((a,b)=> String(a.time).localeCompare(String(b.time))); });
       return d;
     }
     return null;
@@ -1622,6 +1626,7 @@ async function copyText(t){
 $('bbReset').addEventListener('click', ()=>{
   askConfirm('恢复默认行程', '将清空你的所有修改，恢复到默认行程，确定吗？', ()=>{
     state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    state.days.forEach(day=>{ (day.items||[]).sort((a,b)=> String(a.time).localeCompare(String(b.time))); });
     currentDay = 0; expandedIds.clear();
     save(); renderAll();
     toast('已恢复默认行程 ✓');
