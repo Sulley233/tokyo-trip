@@ -502,7 +502,7 @@
 <div class="sheet" id="tipsSheet">
   <div class="grip"></div>
   <h3>东京旅行贴士</h3>
-  <div class="sub">当前行程版本 <b style="color:#C2433D">v67</b> · 2026.09.08 11:00 更新</div>
+  <div class="sub">当前行程版本 <b style="color:#C2433D">v68</b> · 2026.09.09 15:40 更新</div>
   <div class="tips-list">
     <div class="tip"><span class="emo">✈️</span><div><b>航班信息</b>：去程 <b>HX606</b> 香港 01:50 → 成田 07:15（4h25m）；回程成田 20:25 → 香港 00:50+1（5h25m）。<span>香港航空 · 成田 T1 航站楼</span>。</div></div>
     <div class="tip"><span class="emo">🏠</span><div><b>民宿</b>：中央区日本桥小伝馬町 16-6（〒103-0001）；最近车站：日比谷线「小伝馬町」步行 3 分钟、JR「新日本桥」5 分钟、都营浅草线「东日本桥」7 分钟。</div></div>
@@ -575,7 +575,7 @@ function lighten(hex, t){
 
 /* ================= 默认行程数据 ================= */
 const DEFAULT_DATA = {
-  version: 58,
+  version: 59,
   todos: [
     {id:'t1', text:'抢三鹰吉卜力美术馆 11 月门票', tag:'每月 10 日开售下月票 → 10/10 上午放票，需官网注册+手速', urgent:true, done:false},
     {id:'t2', text:'生化危机展览门票', tag:'官网购票，留意场馆与入场场次（11.22）', urgent:false, done:false},
@@ -583,7 +583,7 @@ const DEFAULT_DATA = {
     {id:'t4', text:'预约高速巴士 新宿 → 山中湖旭日丘（11.20 08:15 班次）', tag:'⚠️ 全指定席、发车前 1 个月开放预约；网上支付约 ¥2,350 比窗口便宜；红叶季极易满席。票要买到「山中湖旭日丘」不是河口湖', urgent:true, done:false},
     {id:'t5', text:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:45 预约', tag:'TableCheck 网上预约或电话 070-3206-1079；只有 12 席、L.O. 21:30，务必提前；迟到 15 分钟以上座位可能被取消', urgent:true, done:false},
     {id:'t12', text:'预约高速巴士 河口湖站 → 新宿（11.20 18:10 班次）', tag:'红叶季满席常见，建议提前网上预约；也可河口湖站窗口现场买。备选 18:20 / 18:40 班次', urgent:false, done:false},
-    {id:'t6', text:'焼肉芝浦 新宿订位 11.18 晚餐', tag:'人气烤肉店，提前订位稳妥', urgent:false, done:false},
+    {id:'t6', text:'Yakiniku Hormone Bondz 新宿本馆 11.18 晚餐订位', tag:'电话 03-4400-7699（Tabelog 专线 050-5593-6646）；新宿站东南口徒步 2 分钟，週三 16:00 开门、不定休', urgent:false, done:false},
     {id:'t7', text:'eSIM / 随身 WiFi', tag:'出发前 1 周买好，落地即插即用', urgent:false, done:false},
     {id:'t8', text:'Suica 绑定 + 备 2~3 万日元现金', tag:'iPhone 钱包可直接添加西瓜卡', urgent:false, done:false},
     {id:'t9', text:'HX606 网上值机', tag:'出发前 24-48 小时开放，选好座位', urgent:false, done:false},
@@ -624,7 +624,7 @@ const DEFAULT_DATA = {
         {id:'a11', time:'16:30', type:'transport', title:'前往新宿', loc:'JR 中央线', note:'吉祥寺 → 新宿约 15 分钟。'},
         {id:'a12', time:'17:00', type:'shop', title:'新宿购物巡礼', loc:'丸井 · NEWoMan 一带', note:'冈田屋 / Sanrio / 迪士尼旗舰店 / 丸井本馆·别馆 / animate 新宿店顺路扫。', geo:'新宿マルイ 本館'},
         {id:'a13', time:'18:30', type:'night', title:'歌舞伎町一番街 · 哥斯拉头', loc:'新宿东口', note:'霓虹地标打卡；哥斯拉头在新宿东宝大厦，整点喷汽咆哮。', geo:'歌舞伎町'},
-        {id:'a14', time:'19:30', type:'food', title:'晚餐：新宿烤肉芝浦荷尔蒙', loc:'新宿', note:'行程指定烧肉店，荷尔蒙拼盘+和牛，人气店建议提前订位。', geo:'焼肉芝浦 新宿'},
+        {id:'a14', time:'19:30', type:'food', title:'晚餐：Yakiniku Hormone Bondz 新宿本馆', loc:'新宿区新宿 3-35-11 あぜみビル 1F（新宿站东南口徒步 2 分钟）', note:'💰 人均 ¥250-350（含税，コース ¥208 起、另加饮品）｜「**焼肉ホルモン ボンズ 新宿本館**」——2024.6 才开幕的新店，概念是「**朋友开的烧肉店**」：气氛亲切不摆架子，却用**上质黑毛和牛 + 新鲜荷尔蒙**，价格压得很亲民（Tabelog **3.35** / 288 条评价，人均 JPY 5,000-5,999）。🔥 **店员会帮你烤**：スタッフが丁寧に焼き上げます，每块肉都在最刚好的熟度递到你面前——不用自己顾炉火也不怕烤焦，**落地第一天已经累瘫，这点超重要**。📍 **新宿站东南口出来步行 2 分钟**（205m）；从 a13 歌舞伎町一番街／哥斯拉头走过来约 5-8 分钟，**完全顺路**。🕐 **11.18 週三营业 16:00-00:00**（週末 11:30 开），19:30 入座没问题；⚠️ **不定休**（员工研修／内部活动可能临时休），出发当天再确认一次。🍖 必点：黑毛和牛拼盘、**荷尔蒙拼盘（ホルモン盛り合わせ）**、和牛舌、ハラミ、ミノ、シマチョウ；**套餐 ¥4,158 起**（可加 2 小时饮み放题），两人点套餐＋单点几样最划算。🪑 39 席、无包厢（可包场）、有指定吸烟区（仅加热式烟，一般座位闻不太到）。💳 信用卡 VISA / Master / JCB / AMEX / Diners ＋ PayPay；**电子钱包（Suica 等）不可用**，备好卡或现金。⚠️ 建议提前订位！电话 **03-4400-7699**（Tabelog 预约专线 050-5593-6646），週三晚间热门时段建议订 19:30。🚶 21:00 前结束，走回新宿站搭都营新宿线回民宿。', geo:'焼肉ホルモン ボンズ 新宿本館'},
         {id:'a10', time:'21:00', type:'hotel', title:'回民宿', loc:'新宿 → 马喰横山', note:'都营新宿线 新宿直达马喰横山站，步行约 7 分钟到家；凌晨航班，今晚早点休息。', geo:'東京都中央区日本橋小伝馬町16-6'},
       ]},
     { date:'11.19', weekday:'周四', theme:'台场 · 银座 · 浅草酉之市',
@@ -1199,6 +1199,12 @@ function load(){
           const src5 = DEFAULT_DATA.days.find(x=>x.date==='11.22');
           if(src5){ d.days.forEach(day=>{ if(day.date==='11.22'){ day.items = JSON.parse(JSON.stringify(src5.items)); day.note = src5.note; day.theme = src5.theme; } }); }
           (d.todos||[]).forEach(t=>{ if(t.id==='t11'){ t.text='Jomon ジョウモン 涩谷店 11.22 晚餐预约'; t.tag='⚠️ 提前 1 个月！电话 03-6416-1633（Tabelog 专线 050-5596-5644），周日晚上热门时段要抢、吧台位最推荐；涩谷店离 Mont-Bell 步行 8-10 分钟'; t.urgent=true; } });
+        })();
+        /* v68: Day1（11.18）19:30 晚餐改 Yakiniku Hormone Bondz 新宿本馆 —— 以 DEFAULT 为准：新宿站东南口徒步 2 分钟 */
+        (function(){
+          const src1 = DEFAULT_DATA.days.find(x=>x.date==='11.18');
+          if(src1){ d.days.forEach(day=>{ if(day.date==='11.18'){ day.items = JSON.parse(JSON.stringify(src1.items)); day.note = src1.note; day.theme = src1.theme; } }); }
+          (d.todos||[]).forEach(t=>{ if(t.id==='t6'){ t.text='Yakiniku Hormone Bondz 新宿本馆 11.18 晚餐订位'; t.tag='电话 03-4400-7699（Tabelog 专线 050-5593-6646）；新宿站东南口徒步 2 分钟，週三 16:00 开门、不定休'; } });
         })();
         d.days.forEach(day=>{ (day.items||[]).sort((a,b)=> String(a.time).localeCompare(String(b.time))); });
         // v19: 行程里取消勾选完成态，清掉旧用户已勾选的位置
