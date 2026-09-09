@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F6F3ED">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>东京 6 日行程 · 11.18 - 11.23</title>
+<style>
+  :root{
+    --bg:#F6F3ED;
+    --bg-deep:#ECE7DE;
+    --card:#FFFFFF;
+    --ink:#2D2A26;
+    --ink2:#8B8478;
+    --ink3:#B5ADA0;
+    --line:#ECE6DB;
+    --red:#C2433D;
+    --red-deep:#A93A34;
+    --red-soft:#FAEDEB;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(45,42,38,.04), 0 6px 18px rgba(45,42,38,.07);
+    --serif:"Songti SC","STSong","Noto Serif SC","Hiragino Mincho ProN","SimSun",serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg-deep);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.5;
+  }
+  button{font-family:inherit;cursor:pointer}
+  input,textarea,select{font-family:inherit}
+  *{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif}
+  .emo, .tl-dot, .h-meta, .tip .emo, .bb-btn .emo{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Noto Emoji",sans-serif}
+
+  #app{
+    max-width:480px;margin:0 auto;min-height:100vh;min-height:100dvh;
+    background:var(--bg);box-shadow:0 0 44px rgba(45,42,38,.12);
+    position:relative;padding-bottom:calc(120px + env(safe-area-inset-bottom));
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    padding:calc(22px + env(safe-area-inset-top)) 20px 16px;
+    background:linear-gradient(180deg,#FAF7F1 0%,var(--bg) 100%);
+    position:relative;
+  }
+  .h-eyebrow{font-size:11px;letter-spacing:4px;color:var(--red);font-weight:700}
+  h1{font-family:var(--serif);font-size:27px;font-weight:700;margin-top:6px;letter-spacing:2px}
+  .h-meta{margin-top:10px;font-size:12.5px;color:var(--ink2);display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+  .pill{background:var(--red-soft);color:var(--red);border-radius:99px;padding:2px 10px;font-weight:600;font-size:12px}
+  .stamp{
+    position:absolute;right:20px;top:calc(26px + env(safe-area-inset-top));
+    width:46px;height:46px;background:var(--red);color:#fff;
+    font-family:var(--serif);display:flex;align-items:center;justify-content:center;
+    font-size:24px;border-radius:6px;transform:rotate(6deg);
+    box-shadow:0 4px 10px rgba(194,67,61,.35);
+  }
+  .stamp::after{content:'';position:absolute;inset:3px;border:1.5px solid rgba(255,255,255,.7);border-radius:4px}
+
+  /* ---------- 出发倒计时 ---------- */
+  .cd-card{
+    margin:0 16px 12px;background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;padding:14px 16px;
+    border-left:4px solid var(--red);
+  }
+  .cd-tag{
+    display:inline-flex;align-items:center;gap:5px;font-size:10.5px;
+    font-weight:700;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px;
+  }
+  .cd-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:cdPulse 1.8s ease-in-out infinite}
+  @keyframes cdPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+  .cd-title{
+    font-family:var(--serif);font-size:17px;font-weight:700;letter-spacing:.5px;
+    line-height:1.3;margin-bottom:2px;
+  }
+  .cd-sub{font-size:12px;color:var(--ink2);margin-bottom:10px;line-height:1.4}
+  .cd-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+  .cd-num{
+    font-family:'SF Mono',SFMono-Regular,Menlo,Monaco,'Courier New',monospace;
+    font-size:32px;font-weight:800;color:var(--red);letter-spacing:1px;
+    font-variant-numeric:tabular-nums;line-height:1.1;
+    text-shadow:0 1px 0 rgba(194,67,61,.12);
+  }
+  .cd-unit{font-size:13px;color:var(--ink2);font-weight:600}
+  .cd-suffix{font-size:13px;color:var(--ink3);font-weight:500}
+  .cd-gone{font-size:13px;color:var(--red);font-weight:700}
+
+  /* ---------- Todo 置顶卡 ---------- */
+  .todo-card{
+    margin:0 16px 12px;background:var(--card);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .todo-head{
+    display:flex;align-items:center;gap:8px;padding:12px 14px 10px;cursor:pointer;
+  }
+  .todo-title{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:1px;flex:1}
+  .todo-num{font-size:12px;color:var(--ink2);font-weight:600;font-variant-numeric:tabular-nums}
+  .todo-chev{
+    width:22px;height:22px;border:none;background:none;color:var(--ink3);font-size:12px;
+    display:flex;align-items:center;justify-content:center;transition:transform .25s;
+  }
+  .todo-bar{height:3px;background:var(--line);position:relative}
+  .todo-bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--red),#D97A5E);transition:width .35s ease;border-radius:99px}
+  .todo-body{max-height:640px;transition:max-height .3s ease;overflow:hidden}
+  .todo-body.closed{max-height:0}
+  .todo-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-top:1px solid var(--line)}
+  .todo-item:first-child{border-top:none}
+  .todo-check{
+    flex:0 0 auto;width:19px;height:19px;margin-top:2px;border-radius:50%;
+    border:1.5px solid var(--ink3);background:#fff;padding:0;position:relative;
+  }
+  .todo-item.is-done .todo-check{background:var(--red);border-color:var(--red)}
+  .todo-item.is-done .todo-check::after{
+    content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:11px;font-weight:700;
+  }
+  .todo-main{flex:1;min-width:0}
+  .todo-text{font-size:13.5px;font-weight:600;line-height:1.4}
+  .todo-item.is-done .todo-text{text-decoration:line-through;color:var(--ink3)}
+  .todo-item.is-done .todo-tag{color:var(--ink3)}
+  .todo-tag{font-size:11.5px;color:var(--ink2);margin-top:2px;line-height:1.5}
+  .todo-urgent{
+    display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:10px;font-weight:700;padding:0 5px;margin-right:6px;line-height:17px;vertical-align:1px;letter-spacing:1px;
+  }
+  .todo-empty{padding:14px;text-align:center;font-size:12.5px;color:var(--ink3)}
+
+  /* ---------- Day Tabs ---------- */
+  .tabs{
+    display:flex;gap:8px;overflow-x:auto;padding:12px 16px;
+    position:sticky;top:0;z-index:20;
+    background:rgba(246,243,237,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{
+    flex:0 0 auto;background:#fff;border:1.5px solid var(--line);border-radius:12px;
+    padding:7px 13px;text-align:center;color:var(--ink2);transition:all .2s;
+  }
+  .tab .t1{display:block;font-size:12.5px;font-weight:700}
+  .tab .t2{display:block;font-size:11px;opacity:.8;margin-top:1px}
+  .tab.active{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 5px 14px rgba(194,67,61,.3);transform:translateY(-1px)}
+
+  main{padding:16px 16px 0}
+
+  /* ---------- Overview Card ---------- */
+  .overview{
+    background:var(--card);border-radius:var(--radius);padding:18px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .overview::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red)}
+  .ov-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .ov-day{font-size:12px;color:var(--red);font-weight:700;letter-spacing:1px}
+  .ov-edit{background:none;border:none;color:var(--ink3);font-size:12px;padding:4px 6px;border-radius:8px}
+  .ov-edit:active{background:var(--line)}
+  .ov-theme{font-family:var(--serif);font-size:21px;font-weight:700;margin-top:4px;letter-spacing:1px}
+  .ov-progress{display:flex;align-items:center;gap:10px;margin-top:12px}
+  .ov-bar{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+  .ov-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#D97A5E);border-radius:99px;transition:width .35s ease}
+  .ov-num{font-size:12px;color:var(--ink2);font-weight:600;font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .ov-note{
+    margin-top:12px;background:#FBF6EA;border:1px solid #F0E6CD;border-radius:10px;
+    padding:9px 12px;font-size:12.5px;color:#8A7A4E;line-height:1.6;
+  }
+  .ov-wx{
+    display:flex;align-items:center;gap:6px;margin-top:9px;
+    font-size:12.5px;color:var(--ink2);flex-wrap:wrap;font-variant-numeric:tabular-nums;
+  }
+  .ov-wx .wx-t{color:var(--ink);font-weight:700}
+  .wx-badge{font-size:10.5px;border-radius:99px;padding:1px 8px;font-weight:600;flex:0 0 auto}
+  .wx-badge.live{background:#E7F2EB;color:#3E7D5A}
+  .wx-badge.ref{background:var(--line);color:var(--ink2)}
+  .ov-wear{
+    margin-top:10px;background:#F4F1FA;border:1px solid #E5DFF1;border-radius:10px;
+    padding:9px 12px;font-size:12.5px;color:#6A6294;line-height:1.65;
+  }
+  .ov-wear b{color:#574E85}
+
+  /* ---------- Timeline ---------- */
+  .tl{margin-top:18px}
+  .tl-row{display:flex;padding:10px 0;position:relative}
+  .tl-time{
+    width:50px;flex:0 0 auto;text-align:right;padding:9px 10px 0 0;
+    font-size:13px;font-weight:700;color:var(--ink2);font-variant-numeric:tabular-nums;
+  }
+  .tl-rail{width:34px;flex:0 0 auto;position:relative;display:flex;justify-content:center}
+  .tl-rail::before{content:'';position:absolute;top:0;bottom:0;width:2px;background:var(--line);left:50%;transform:translateX(-50%)}
+  .tl-row:first-child .tl-rail::before{top:18px}
+  .tl-row:last-child .tl-rail::before{bottom:auto;height:18px}
+  .tl-dot{
+    width:32px;height:32px;border-radius:50%;background:#fff;
+    border:2px solid var(--c,#ccc);display:flex;align-items:center;justify-content:center;
+    font-size:15px;position:relative;z-index:1;box-shadow:0 2px 8px rgba(45,42,38,.08);
+    margin-top:2px;
+  }
+  .tl-card{
+    flex:1;background:var(--card);border-radius:14px;box-shadow:var(--shadow);
+    padding:12px 14px;margin-left:4px;transition:opacity .25s,transform .25s;min-width:0;
+  }
+  .tl-row.is-done .tl-card{opacity:.5}
+  .tl-row.is-done .tl-title{text-decoration:line-through;color:var(--ink2)}
+  .tl-top{display:flex;align-items:flex-start;gap:8px}
+  .tl-info{flex:1;min-width:0}
+  .tl-title{font-size:15px;font-weight:700;line-height:1.4;word-break:break-word}
+  .tl-loc{font-size:12px;color:var(--ink2);margin-top:2px;word-break:break-word}
+  a.tl-loc{display:inline-flex;align-items:center;gap:4px;color:var(--red);font-weight:600;text-decoration:none;border-bottom:1px dashed rgba(194,67,61,.55);-webkit-touch-callout:none}
+  a.tl-loc:active{opacity:.55}
+  a.tl-loc .nav-go{font-size:10px;font-weight:700;background:var(--red);color:#fff;border-radius:99px;padding:1px 6px;letter-spacing:0;flex:0 0 auto}
+  .tl-chev{
+    flex:0 0 auto;background:none;border:none;color:var(--ink3);
+    padding:8px;margin:-4px 0 0 0;transition:transform .25s;line-height:1;
+    position:relative;width:26px;height:26px;
+  }
+  .tl-chev::before{
+    content:'';position:absolute;left:50%;top:50%;width:8px;height:8px;
+    border-right:2px solid var(--ink3);border-bottom:2px solid var(--ink3);
+    transform:translate(-50%,-65%) rotate(45deg);transition:transform .25s;
+  }
+  .tl-card.expanded .tl-chev{transform:rotate(180deg)}
+  .tl-card.expanded .tl-chev::before{transform:translate(-50%,-35%) rotate(45deg)}
+  .tl-more{max-height:0;overflow:hidden;transition:max-height .28s ease}
+  .tl-card.expanded .tl-more{max-height:80vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .tl-note{
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+    font-size:12.5px;color:var(--ink2);line-height:1.65;
+  }
+  .tl-acts{display:flex;gap:8px;margin-top:10px}
+  .mini-btn{
+    background:#FBFAF7;border:1px solid var(--line);border-radius:9px;
+    padding:6px 13px;font-size:12.5px;color:var(--ink2);
+  }
+  .mini-btn:active{background:var(--line)}
+  .mini-btn.danger{color:var(--red);border-color:#F0D9D6;background:var(--red-soft)}
+  .tl-end{text-align:center;font-size:11px;color:var(--ink3);letter-spacing:2px;margin:18px 0 4px}
+
+  /* ---------- FAB ---------- */
+  .fab{
+    position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));
+    right:max(16px, calc(50% - 224px));z-index:40;
+    width:54px;height:54px;border-radius:18px;border:none;
+    background:linear-gradient(135deg,#D0544D,var(--red-deep));color:#fff;
+    font-size:32px;font-weight:300;box-shadow:0 8px 22px rgba(194,67,61,.4);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .15s;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    font-weight:400;
+  }
+  .fab:active{transform:scale(.92)}
+
+  /* ---------- Bottom bar ---------- */
+  .bottombar{
+    position:fixed;left:50%;transform:translateX(-50%);bottom:0;
+    width:100%;max-width:480px;z-index:41;
+    display:flex;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+    padding:7px 0 calc(7px + env(safe-area-inset-bottom));
+  }
+  .bb-btn{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;
+    font-size:11px;color:var(--ink2);background:none;border:none;padding:5px;
+  }
+  .bb-btn .emo{font-size:19px;filter:grayscale(.15)}
+  .bb-btn:active{color:var(--red)}
+
+  /* ---------- Sheets ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(38,33,28,.45);
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:50;
+  }
+  .overlay.show{opacity:1;pointer-events:auto}
+  .sheet{
+    position:fixed;left:50%;transform:translate(-50%,105%);bottom:0;
+    width:100%;max-width:480px;background:#fff;border-radius:22px 22px 0 0;
+    z-index:60;transition:transform .32s cubic-bezier(.32,.72,.24,1);
+    padding:8px 20px calc(22px + env(safe-area-inset-bottom));
+    max-height:88vh;max-height:88dvh;overflow-y:auto;
+    box-shadow:0 -8px 40px rgba(45,42,38,.18);
+  }
+  .sheet.show{transform:translate(-50%,0)}
+  .grip{width:38px;height:4px;border-radius:99px;background:var(--line);margin:6px auto 4px}
+  .sheet h3{font-family:var(--serif);font-size:18px;letter-spacing:1px;margin:8px 0 2px}
+  .sheet .sub{font-size:12px;color:var(--ink3);margin-bottom:4px}
+
+  .field{margin-top:14px}
+  .field>label{font-size:12px;color:var(--ink2);font-weight:700;display:block;margin-bottom:6px}
+  .field input[type=text],.field input[type=time],.field textarea{
+    width:100%;border:1.5px solid var(--line);border-radius:11px;
+    padding:11px 13px;font-size:15px;background:#FBFAF7;color:var(--ink);
+    transition:border-color .2s;outline:none;-webkit-appearance:none;appearance:none;
+  }
+  .field input:focus,.field textarea:focus{border-color:var(--red);background:#fff}
+  .field textarea{resize:none;line-height:1.6}
+  .field .err{border-color:var(--red) !important;background:var(--red-soft)}
+
+  .types{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:6px}
+  .type-chip{
+    border:1.5px solid var(--line);border-radius:11px;padding:8px 2px;
+    font-size:11px;color:var(--ink2);background:#FBFAF7;
+    display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s;
+  }
+  .type-chip .emo{font-size:19px}
+  .type-chip.sel{border-color:var(--c);background:var(--cs);color:var(--ink);font-weight:700;transform:translateY(-1px)}
+
+  .sheet-btns{display:flex;gap:10px;margin-top:20px}
+  .btn{
+    border:none;border-radius:13px;padding:13px 18px;font-size:15px;font-weight:700;
+    transition:transform .15s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:linear-gradient(135deg,#D0544D,var(--red-deep));color:#fff;flex:1;box-shadow:0 5px 16px rgba(194,67,61,.32)}
+  .btn-ghost{background:#fff;color:var(--ink2);border:1.5px solid var(--line)}
+  .btn-danger-ghost{background:#fff;color:var(--red);border:1.5px solid #EFCBC7}
+
+  /* tips sheet */
+  .tips-list{margin-top:6px}
+  .tip{
+    display:flex;gap:12px;padding:13px 2px;border-bottom:1px dashed var(--line);
+    font-size:13px;line-height:1.65;color:var(--ink);
+  }
+  .tip:last-child{border-bottom:none}
+  .tip .emo{font-size:20px;flex:0 0 auto;line-height:1.4}
+  .tip b{color:var(--red)}
+  .tip span{color:var(--ink2)}
+
+  /* export */
+  #exportTa{
+    width:100%;height:300px;border:1.5px solid var(--line);border-radius:11px;
+    background:#FBFAF7;padding:12px;font-size:12px;line-height:1.7;color:var(--ink);
+    margin-top:12px;resize:none;outline:none;font-family:Menlo,Consolas,monospace;
+  }
+
+  /* confirm */
+  .cfm-text{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-top:6px}
+
+  /* toast */
+  .toast{
+    position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom));
+    transform:translate(-50%,16px);opacity:0;
+    background:rgba(45,42,38,.93);color:#fff;padding:10px 20px;border-radius:99px;
+    font-size:13px;transition:.28s;z-index:99;pointer-events:none;white-space:nowrap;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* 入场动画 */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .tl-row{animation:fadeUp .35s ease backwards}
+  .overview{animation:fadeUp .3s ease backwards}
+
+  /* ---------- 加载兜底层 ---------- */
+  #loading{
+    position:fixed;inset:0;z-index:9999;background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    padding:30px;text-align:center;transition:opacity .3s;
+  }
+  #loading.hide{opacity:0;pointer-events:none}
+  .ld-ico{font-size:44px;line-height:1}
+  .ld-t{font-family:var(--serif);font-size:18px;margin-top:14px;letter-spacing:2px}
+  .ld-d{font-size:12.5px;color:var(--ink2);line-height:1.9;margin-top:14px}
+  .ld-d b{color:var(--red)}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="h-eyebrow">TOKYO · 旅のしおり</div>
+    <h1>东京 6 日行程</h1>
+    <div class="h-meta">
+      <span class="pill">11.18 — 11.23</span>
+      <span>🍁 红叶银杏季</span>
+      <span>🌡 8 ~ 16°C</span>
+      <span>✈️ 香港航空往返</span>
+    </div>
+    <div class="stamp">旅</div>
+  </header>
+
+  <!-- 出发倒计时 -->
+  <div class="cd-card" id="countdownCard">
+    <div class="cd-tag"><span class="cd-dot"></span>此刻关注 · NOW</div>
+    <div class="cd-title">HX606 → 成田 起飞</div>
+    <div class="cd-sub">香港航空 · 2026.11.18 07:15 · 建议前 1 小时到机场</div>
+    <div class="cd-row" id="countdownRow">
+      <!-- JS 填充倒計時數字 -->
+    </div>
+  </div>
+
+  <section class="todo-card" id="todoCard" style="display:none">
+    <div class="todo-head" id="todoHead">
+      <div class="todo-title">📋 行前待办</div>
+      <span class="todo-num" id="todoNum">0 / 0</span>
+      <button class="todo-chev" id="todoChev" aria-label="展开收起">▾</button>
+    </div>
+    <div class="todo-bar"><i id="todoBar" style="width:0%"></i></div>
+    <div class="todo-body" id="todoBody"></div>
+  </section>
+
+  <section class="todo-card" id="packCard" style="display:none">
+    <div class="todo-head" id="packHead">
+      <div class="todo-title">🎒 行李清单</div>
+      <span class="todo-num" id="packNum">0 / 0</span>
+      <button class="todo-chev" id="packChev" aria-label="展开收起">▾</button>
+    </div>
+    <div class="todo-bar"><i id="packBar" style="width:0%"></i></div>
+    <div class="todo-body" id="packBody"></div>
+  </section>
+
+  <nav class="tabs" id="tabs"></nav>
+
+  <main>
+    <section class="overview" id="ov"></section>
+    <div class="tl" id="tl"></div>
+    <div class="tl-end" id="tlEnd"></div>
+  </main>
+
+  <button class="fab" id="fab" aria-label="添加行程">+</button>
+
+  <div class="bottombar">
+    <button class="bb-btn" id="bbTips"><span class="emo">💡</span>贴士</button>
+    <button class="bb-btn" id="bbExport"><span class="emo">📋</span>导出</button>
+    <button class="bb-btn" id="bbReset"><span class="emo">🔄</span>重置</button>
+  </div>
+</div>
+
+<!-- 加载兜底层：JS 正常执行后被隐藏；若一直显示说明浏览器不兼容 -->
+<div id="loading">
+  <div class="ld-box">
+    <div class="ld-ico">🗼</div>
+    <div class="ld-t">正在加载行程…</div>
+    <div class="ld-d">若此页面长时间停留在这里，说明当前浏览器不支持本页面。<br>请改用 <b>Chrome / Edge / Safari</b> 等现代浏览器打开本文件<br>（在微信/QQ 中打开请点右上角「···」选择「在浏览器中打开」）。</div>
+  </div>
+</div>
+<noscript>
+  <div style="position:fixed;inset:0;background:#F6F3ED;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;font-size:14px;color:#2D2A26;z-index:999">
+    本页面需要启用 JavaScript 才能显示，请在浏览器设置中开启后刷新。
+  </div>
+</noscript>
+
+<!-- 遮罩 -->
+<div class="overlay" id="overlay"></div>
+
+<!-- 行程编辑 Sheet -->
+<div class="sheet" id="itemSheet">
+  <div class="grip"></div>
+  <h3 id="itemSheetTitle">添加行程</h3>
+  <div class="sub">填写完毕后保存，行程将按时间自动排序</div>
+  <div class="field">
+    <label>类型</label>
+    <div class="types" id="typeGrid"></div>
+  </div>
+  <div style="display:flex;gap:12px">
+    <div class="field" style="flex:0 0 130px">
+      <label>时间</label>
+      <input type="time" id="fTime" value="09:00">
+    </div>
+    <div class="field" style="flex:1">
+      <label>标题</label>
+      <input type="text" id="fTitle" placeholder="如：浅草寺" maxlength="30">
+    </div>
+  </div>
+  <div class="field">
+    <label>地点 / 说明（选填）</label>
+    <input type="text" id="fLoc" placeholder="如：浅草站步行 5 分钟" maxlength="50">
+  </div>
+  <div class="field">
+    <label>🧭 导航地点（选填 · 点卡片地点可跳 Google 地图）</label>
+    <input type="text" id="fGeo" placeholder="Google 地图搜索词，如：浅草寺 / Tokyo Tower" maxlength="70">
+  </div>
+  <div class="field">
+    <label>备注（选填）</label>
+    <textarea id="fNote" rows="3" placeholder="价格、预约提醒、交通方式…"></textarea>
+  </div>
+  <div class="sheet-btns">
+    <button class="btn btn-danger-ghost" id="btnDel" style="display:none">删除</button>
+    <button class="btn btn-primary" id="btnSave">保 存</button>
+  </div>
+</div>
+
+<!-- 每日主题编辑 Sheet -->
+<div class="sheet" id="daySheet">
+  <div class="grip"></div>
+  <h3>编辑当日安排</h3>
+  <div class="field">
+    <label>当日主题</label>
+    <input type="text" id="dTheme" maxlength="20">
+  </div>
+  <div class="field">
+    <label>当日贴士</label>
+    <textarea id="dNote" rows="3" placeholder="显示在概览卡上的小提示"></textarea>
+  </div>
+  <div class="sheet-btns">
+    <button class="btn btn-primary" id="btnDaySave">保 存</button>
+  </div>
+</div>
+
+<!-- 贴士 Sheet -->
+<div class="sheet" id="tipsSheet">
+  <div class="grip"></div>
+  <h3>东京旅行贴士</h3>
+  <div class="sub">当前行程版本 <b style="color:#C2433D">v65</b> · 2026.09.09 08:05 更新</div>
+  <div class="tips-list">
+    <div class="tip"><span class="emo">✈️</span><div><b>航班信息</b>：去程 <b>HX606</b> 香港 01:50 → 成田 07:15（4h25m）；回程成田 20:25 → 香港 00:50+1（5h25m）。<span>香港航空 · 成田 T1 航站楼</span>。</div></div>
+    <div class="tip"><span class="emo">🏠</span><div><b>民宿</b>：中央区日本桥小伝馬町 16-6（〒103-0001）；最近车站：日比谷线「小伝馬町」步行 3 分钟、JR「新日本桥」5 分钟、都营浅草线「东日本桥」7 分钟。</div></div>
+    <div class="tip"><span class="emo">🍁</span><div><b>红叶季</b>：11 月下旬正值佳期，<span>明治神宫外苑银杏并木（11.22 清晨已排入·黄金期 11.20~12.05）</span>、河口湖红叶回廊、井之头公园、芝公园都在动线上；代代木公园、上野公园红叶银杏顺路可看；时间富裕可加<span>六义园夜枫点灯</span>（驹込）。</div></div>
+    <div class="tip"><span class="emo">🌡</span><div><b>天气穿搭</b>：约 8~16°C，早晚温差大，<span>风衣/大衣 + 毛衣 + 舒适步行鞋</span>；富士山一日游山区更冷，备好围巾手套。每日概览卡有当日气温与穿搭，<span>11.11 起打开页面自动更新实时预报</span>（富士山日按河口湖山区）。</div></div>
+    <div class="tip"><span class="emo">⛩️</span><div><b>御守巡礼</b>：增上寺<span>勝運守</span>（黑金葵纹·500 円）→ 浅草寺金龙铃守 → 鹫神社熊手守（<span>酉之市限定</span>）→ 明治神宫<span>開運木鈴</span>（数量限定常售罄）→ 神田明神電気堂（IT 守）。御守别拆封，有效期一年。</div></div>
+    <div class="tip"><span class="emo">📕</span><div><b>小红书参考</b>：展开行程卡点「📕 小红书」直接搜索该地点的攻略笔记；手机浏览器打开会提示跳转小红书 App，笔记里最新排队/预约情报很有用。</div></div>
+    <div class="tip"><span class="emo">🧭</span><div><b>地图导航</b>：点击行程卡片上的<span>地点（红色带"导航"标签）</span>即可跳转 Google 地图开始导航（默认公交模式）；未安装 Google 地图 App 时会打开网页版。</div></div>
+    <div class="tip"><span class="emo">🚇</span><div><b>交通</b>：iPhone / 华为可直接在钱包绑定 Suica（西瓜卡）；京成 Sky Access 往东日本桥约 45 分钟一班，<span>等车间隙可先吃早餐</span>；市区重度出行可买东京地铁 72 小时券。</div></div>
+    <div class="tip"><span class="emo">🎫</span><div><b>需提前预约</b>：完整清单见<span>首页顶部「行前待办」</span>——吉卜力（每月 10 日开售下月票）、生化危机展、富士回游号/高速巴士、人气餐厅订位等，勾选状态追踪。</div></div>
+    <div class="tip"><span class="emo">🎊</span><div><b>酉之市</b>：11.19 浅草鹫神社「二之酉」，熊手招福寓意开运，现场屋台小吃云集，<span>晚上 7 点后最热闹</span>，注意人潮与随身财物。</div></div>
+    <div class="tip"><span class="emo">💴</span><div><b>支付退税</b>：支付宝/微信普遍可用，备 2~3 万日元现金；单店满 5000 日元凭护照免税，<span>免税商品托运前保持密封</span>。</div></div>
+    <div class="tip"><span class="emo">📱</span><div><b>网络</b>：出发前购买 eSIM 或租随身 WiFi，机场也可取。</div></div>
+    <div class="tip"><span class="emo">🧳</span><div><b>行李</b>：早到民宿若未到入住时间可先寄存行李；Day6 退房后大件可寄存民宿或车站投币柜（约 700-1000 日元/天）。</div></div>
+  </div>
+  <div class="sheet-btns">
+    <button class="btn btn-primary" id="tipsClose">我知道了</button>
+  </div>
+</div>
+
+<!-- 导出 Sheet -->
+<div class="sheet" id="exportSheet">
+  <div class="grip"></div>
+  <h3>导出行程</h3>
+  <div class="sub">复制文本后可粘贴到备忘录、微信或文档</div>
+  <textarea id="exportTa" readonly></textarea>
+  <div class="sheet-btns">
+    <button class="btn btn-ghost" id="exportClose">关闭</button>
+    <button class="btn btn-primary" id="exportCopy">复制全部</button>
+  </div>
+</div>
+
+<!-- 确认 Sheet -->
+<div class="sheet" id="cfmSheet">
+  <div class="grip"></div>
+  <h3 id="cfmTitle">确认</h3>
+  <div class="cfm-text" id="cfmText"></div>
+  <div class="sheet-btns">
+    <button class="btn btn-ghost" id="cfmCancel">取消</button>
+    <button class="btn btn-primary" id="cfmOk">确定</button>
+  </div>
+</div>
+
+<div class="toast" id="toastEl"></div>
+
+<script>
+/* ================= 类型定义 ================= */
+const TYPES = {
+  sight:   {icon:'⛩️', name:'景点', color:'#C75B54'},
+  food:    {icon:'🍜', name:'餐饮', color:'#D89A3D'},
+  transport:{icon:'🚄',name:'交通', color:'#4E7FB2'},
+  nature:  {icon:'🍁', name:'自然', color:'#C07B4A'},
+  shop:    {icon:'🛍️', name:'购物', color:'#B57BB0'},
+  night:   {icon:'🌃', name:'夜景', color:'#6C6CBB'},
+  fun:     {icon:'🎮', name:'娱乐', color:'#4FAE93'},
+  museum:  {icon:'🎨', name:'展览', color:'#5E8FB8'},
+  festival:{icon:'🎊', name:'祭典', color:'#D46A9E'},
+  hotel:   {icon:'🏨', name:'住宿', color:'#8B7DBD'},
+  flight:  {icon:'✈️', name:'飞行', color:'#4E7FB2'},
+  other:   {icon:'📍', name:'其他', color:'#9A938A'},
+};
+
+// 所有卡片均显示小红书按钮（不再按 type 限制）
+
+function lighten(hex, t){
+  const n = parseInt(hex.slice(1),16), r = n>>16&255, g = n>>8&255, b = n&255;
+  const f = c => Math.round(c+(255-c)*t).toString(16).padStart(2,'0');
+  return '#'+f(r)+f(g)+f(b);
+}
+
+/* ================= 默认行程数据 ================= */
+const DEFAULT_DATA = {
+  version: 56,
+  todos: [
+    {id:'t1', text:'抢三鹰吉卜力美术馆 11 月门票', tag:'每月 10 日开售下月票 → 10/10 上午放票，需官网注册+手速', urgent:true, done:false},
+    {id:'t2', text:'生化危机展览门票', tag:'官网购票，留意场馆与入场场次（11.22）', urgent:false, done:false},
+    {id:'t3', text:'涩谷 PARCO 屋上日落机位（11.22 16:00）', tag:'免费免预约，晴天直接冲', urgent:false, done:false},
+    {id:'t4', text:'预约高速巴士 新宿 → 山中湖旭日丘（11.20 08:15 班次）', tag:'⚠️ 全指定席、发车前 1 个月开放预约；网上支付约 ¥2,350 比窗口便宜；红叶季极易满席。票要买到「山中湖旭日丘」不是河口湖', urgent:true, done:false},
+    {id:'t5', text:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:45 预约', tag:'TableCheck 网上预约或电话 070-3206-1079；只有 12 席、L.O. 21:30，务必提前；迟到 15 分钟以上座位可能被取消', urgent:true, done:false},
+    {id:'t12', text:'预约高速巴士 河口湖站 → 新宿（11.20 18:10 班次）', tag:'红叶季满席常见，建议提前网上预约；也可河口湖站窗口现场买。备选 18:20 / 18:40 班次', urgent:false, done:false},
+    {id:'t6', text:'焼肉芝浦 新宿订位 11.18 晚餐', tag:'人气烤肉店，提前订位稳妥', urgent:false, done:false},
+    {id:'t7', text:'eSIM / 随身 WiFi', tag:'出发前 1 周买好，落地即插即用', urgent:false, done:false},
+    {id:'t8', text:'Suica 绑定 + 备 2~3 万日元现金', tag:'iPhone 钱包可直接添加西瓜卡', urgent:false, done:false},
+    {id:'t9', text:'HX606 网上值机', tag:'出发前 24-48 小时开放，选好座位', urgent:false, done:false},
+    {id:'t10', text:'おでん屋たけし 新宿三丁目店 11.21 晚餐预约', tag:'Tabelog 或电话 03-6384-1356 预约；不预约 20:00 后现场等位约 15 分钟', urgent:false, done:false},
+    {id:'t11', text:'Jomon ジョウモン 六本木店 11.22 晚餐预约', tag:'⚠️ 提前 1 个月！电话 03-3405-2585 或 Tabelog 网上预约，周末靠窗/吧台位要抢', urgent:true, done:false},
+    {id:'t14', text:'11.19 早餐 Unison Tailor（人形町）08:00 到店', tag:'免预约，但**一人一项低消**、客满限时 60 分钟；周四 08:00 开门，08:45 前离开赶 08:50 的车去台场', urgent:false, done:false},
+  ],
+  packing: [
+    {id:'p1', text:'A 型转换插头（重点！）', tag:'香港 G 型三脚在日本插不上——日本是 A 型两脚扁口；手机电脑充电器均支持 100V 宽压，只需转形状', urgent:true, done:false},
+    {id:'p2', text:'充电宝 + 数据线', tag:'全程拍照导航耗电快；额定 ≤100Wh 可登机，日本共享充电宝不普及', urgent:false, done:false},
+    {id:'p3', text:'取卡针 + eSIM 二维码截图备份', tag:'换卡时装小卡用；二维码存相册防丢失', urgent:false, done:false},
+    {id:'p4', text:'保暖内衣 + 毛帽 + 手套', tag:'富士山日山区 0~8°C，骑行迎风必备', urgent:false, done:false},
+    {id:'p5', text:'防风厚外套 + 围巾', tag:'台场海边、PARCO 屋上风大速冷', urgent:false, done:false},
+    {id:'p6', text:'最舒适的步行鞋', tag:'日均 2 万步起，别穿新鞋磨脚', urgent:false, done:false},
+    {id:'p7', text:'护照（6 个月以上有效期）', tag:'退税出示原件；首页拍照+复印件备份', urgent:false, done:false},
+    {id:'p8', text:'常用药小药包', tag:'感冒/肠胃药/创可贴/晕车药（富士山山路巴士）', urgent:false, done:false},
+    {id:'p9', text:'折叠购物袋 + 行李秤', tag:'池袋上野扫货日战利品多，防超重', urgent:false, done:false},
+    {id:'p10', text:'相机存储卡 + 手机清空间', tag:'红叶季出片量大，视频更占空间', urgent:false, done:false},
+    {id:'p11', text:'旅行装洗漱用品', tag:'民宿可能不提供牙刷毛巾，自带稳妥', urgent:false, done:false},
+  ],
+  days: [
+    { date:'11.18', weekday:'周三', theme:'落地成田 · 吉祥寺 · 新宿',
+      note:'HX606 07:15 落地成田 T1，凌晨航班记得机上补眠；吉卜力门票每月 10 日开售下月。清晨先放行李，再到水道桥 10 DIXANS（JR 中央线，名字デゾン）吃厚切生火腿起司吐司早餐，顺路直奔吉祥寺。',
+      wx:{lo:9,hi:15,label:'晴到多云',pop:20},
+      wear:'长途飞行+城市漫步：长袖＋针织衫＋防风外套洋葱式，飞机空调冷备条披肩；今天步行最多，穿最舒适的鞋',
+      items:[
+        {id:'a0', time:'01:50', type:'flight', title:'香港航空 HX606 · 香港 → 东京', loc:'香港国际机场 T2 起飞', note:'凌晨航班，建议 11.17 晚 23:00 前抵达机场值机；飞行 4h25m，机上补眠。', geo:'Hong Kong International Airport Terminal 2'},
+        {id:'a1', time:'07:15', type:'flight', title:'落地东京成田机场 T1', loc:'入境审查 · 行李提取', note:'HX606 07:15 落地 T1；入境+行李约 40-60 分钟，出来先激活 eSIM。', geo:'成田国際空港 第1旅客ターミナル'},
+        {id:'a2', time:'08:30', type:'transport', title:'京成 Sky Access → 东日本桥', loc:'成田机场站', note:'约 45 分钟一班；若等车间隔长，先在站内吃个早餐再出发。'},
+        {id:'a3', time:'09:00', type:'hotel', title:'民宿放行李 · 轻装出发', loc:'中央区日本桥小伝馬町 16-6', note:'东日本桥站步行约 7 分钟 / 小伝馬町站步行 3 分钟；未到入住时间可寄存行李。', geo:'東京都中央区日本橋小伝馬町16-6'},
+        {id:'a3b', time:'09:45', type:'food', title:'10 DIXANS 厚切吐司', loc:'千代田区西神田 2-7-11 北村ビル 1F（神保町站徒步 8 分 / 水道桥站徒步 10 分）', note:'🥪 **10 DIXANS（ディゾン）水道橋**：Tabelog 百名店咖啡廳，JR 中央線水道橋站旁（千代田區西神田 2-7-11 北村ビル 1F，神保町站徒步 8 分），昭和摩登裝潢＋爵士樂＋內庭綠意，被譽為「想一訪再訪的咖啡館」。🍞 **招牌厚切吐司**：生火腿起司厚切吐司（超市場火腿＋融起司夾厚切吐司，鹹香滿分）、An Butter 吐司（奶油＋煉乳）、法式吐司、布丁（firm purin 必點）、法式蛋糕；單點 ¥900、飲料套餐 ¥1,300。🕐 **平日 08:00 開門**（我們 11.18 週三去正好），建議開店左右到避排隊（中午後人潮不斷）。💳 收 Visa/Master/AMEX/JCB/Diners（建議帶現金備用）；不開放預約、無用餐時間限制。🚶 **完全順路**：放完行李從小伝馬町搭地鐵到神保町（都営新宿線約 15 分），走 8 分到店；吃完走到水道橋站搭 **JR 中央線直達吉祥寺**（約 25 分），跟 a4 去吉祥寺同一條線，零繞路。📞 03-6256-8417，IG @dixans.tokyo。', geo:'10 DIXANS（ディゾン）'},
+        {id:'a4', time:'11:00', type:'transport', title:'前往吉祥寺', loc:'水道桥站 → JR 中央线直达吉祥寺', note:'JR 中央线水道桥 → 吉祥寺直达约 25 分钟（各停）；吃完 10 DIXANS 走 10 分钟到水道桥站上车。'},
+        {id:'a5', time:'11:45', type:'food', title:'白胡子泡芙工房 · 佐藤炸肉排', loc:'吉祥寺站周边', note:'站前小吃开场：白胡子泡芙 + 佐藤食品中心现炸肉饼，边走边吃。', geo:'白ひげのシュークリーム工房'},
+        {id:'a6', time:'12:15', type:'nature', title:'井之头恩赐公园', loc:'吉祥寺站南口步行 5 分钟', note:'11 月下旬红叶正盛，湖畔散步、天鹅船皆宜。', geo:'井の頭恩賜公園'},
+        {id:'a7', time:'13:00', type:'museum', title:'三鹰之森吉卜力美术馆', loc:'井之头公园西园旁', note:'每月 10 日开售下月门票，官网抢票；按预约场次入场，馆内禁摄影。🎁 馆内商店 Mamma Aiuto 有美术馆限定周边（馆外买不到），出馆前必逛。', geo:'三鷹の森ジブリ美術館'},
+        {id:'a8', time:'14:30', type:'food', title:'汤咖喱 Rojiura Curry SAMURAI.', loc:'吉祥寺店', note:'札幌汤咖喱名店，时蔬拼盘+烤鸡腿人气搭配。', geo:'ROJIURA CURRY SAMURAI. 吉祥寺'},
+        {id:'a9', time:'15:30', type:'shop', title:'吉祥寺小村庄 · Capoon 抹茶 · 空想街杂货', loc:'吉祥寺', note:'小巷杂货铺与抹茶咖啡慢逛消食，伴手礼一路收集。', geo:'吉祥寺駅'},
+        {id:'a11', time:'16:30', type:'transport', title:'前往新宿', loc:'JR 中央线', note:'吉祥寺 → 新宿约 15 分钟。'},
+        {id:'a12', time:'17:00', type:'shop', title:'新宿购物巡礼', loc:'丸井 · NEWoMan 一带', note:'冈田屋 / Sanrio / 迪士尼旗舰店 / 丸井本馆·别馆 / animate 新宿店顺路扫。', geo:'新宿マルイ 本館'},
+        {id:'a13', time:'18:30', type:'night', title:'歌舞伎町一番街 · 哥斯拉头', loc:'新宿东口', note:'霓虹地标打卡；哥斯拉头在新宿东宝大厦，整点喷汽咆哮。', geo:'歌舞伎町'},
+        {id:'a14', time:'19:30', type:'food', title:'晚餐：新宿烤肉芝浦荷尔蒙', loc:'新宿', note:'行程指定烧肉店，荷尔蒙拼盘+和牛，人气店建议提前订位。', geo:'焼肉芝浦 新宿'},
+        {id:'a10', time:'21:00', type:'hotel', title:'回民宿', loc:'新宿 → 马喰横山', note:'都营新宿线 新宿直达马喰横山站，步行约 7 分钟到家；凌晨航班，今晚早点休息。', geo:'東京都中央区日本橋小伝馬町16-6'},
+      ]},
+    { date:'11.19', weekday:'周四', theme:'台场 · 银座 · 浅草酉之市',
+      note:'早上民宿步行 10 分钟到人形町 Unison Tailor 吃冰淇淋黄油吐司当早餐（08:00 开门，吃完人形町站直达新桥，顺路）；上午照小红书「数码宝贝取景地圣地巡礼」路线跑台场：台场海滨公园站 → 太一家 → 沙滩分别场景／海狮兽码头 → 自由女神像／富士电视台 → Big Sight 巨锯，约 2 小时；下午银座—**Bic Camera 有乐町 80 分钟**（原 45 分，电器药妆免税终于够逛）—六义园夜枫；今晚浅草酉之市（二之酉），先正餐牛舌檸檬再逛熊手+屋台补吃。',
+      wx:{lo:8,hi:14,label:'多云',pop:25},
+      wear:'台场海边风大体感低 2~3°C：防风外套＋围巾；正餐后酉之市户外逛吃，手套备上',
+      items:[
+        {id:'b0', time:'08:00', type:'food', title:'Unison Tailor Ningyocho 冰淇淋黄油吐司', loc:'中央区日本桥人形町 3-9-8（人形町站 A4 出口步行 1 分钟）', note:'🍞 **招牌「アイスバタートースト」＝ 冰淇淋黄油法式吐司**：厚切吐司浸满蛋奶液煎到外脆内软，上桌再叠一球**冰黄油**，遇热慢慢化开渗进面包里，口感松软湿润、奶香直接拉满——店里毫无争议的第一名。🍮 **焦糖布丁（プリン）** 是第二招牌：蛋香浓、奶味足，焦糖汁带微苦，所以**完全不甜腻**。☕ 咖啡豆来自本地名店 PASSAGE COFFEE NIHOMBASHI，水出しコーヒー（冷萃）干净顺口，也供应精酿啤酒。💰 人均 ¥75-100（含税）：法式吐司整份 **¥1,080（≈¥54）**、吐司＋饮料 Set **¥1,450**（单点吐司加咖啡原价 ¥1,640，Set 省 ¥190）、布丁 **¥580（≈¥29）**、冷萃 (L) **¥680** / 卡布奇诺 ¥600 / 摩卡 ¥660 / 巴斯克芝士蛋糕 ¥600。🕐 **周四 08:00 开门**（周一 10:00 · 周二 09:00 · 周三～五 08:00 · 周末 08:30，**每月最后一个周一休**），L.O. 17:30；我们 08:00 准点到、08:45 前离开，避开 09 点后的上班人潮。🚶 **完全顺路**：从民宿步行约 10 分钟就到（人形町就在小伝馬町隔壁），吃完走出店门 **1 分钟进人形町站**，搭**都营浅草线直达新桥**（约 7 分钟、4 站不用换车）再转百合鸥线去台场——原本从民宿去新桥还得绕，这样反而更顺。⚠️ **一人一项低消**（两人只点一份吐司会被提醒加单），**客满时限时 60 分钟**、必须全员到齐才能入座。⚠️ 禁止长时间拍摄、禁止拍到其他客人、禁连拍快门声、禁拍门口长椅（门口排队时会挡到邻居）。💳 现金 / 信用卡 / 交通 IC / PayPay 都可用。📞 03-3527-2507。约 20 席，部分座位带插座。', geo:'Unison Tailor Ningyocho'},
+        {id:'b1', time:'08:50', type:'transport', title:'前往台场', loc:'人形町站 → 新桥站转百合鸥线', note:'吃完早餐走 1 分钟进人形町站；都营浅草线人形町 → 新桥直达约 7 分钟（4 站不换车），新桥再换百合鸥线。百合鸥线无人驾驶，坐车头视野最佳。📸 **转乘时可顺路打卡 P2・P3**：作者说如果地图提示在新桥站换乘，可以出站拍 **P2 那面砖墙**和 P3——海鸥线与 JR 线两个出口对着、很好找（找不到就围着出站口转一圈）。⚠️ 这会多花约 5 分钟，想赶行程就跳过。⏱ **08:50 出发、09:25 就到台场**（车程只要 30 分钟）。', geo:'人形町駅'},
+        {id:'b2', time:'09:25', type:'sight', title:'台场海滨公园站 · 数码宝贝巡礼起点（P4・P5）', loc:'台场海滨公园站 1B 出口', note:'🎬 **上午整段照小红书「数码宝贝取景地圣地巡礼」路线走**（作者说认真拍约 2 小时）。\n🚃 **P4**：到「台场海滨公园站」下地铁后**先别急着出站，回头对着列车拍**——车厢就是动画里的那个画面。\n🚶 **P5**：从 **1B 出口**出来就能看到路灯杆和灯箱，**把你的滚球兽从书包里掏出来一起拍**。\n⏱ **给 20 分钟**。⚠️ 独角兽高达立像 2026.8.31 已结束展示（别再找了）；DiverCity 7F 的 Gundam Base Tokyo 仍营业，店限模型可淘。', geo:'お台場海浜公園'},
+        {id:'b3', time:'09:45', type:'sight', title:'太一家 · 全家台场海滨公园店（P6・P7・P8）', loc:'FamilyMart 台场海滨公园店', note:'📍 地图搜「Familymart」找「**台场海滨公园店**」，从 1B 出口步行 3 分钟。\n🥚 **P6**：太一抱着亚古兽的那张——作者说这是他所有打卡里最喜欢的一张，把亚古兽／滚球兽拿出来一起拍。\n🏢 **P7**：拍完 P6 **向左转头**，看见的两栋高楼就是太一被吸回数码宝贝世界的地方。\n🏠 **P8**：回到 P6 的位置，**面向便利店右手边**走个几十米，就是太一家。\n⏱ **三个机位连在一起，给 35 分钟**。💡 这区正是作者 P14 地图标的「集中打卡区」，走路最少的走法。', geo:'ファミリーマート お台場海浜公園店'},
+        {id:'b2b', time:'10:20', type:'sight', title:'台场沙滩 · 分别场景 & 海狮兽码头（P1・P9）', loc:'台场海滨公园沙滩', note:'🏖️ **P1**：拍完太一家**回头面向海滩**看到跨海大桥，沿着沙滩走、找个合适的角度坐下——作者说「系统会自动给你匹配一只亚古兽」，就是太一与亚古兽分别的那个经典画面。\n🦭 **P9**：拍完继续沿着沙滩走，能看到**两个乘坐海狮兽的码头**。\n⏱ **给 25 分钟**。⚠️ 海边风大体感低 2~3°C，外套围巾别脱；沙滩不好走，穿好走的鞋。', geo:'お台場海浜公園'},
+        {id:'b2c', time:'10:45', type:'sight', title:'自由女神像 & 富士电视台（P10・P11）', loc:'台场海滨公园 → 自由女神像', note:'🗽 **P10**：从海狮兽码头继续往前走就到**自由女神像**（找不到就导航「自由女神像」），自由女神 × 彩虹大桥同框。\n📺 **P11**：拍完自由女神**背向海面方向抬头**，能看到**富士电视台总部大楼**——作者说这是**最难拍的一个**，很难找角度，他自己是在**廊桥上**拍到的。\n⏱ **给 25 分钟**。💡 今天**不上球体展望室**（门票 ¥550／人 ≈¥28 含税、还要排队），纯拍外观，省下的时间全留给 Bic Camera。', geo:'自由の女神像'},
+        {id:'b4', time:'11:10', type:'sight', title:'Tokyo Big Sight · 黑暗巨龙兽的巨锯（P12・P13）', loc:'东京国际展示场（Tokyo Big Sight）', note:'🪚 **P12**：从「台场站」坐两站地铁，或步行导航到「**Tokyo Big Sight**」，出站就能看到**黑暗巨龙兽和仙人掌兽打架那把巨大的锯子**——这是整条巡礼路线的收尾。\n🏛️ **P13**：拍完巨锯，找个角度拍**会展中心**的倒金字塔建筑就收工。\n⏱ **给 30 分钟（含交通）**。🥤 旁边有全家，补水／上洗手间／买热饮都在这解决。', geo:'東京国際展示場'},
+        {id:'b5', time:'11:40', type:'transport', title:'前往银座', loc:'百合鸥线 → 新桥转银座线', note:'🚃 百合鸥线 台场 → 新桥约 15 分钟，转银座线 1 站到银座（或新桥步行 10 分钟），**全程约 40 分钟**，12:20 前后到银座。车上小憩——上午在海边走了 2 小时，脚会酸。'},
+        {id:'b9', time:'12:20', type:'food', title:'鳗鱼饭 · 鰻ひつまぶし備長 三越銀座店', loc:'中央区银座 4-6-16 银座三越新馆 11F', note:'💰 人均 ¥180-250（含税，鳗重午市套餐）｜名古屋ひつまぶし名店「備長」的银座二号店，在银座三越**新馆 11F** 餐厅层。招牌吃法是「ひつまぶし三吃」：第一碗吃原味，第二碗拌海苔・葱花・山葵，第三碗浇高汤做成茶泡饭（出汁可免费续），一碗三变、收尾最香。鳗鱼炭火直烤，皮焦脆肉细嫩，酱汁渗进米饭特别下饭。⏰ 营业 11:00-15:30（L.O. 14:45）/ 17:00-21:00（L.O. 20:00），休馆日随银座三越；11.19 周四正常营业。🚉 交通：地铁银座线・丸之内线・日比谷线 **银座站 A6/A7 出口即到**（百货直通）；或都营浅草线/日比谷线东银座站经地下通道步行 2 分钟；JR 有乐町站步行 9 分钟。⚠️ 位置在**新馆 11F 不是本馆**，注意电梯分区（同一层店外有吸烟室）。⚠️ 百货餐厅层中午排队常见，**人多时会在最后点餐前提前截止排队**，建议 13:30 前到；店内要求**每人至少点一份鳗鱼套餐**（单点碗只限外带）。📞 03-6263-2157，建议提前电话预约。💳 信用卡・电子钱包・扫码支付全都可用。', geo:'鰻ひつまぶし備長 三越銀座店'},
+        {id:'b10', time:'13:20', type:'shop', title:'银座购物巡礼', loc:'GINZA SIX → 优衣库 → 无印 → Loft', note:'GINZA SIX 艺术中庭、优衣库全球旗舰店、无印旗舰、银座 Loft 一条线。🎁 手信：Press Butter Sand 银座本店（店限口味）、銀のぶどう 葡萄干黄油夹心。⏱ **今天只给 40 分钟**（原 60）：挑 1-2 家重点逛就好，手信集中在 Bic Camera 与 Nagano Market 那一段买。', geo:'GINZA SIX'},
+        {id:'b11', time:'14:05', type:'shop', title:'Bic Camera 有乐町 · 电器药妆', loc:'有乐町站旁', note:'电器药妆免税扫货主力，购物清单集中火力。⏱ **14:05-15:25 有 80 分钟**（原 45 分钟，把台场段重排成圣地巡礼后挪过来的）。🚶 从银座步行 5-8 分钟（沿中央通往有乐町方向）。💡 **免税结账会排队，务必留 20-30 分钟给柜台**——先逛满 ¥5,000 再一次性结，别分两次。🎧 主力扫货：耳機／相机／美容仪／手表／药妆／零食，8 层楼。**带护照**才能免税。', geo:'ビックカメラ有楽町店'},
+        {id:'b11b', time:'15:25', type:'shop', title:'Nagano Market GINZA · ちいかわ周边', loc:'中央区银座 2-2-14 マロニエゲート銀座1 4F', note:'ちいかわ/吉伊卡哇作者插画师 NAGANO 的官方商店！免入场，商场营业 11:00-21:00。银座一丁目站 4 号出口步行 2 分钟；从 Bic Camera 沿银座中央通向东步行约 6-8 分钟可达。角色：自嘲熊（ナガノのくま）、ちいかわ 小八猫/兔兔联名、帕格 Pug、鼹鼠可乐饼等。🎁 必买：ちいかわ×NAGANO Friends 联名帆布袋 ¥2,970、Nagano Friends 不锈钢随行杯 ¥2,860、毛绒纸巾套 ¥3,300、自嘲熊干发浴帽 ¥1,980；大福袋 ¥11,000 含大手提袋/达摩公仔/特大毛巾/环保袋/针织帽等。📌 早 11:00 入场最不挤；热门新品/新发售发番号券（LINE 派发，关注官方 X）。本店不免税（机场退税）；同款部分商品可 nagano-market.jp 官网网购直邮。', geo:'マロニエゲート銀座1'},
+        {id:'b14', time:'16:20', type:'sight', title:'六义园 · 夜枫点灯', loc:'文京区本驹込 6-16-3', note:'🍁 **东京夜枫名所前三甲**！展期 11.18-12.6（**正好覆盖行程 11.19 周四**）；夜间点灯日落-21:00（最后入场 20:30），票价预售 ¥1,000 / 当日 ¥1,200。500+ 棵枫树+银杏+野漆树，11 月下旬-12 月上旬最佳品赏期，「水香江」周边机位绝杀。**从 Nagano Market 走 2 分钟到银座一丁目站** → 银座线到上野（8 分钟）→ 南北线驹込（6 分钟）N14 出口步行 7 分钟，**全程约 25 分钟到园，16:20 抵达**。⏱ 16:20-18:15 足足 **115 分钟**（比原计划多 20 分钟）：先逛白天红叶，再等 16:30 前后的点灯与蓝调时刻，18:15 出门 → 19:00 前到达浅草。⚠️ 周末人山人海；**周四属于工作日，人少机位好**！三脚架禁用，11 月夜晚山手线/南北线有暖气但夜间山区风冷，建议带薄羽绒/围巾。', geo:'六義園'},
+        {id:'b12', time:'18:30', type:'transport', title:'前往浅草', loc:'驹込 → 银座线', note:'驹込 → 上野（南北线 6 分钟）→ 浅草（银座线 12 分钟）约 25 分钟，19:00 抵达浅草。'},
+        {id:'b13', time:'19:00', type:'sight', title:'浅草寺：雷门 → 仲见世 → 宝藏门 → 五重塔', loc:'浅草', note:'夜间灯笼全亮（仲见世 18 点已关，只能看外景+寺内）；五重塔夜晚打灯，藏造建筑群夜景。⛩️ 御守：金龙铃守（开运·金色铃铛）、雷门合格守；抽签 100 円。', geo:'雷門 浅草寺'},
+        {id:'b6', time:'19:45', type:'food', title:'浅草晚餐 · 屋台小吃', loc:'浅草', note:'酉之市周边屋台边逛边吃。', geo:'浅草駅'},
+        {id:'b7', time:'20:30', type:'festival', title:'浅草酉之市（二之酉）', loc:'鹫神社', note:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。🎁 迷你熊手钥匙圈，祭典限定开运小物。⛩️ 熊手御守「かっこめ」仅酉之市期间授与（招福聚财）；「なでおかめ」摸鼻招金运、右颊招恋爱；当日限定御朱印。', geo:'鷲神社 台東区'},
+        {id:'b8', time:'22:00', type:'hotel', title:'回民宿', loc:'浅草 → 东日本桥', note:'都营浅草线 浅草 → 东日本桥仅 2 站约 5 分钟，步行约 7 分钟到家。', geo:'東京都中央区日本橋小伝馬町16-6'},
+      ]},
+    { date:'11.20', weekday:'周五', theme:'富士山 · 山中湖骑行 & 河口湖（ほうとう不動 + 红叶回廊）一日游',
+      note:'上午山中湖骑行；下午 14:00 河口湖站前「ほうとう不動」乡土面午餐（駅前店、不绕路）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 站前扫街、17:50 买 ふるや 炸物当车上晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。',
+      wx:{lo:0,hi:8,label:'晴 · 河口湖山区',pop:15},
+      wear:'全程最冷！山区约 0~8°C：保暖内衣＋毛衣＋厚防风外套，毛帽手套上阵；骑行迎风，口罩/防风镜更舒适；傍晚返东京约 10°C',
+      items:[
+        {id:'c0', time:'07:30', type:'transport', title:'民宿出发 · 前往バスタ新宿', loc:'日本桥小伝馬町 → 馬喰横山 → 新宿', note:'步行约 7-8 分钟到**馬喰横山站**，搭都營新宿線直达新宿三丁目 / 新宿约 15-18 分钟，再步行 5-8 分钟到 **バスタ新宿（JR 新宿站南口）**，全程约 30-35 分钟。😴 **今天比原计划多睡 1 小时**——改搭 08:15 那班高速巴士，最晚 **07:30** 出门，留 10 分钟买水、找月台。🎫 出发前确认高速巴士票已取（网上预约的话在窗口或自助机取票）。', geo:'馬喰横山駅'},
+        {id:'c1', time:'08:15', type:'transport', title:'高速巴士 · バスタ新宿 → 山中湖旭日丘（直达）', loc:'新宿〜富士五湖线（京王 / 富士急）', note:'💰 单程 ¥2,300-2,600/人（≈¥115-130）｜**直达、全程不换乘**：这台车会先经停河口湖站（约 10:10）再继续开往山中湖，**不要下车，坐到底就是旭日丘**。**10:37 抵达山中湖旭日丘**，巴士站旁边就是自行车租赁点。⏱ 全程约 2 小时 22 分。🎫 参考班次：**08:15 发 → 10:37 旭日丘**（首选，终点就是旭日丘）；备选 07:55 → 10:09（终点山中湖平野，旭日丘有停，可多骑 30 分钟）、07:15 → 09:29（最早，能多骑 50 分钟）。⚠️ **全指定席，必须提前网上预约**（发车前 1 个月开放，红叶季极易满席）；网上支付比窗口便宜（山中湖方向约 ¥2,350）。🎫 **买票买到「山中湖旭日丘」**，别只买到河口湖——差价只有几百日元，但省掉一次换乘 + 45 分钟。🎒 车上有卫生间，行李舱可放大件；建议备好晕车药和水。', geo:'バスタ新宿'},
+        {id:'c2', time:'10:45', type:'fun', title:'抵达山中湖旭日丘 · 租电动自行车', loc:'山中湖旭日丘巴士站 · 租赁点', note:'🕐 **10:37 抵达山中湖旭日丘**，下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 12:30 之前还车（之后搭巴士回河口湖）。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。', geo:'山中湖 旭日丘'},
+        {id:'c3', time:'10:50', type:'fun', title:'山中湖 · 环湖骑行', loc:'旭日丘租车店 · 环湖约 20km', note:'电动自行车约 2000-3000 日元/3 小时；白鸟滨看天鹅、长池滨拍富士山倒影。⏱ **骑到 12:30 前必须还车**——之后搭富士急巴士约 45 分钟回河口湖站（13:00 前后发车）。从 10:50 算起有约 100 分钟，电动自行车环湖 20km 绰绰有余。', geo:'山中湖 旭日丘'},
+        {id:'c5', time:'13:00', type:'transport', title:'巴士返回河口湖', loc:'山中湖 → 河口湖站', note:'🚐 骑行还车后，搭 **13:00 前后**的富士急巴士（山中湖 → 河口湖站）约 45 分钟 → **13:45 前后抵河口湖站**。班次约每小时 1 班，上车前先看好时刻表；错过这班下一班要再等近 1 小时，会压缩午餐时间。', geo:'河口湖駅'},
+        {id:'c4', time:'14:00', type:'food', title:'山梨乡土料理 · ほうとう不動 河口湖駅前店', loc:'山梨县南都留郡富士河口湖町船津 3631-2（河口湖站步行 1 分钟）', note:'💰 人均 ¥70-130（含税）｜山梨乡土料理「ほうとう（馎饦）」名店，就在**河口湖站前**（3631-2 Funatsu），出站步行 1 分钟即达，完全不绕路。味噌汤底炖整块南瓜 + 红薯 + 芋头 + 白菜 + 香菇 + 手打宽面，铁锅现煮、份量极大（两人分一锅也够）。必点：**かぼちゃほうとう（南瓜馎饦）¥1,300｜肉ほうとう（猪肉）¥1,300｜あずきほうとう（红豆）¥1,300｜もつ煮（炖内脏）¥550**。营业 **11:00-19:00（L.O. 18:30）**、全年无休，且是各分店里**离河口湖站最近**的一家，最适合赶行程。🚶 **駅前店、出站即到**，午餐后直接步行去站前 6 号站牌搭 Red Line 去红叶回廊，**全程零打车**。⏱ 给这顿约 50 分钟（14:00-14:50），铁锅上桌就能吃，节奏抓好。⚠️ **不接受预约**，只能现场取号；红叶季 12:00-13:30 人潮最挤，**我们 14:00 到正好是离峰**。💳 现金 / 信用卡可用，**不支持电子钱包与扫码支付**，备好实体卡。', geo:'ほうとう不動 河口湖駅前店'},
+        {id:'c6', time:'15:20', type:'sight', title:'站前集结 · 赶 16:00 Red Line 去红叶回廊', loc:'河口湖站 站前 6 号站牌', note:'🚏 午餐在駅前店吃完（约 **14:50** 收尾），**14:50-15:20 这 30 分钟全在站前这一圈晃**：土产店、河口湖温泉足汤、寄物柜取行李都在步行 3 分钟内，节奏很松、不用赶。约 **15:20** 溜达到站前 **6 号站牌**等 Red Line 周游巴士（往河口湖北岸・红叶回廊方向），**16:00 整发车**（约 20 分钟到，16:20 到会场）——这班不能错过，晚一班就少掉整段黄昏光。🎒 出发前先把背包存进站前投币储物柜，轻装去拍。✅ 全程步行＋周游巴士，**今天一整天都不用打车**。', geo:'河口湖駅'},
+        {id:'c9', time:'16:20', type:'night', title:'河口湖红叶回廊 · 夜枫点灯', loc:'山梨县南都留郡富士河口湖町河口 · 梨川沿岸', note:'🍁 **2026 富士河口湖红叶祭 11.07-11.29，正好覆盖今天**！主会场就是红叶回廊：梨川沿岸约 150 棵枫树织成红色隧道，免费入场、24 小时开放。🚏 **交通（全程不打车）**：在**河口湖站前 6 号站牌**搭 **Red Line 周游巴士**（往河口湖北岸・紅葉回廊方向）约 20 分钟 → **「久保田一竹美術館」站**下车，步行 2-5 分钟即到；单程约 ¥200-400/人（≈¥10-20 含税），只坐这一趟买单程即可，不必买 ¥1,500 一日券。⏱ **节奏：16:20 到 → 16:20-16:40 先抢黄昏暖光**（红叶＋富士山同框，斜光的颜色比正午平光好看太多）→ **16:40 日落点灯** → 16:50-17:15 是「蓝调时刻」，天空深蓝、灯刚亮，是全场最好的 25 分钟 → 17:15 收工（把蓝调时刻拍满）。✅ 15:40-16:20 那段平光已经砍掉了，体力全留给点灯后——**一分钟都不浪费在普通光线上**。📷 **夜枫一定要走上木桥拍**——灯光是从桥上打下来的，站在步道上拍不出效果；桥上能同时拍到枫红隧道 + 底下落叶地毯。🎪 会场旁有美食摊贩与手作市集（9:00-19:00）。⚠️ 夜间常低于 5°C，厚外套 + 毛帽 + 围巾全上；人流中三脚架不好用，手持 + 拉高 ISO 更实际。🚌 **回程：17:25-17:35 在同一站牌搭 Red Line 回河口湖站**（约 20 分钟，17:45 前后到站），接着**站前扫街 + 便利店补给当晚餐**（见 17:45 那张卡，时间很充裕），再搭 18:10 的高速巴士。⚠️ 红叶季周游巴士极挤、末班约 18:00，上车前务必先拿一张时刻表确认末班；万一挤不上，就改搭 18:20 高速巴士（新宿 20:20），GOKU 相应推迟到 21:00。', geo:'河口湖もみじ回廊'},
+                {id:'c17', time:'17:45', type:'sight', title:'河口湖站前扫街 · 便利店补给', loc:'河口湖站站前（出站即达）', note:'🚉 **红叶回廊看完回来，这里才有空慢慢逛**：17:45 周游巴士到站，到 18:10 发车有整整 25 分钟。河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 它是**公寓式旅馆、不是景点**，只能在外面看一眼外观。站前还有河口湖温泉、ほうとう不動（站前店）等。🍱 **站前便利店补给**热饮／零食；真正的车上晚餐是 **17:50 去 ふるや 买炸物**（见下一张卡）带上 18:10 巴士。🎒 站前有投币储物柜，背包存了再轻装活动。⏱ **18:05 前回到站前等车**（18:10 发车）。', geo:'河口湖駅'},
+        {id:'c15', time:'17:50', type:'food', title:'お惣菜の店 ふるや · 河口湖第一炸物', loc:'山梨県南都留郡富士河口湖町船津4120-1（河口湖站步行 5 分钟）', note:'🥇 **河口湖 Tabelog 炸物类第一名**、开了 20 多年的外带老店，只卖五种炸物、做到极致：可乐饼 **¥90**（≈¥4.5）起、炸土豆饼、**鳕鱼饼（炸银鳕鱼，最多人推）**、炸猪排、火腿排、竹筴鱼；人均 ¥999 以下（≈¥50 含税）。下单后才现炸，报纸＋橡皮筋一包，很昭和。🕐 **营业 10:00-14:00 / 16:00-19:00，卖完即止**——我们排在看完红叶回廊之后，落在 16:00-19:00 这个时段内，时间对得上；11.20 是周五，正常营业（定休日多为周二／周日）。📞 **建议上午先电 0555-72-0862 预约 17:50 取货**（店家接受预约），能省掉排队——这一年里最挤的红叶季，排队是最大的风险。💳 **只收现金**：信用卡、电子货币、QR 支付全不接受，备好日元现钞。🍱 **仅外带、没有座位**；买完直接带上 18:10 的高速巴士当晚餐（车上可以吃味道不重的手持食物，禁止饮酒）。🚶 从河口湖站步行 5 分钟／约 350 米。⚠️ **时间很紧**：17:45 周游巴士到站 → 17:50 到店 → **18:05 必须动身走回车站**赶 18:10 的巴士。若现场排队或已卖完，立刻放弃、改去站前便利店买饭团，千万别误车——误车就改 18:20／18:40（末班 20:15 前都有车），GOKU 要电话顺延。', geo:'お惣菜の店 ふるや'},
+        {id:'c10', time:'18:10', type:'transport', title:'返回东京 · 高速巴士 河口湖站 → 新宿', loc:'河口湖站 18:10 → バスタ新宿 约 20:10', note:'🚌 **高速巴士（富士急 / 京王）**：河口湖站 18:10 发 → バスタ新宿约 20:10，车程约 2 小时，¥2,300-2,600/人（≈¥115-130），比富士回游便宜一半。🎫 备选班次 **18:20 / 18:40**（末班 20:15）——17:45 周游巴士回到河口湖站，买完炸物 18:05 回站，只有 5 分钟上车；**回廊拍满 17:15 也完全来得及**，18:10 发车、20:10 到新宿，GOKU 20:45 不受影响。⚠️ 红叶季满席常见，建议提前网上预约，也可在河口湖站窗口现场买。🍱 **晚餐是站前 ふるや 买的炸物（17:50 已取）带上车**当车上晚餐（味道不重的手持食物，禁止饮酒）；也可补买便利店饭团、热饮。车上有卫生间；GOKU 已改约 20:45。⚠️ **不打车的话时间紧**：20:10 到バスタ新宿 → 丸之内线到银座约 20 分钟 → 步行 8 分钟 = 20:38 到店，只剩 7 分钟；**巴士晚点请立刻电话 070-3206-1079 说明**，或改约 21:00（L.O. 21:30 前入座即可）。', geo:'河口湖駅'},
+        {id:'c11', time:'20:45', type:'food', title:'和牛寿喜烧 · WAGYU SUKIYAKI 極〜GOKU〜 銀座', loc:'中央区银座 8-2-14 银座竜王ビル 1F', note:'💰 人均 ¥290-390（含税，150g/250g 套餐）｜可以一人一锅吃 A5 和牛寿喜烧的特色店，Google 4.9 分、2025.6.26 开业的人气新店。营业 10:30-22:00（全年无休）。只有 12 席的小店，**务必提前预约**（TableCheck 网上预约 / 电话 070-3206-1079）。套餐均含时令蔬菜 + 生鸡蛋 + 米饭 + 味噌汤 + **松露鸡蛋拌饭，米饭/味噌汤/鸡蛋全部免费续**：国产 A5 和牛 100g ¥240｜150g ¥290（推荐）｜250g ¥390｜1 磅 ¥540。汤底是偏甜酱油基底，很好入口；餐后松露蛋拌饭是招牌收尾。🍽 从新宿出发：丸之内线 新宿 → 银座 约 25 分钟，或 JR 山手线/中央线 新宿 → 有乐町 约 20 分钟再步行 8 分钟；**用银座站 C2 出口最近**（也可新桥站银座口 / 内幸町站 309m）。🚉 バスタ新宿约 20:10 到站 → 丸之内线 新宿 → 银座 约 20 分钟（或 JR 到有乐町 20 分钟 + 步行 8 分钟），**20:35-20:45 可到店，20:45 场次刚好**（🚕 想更稳就バスタ新宿直接打车去银座，约 15-20 分钟、¥1,500-2,000 ≈ ¥75-100）。⚠️ 只有 12 席、L.O. 21:30、22:00 闭店，**迟到 15 分钟以上座位可能被取消**；万一红叶回廊拍超时或巴士晚点，立刻电话 070-3206-1079 说明。💳 可用信用卡（VISA/Master/JCB），**不接受电子货币与扫码支付**，备好实体卡。', geo:'WAGYU SUKIYAKI 極 銀座'},
+        {id:'c8', time:'22:00', type:'hotel', title:'回民宿', loc:'银座 → 小伝馬町', note:'日比谷线 银座 → 小伝馬町**直达约 5 分钟**（无需换乘），出站步行 3 分钟到家；比原来去人形町更近。GOKU 20:45 入店、L.O. 21:30，21:50 前收尾，约 22:00 到家。', geo:'東京都中央区日本橋小伝馬町16-6'},
+      ]},
+    { date:'11.21', weekday:'周六', theme:'增上寺 · 东京塔远眺 · 秋叶原 4 店',
+      note:'上午压缩：浅草 Ginza Brazil 早餐 35 分钟 → 增上寺 40 分钟 → 芝公园＋东京塔远眺拍照 35 分钟（**不上展望台**）→ 11:30 月岛文字烧（50 分钟）→ **12:50 进秋叶原**，跑 4 家店约 6 小时：Mandarake（13:00）→ Animate（14:40）→ Radio 会馆（16:25）→ 骏河屋（18:00）。⚠️ 周六 Mandarake／Animate／Radio 会馆 三家都 20:00 打烊，所以必须照这个顺序跑。🍡 扭蛋机与夹娃娃机沿途到处都有（唐吉诃德 24h、TAITO STATION 开到 24:00），想玩随时停，不必专程排一站。**19:00 收工、19:30 出发、20:00 吃晚餐**（おでん屋たけし，23:00 打烊）。',
+      wx:{lo:9,hi:15,label:'晴',pop:20},
+      wear:'城市步行日：长袖＋开衫＋风衣或大衣，轻装上阵',
+      items:[
+        {id:'d0', time:'09:00', type:'food', title:'Ginza Brazil 銀座ブラジル 炸豬排三明治', loc:'台東区浅草1-28-2 シカゴビル 2F（雷門旁、浅草站步行 2 分钟）', note:'🍳 **銀座ブラジル（Ginza Brazil）**：名字騙人——它其實在**淺草**（雷門旁、1948 年創業的昭和洋食老店），根本不是銀座！🥪 **招牌「元祖炸豬排三明治」**：厚切豬排夾進烤吐司、淋秘製醬汁，外酥內軟、麵包完全不濕爛，是淺草在地人的早餐第一名；**起司吐司**（煎過的起司＋奶油香吐司）跟**炸雞籃**也超推。🕐 **09:00 開門、15:00 收（賣完提早）**，**週三週四休**——我們 11.21 週六去剛好；店裡只有一位廚師、**出餐超慢，建議開門前就到排隊**（08:50 前人潮就湧現）。💰 人均 ¥1,000-2,000（≈¥50-100 含稅）：炸豬排三明治約 ¥1,300、起司吐司 ¥800、雞肉飯 ¥1,200。💳 **只收現金**！備好日圓現鈔。⏱ **今天秋葉原是 8 小時馬拉松，早餐控制在 35 分鐘內（09:35 前離開）**——這家出餐慢，建議 08:50 前就到排隊，坐下先點、別點太多。🚶 **完全順路**：民宿走到小伝馬町站，搭**都營淺草線直達淺草**（4 站約 12 分鐘），下車走 2 分鐘到雷門旁店門（芝加哥大樓 2F）；吃完 淺草（銀座線）→ 日本橋 → 銀座 → 霞ヶ関 轉都營三田線 1 站到**御成門**，直奔增上寺，約 25 分鐘——整個上午把東側舊東京串成一氣，超順。📞 03-3841-1473。', geo:'銀座ブラジル'},
+        {id:'d1', time:'10:00', type:'sight', title:'增上寺', loc:'御成门站', note:'德川家菩提寺；大殿与东京塔同框机位。⛩️ 御守：勝運御守（黑底金葵纹·德川将军家·500 円·求胜运事业）；大殿右侧「千躰子育地藏尊」红帽小地藏顺看。⏱ **今天只给 40 分钟**（原 60 分钟）：三解脱门 → 大殿 → 御守所 → 大殿右侧地藏，一条线走完就走，10:40 前离开。', geo:'増上寺'},
+        {id:'d2', time:'10:40', type:'nature', title:'芝公园 · 红叶 + 东京塔背景', loc:'增上寺旁', note:'红叶季老牌公园，草坪+东京塔背景拍照。⏱ **只给 15 分钟**：从增上寺穿过来，拍「红叶前景 × 东京塔」的经典构图就走。📷 这里就是**今天拍东京塔的主场**（不上展望台，省下来的时间全给秋叶原）。', geo:'芝公園'},
+        {id:'d3', time:'10:55', type:'sight', title:'东京塔 · 芝公园远眺（不上展望台）', loc:'芝公园侧 · 东京塔脚下', note:'🚫 **今天不上展望台**——Main Deck 150m 门票 ¥1,200/人（≈¥60 含税）＋周末排队 30-60 分钟，等于吃掉秋叶原一整站。改成**在塔脚下仰拍**：从芝公园往塔基走，站在「东京塔正下方往上看」的位置，铁塔结构 ＋ 红叶前景比从展望台往外看更震撼，而且免费、零排队。🎁 想买伴手礼的话，塔下的**官方店 Noppon** 有限定周边（不用上塔就能逛）。⏱ 给 20 分钟，11:15 前离开去月岛。💡 展望台留到下次，今天的主菜是秋叶原。', geo:'東京タワー'},
+        {id:'d4', time:'11:15', type:'transport', title:'前往月岛文字烧街', loc:'大江户线 赤羽桥 → 月岛', note:'从东京塔脚下（赤羽桥站）搭都营大江户线直达约 10 分钟；月岛是东京文字烧的发源圣地。⏱ 11:30 前后到，多数店刚开门，不用等。'},
+        {id:'d4b', time:'11:30', type:'food', title:'午餐：文字烧 · 月岛もんじゃ街', loc:'月岛西仲通商店街', note:'约 50 家文字烧店的老牌商店街，老铺推荐「近藤本店」「はざま」「もん吉」；明太子年糕味最入门，第一份可请店员示范下料。🎁 文字烧粉 DIY 套装，月岛限定。⏱ **今天只给 50 分钟**（原 75 分钟）：点一份文字烧 + 一份炒面就够，别加第二锅——文字烧现做现吃本来就要等，**坐下立刻点单**才是关键。💰 人均 ¥1,500-2,500（≈¥75-125 含税）。🚶 12:20 前动身去秋叶原。', geo:'月島もんじゃストリート'},
+        {id:'d4c', time:'12:20', type:'transport', title:'前往秋叶原', loc:'有乐町线 → JR 山手线', note:'月岛 → 有乐町转山手线 → 秋叶原，约 30 分钟（12:50 前后到电气街口）。🚃 出站就直奔 3 丁目的 Mandarake，别在站前逗留——站前的店排在晚上回来那一段。'},
+        {id:'d5', time:'12:50', type:'fun', title:'秋叶原到着 · 4 店起跑', loc:'秋叶原站 电气街口', note:'🎯 **今天秋叶原跑约 6 小时、4 家店**。动线是照「打烊时间 + 地理位置」双条件排的，**请照顺序走**：**3 丁目** Mandarake → **4 丁目** Animate → 折回 **1 丁目** Radio 会馆／骏河屋。全程只有一次大折返（4 丁目回 1 丁目），沿路都是中央通，边走边逛不浪费。\n⏰ **周六打烊时间（今天全部适用）**：Mandarake 20:00｜Animate 20:00（⚠️ 比平日的 21:00 早一小时）｜Radio 会馆 20:00｜骏河屋 21:00。\n⚠️ **前三家都 20:00 关门、绝不能拖**，所以 Mandarake 排第一站（它 12:00 才开，13:00 去刚好）。\n🍡 **扭蛋机与夹娃娃机沿途到处都有**——唐吉诃德秋叶原店（24h）、TAITO STATION（开到 24:00）、各大楼门口的扭蛋角，想玩随时停一下就走，不必专程排一站。\n🆘 **超时预案：先压缩骏河屋**（从 1 小时压到 40 分钟）。**19:00 无论如何收工去新宿**。\n🎁 顺路：神田明神「電気堂」御守（IT 情报御守）就在秋叶原站旁。', geo:'秋葉原電気街'},
+        {id:'d10', time:'13:00', type:'fun', title:'Mandarake 1 号馆 + 2 号馆 · 二手绝版挖宝', loc:'东京都千代田区外神田 3-11-12（COMPLEX）／3-12-2（2 号馆，2025.8.30 开幕，正对面）', note:'🕐 **12:00-20:00 全年无休**｜⚠️ **20:00 打烊，所以排今天第一站**（它 12:00 才开门，13:00 到刚好）。🏢 **1 号馆（COMPLEX）1-8F**：1F 收购柜台与商品、3F 少年漫画与复古绝版、5F 男性偶像与少女漫画，其余各层是同人志、玩具、模型、游戏——二手绝版品的天堂，曾有粉丝在这里挖到作者手稿。🆕 **2 号馆就在正对面**（步行 10 秒，2025.8.30 才开幕），两馆一起逛才完整。⏱ **给 1.5 小时，一馆约 45 分钟**。💰 二手漫画 ¥300-800（≈¥15-40 含税），绝版品 ¥1,000 起跳，收藏级另计。🚶 电气街口步行 4-5 分钟。⚠️ 部分楼层禁止摄影，先看告示；周六人多，**结账会排队，别拖到 19:30 以后才结帐**。➡️ 下一站扭蛋会馆：步行 8 分钟，同在 3 丁目。', geo:'まんだらけ コンプレックス'},
+        
+        {id:'d12', time:'14:40', type:'fun', title:'Animate 秋叶原 1 号馆 + Annex + 2 号馆', loc:'东京都千代田区外神田 4-3-1／4-3-2 一带', note:'🕐 ⚠️ **周六 10:00-20:00**——**比平日的 21:00 早一小时打烊**，今天 **16:10 前离开**。🏢 **1 号馆共 8 层**：1F 当期话题商品，上层是漫画、轻小说、周边、CD／DVD／BD，新刊与限定特典都在这，《幸运星》里店长角色的原型就是这家的店员。🎭 **Annex 是 Cosplay 专门栋**（假发、服装、道具），想买 cos 用品直奔这里。⏱ **给 1.5 小时**：1 号馆 60 分钟 + Annex／2 号馆 30 分钟。💰 单品 ¥500-3,000（≈¥25-150 含税）不等。🛍️ **满 ¥5,000 可办免税，记得带护照**（同一天同一店累计）。🚶 从 Mandarake 往北走 10 分钟。➡️ 下一站折回 1 丁目的 Radio 会馆：沿中央通往回走 15 分钟，沿途全是电器街，边走边逛不无聊。', geo:'アニメイト秋葉原店'},
+        {id:'d13', time:'16:25', type:'fun', title:'Radio 会馆 · 命运石之门圣地', loc:'东京都千代田区外神田 1-15-16', note:'🕐 **10:00-20:00**｜⚠️ **20:00 打烊，今天 17:55 前结束**。🏢 约 **30 家小店**塞进一栋楼——人形 figure、塑胶模型、卡牌、同人志、复古游戏，每层都是不同老板，比价挖宝最有感。🎬 《命运石之门》最重要的圣地：冈部伦太郎与助手相遇的「世界的 Radio 会馆」，楼上有相关展示与周边，石头门迷必朝圣。🚶 电气街南出口步行 10 秒、JR 秋叶原站步行 2 分钟。🍺 B1F 有啤酒馆（11:30-23:00），逛累了可小歇——但今天时间紧，建议跳过。⏱ **给 1.5 小时**。➡️ 下一站骏河屋就在隔壁（1-15-15），步行 1 分钟。', geo:'秋葉原ラジオ会館'},
+        {id:'d14', time:'18:00', type:'fun', title:'骏河屋 秋叶原駅前店 · 中古玩具 Figure', loc:'东京都千代田区外神田 1-15-15 山本无线大楼 B1F-3F', note:'🕐 **10:00-21:00 全年无休**｜⚠️ **21:00 打烊**（比隔壁 Radio 会馆晚一小时，所以排在它后面）。🧸 **B1F-3F 共四层**：中古 figure、玩具、模型、卡牌，同时做收购——想出清手边的公仔也能在这里换钱。💰 中古品价格漂亮，常见 ¥500-5,000（≈¥25-250 含税）。📍 **就在 Radio 会馆隔壁**（1-15-16 vs 1-15-15），一栋换一栋、零移动成本。⚠️ 秋叶原有 6 间骏河屋分店，这间是「駅前店」；**想找塑胶模型另有「秋叶原塑胶模型店」（外神田 4-4-2，10:00-21:00）**，但今天没空再去，需要就在这间问店员能否调货。⏱ **给 1 小时**。➡️ **秋叶原最后一站**：19:00 收工后还有空档，扭蛋机与夹娃娃机（TAITO STATION 开到 24:00）沿途随时能停，19:30 出发去新宿。', geo:'駿河屋 秋葉原駅前店'},
+        
+        {id:'d6', time:'20:00', type:'food', title:'おでん屋たけし · 新宿三丁目店', loc:'新宿区新宿 3-6-12', note:'🕐 **今天晚餐 20:00**（秋叶原 4 店跑完、19:00 收工）。🚃 秋叶原 → JR 山手线／中央线 → 新宿约 10-13 分钟，再步行到新宿三丁目，**19:30 出发 → 20:00 入座**。✅ **时间很充裕**：周六营业 13:00-23:00、L.O. 约 22:30，有整整 2 小时可以慢慢吃，不用赶。💰 人均 ¥180-230（含税，关东煮+饮品 1-2 杯）｜新宿三丁目站徒步 1 分钟的关东煮专门店。智慧点餐系统（扫桌 QR 看多语言菜单），开放吧台 + 上班族气氛热闹。人均约 ¥4,000；必点慢炖带骨鸡腿（お通しも含）、大根 286 円（柚子胡椒推荐）、牛すじ 330 円、トマト（番茄关东煮）462 円、厚炸豆腐 264 円、玉子 220 円、车麩 220 円、奶油烤马铃薯 275 円、香菇蒟蒻 220 円；お通し 275 円。瓶啤酒 748 円、乌龙茶/可乐 418 円。预约可选（Tabelog/电话 03-6384-1356），20:00 后没预约等位约 15 分钟。从秋叶原前往：JR 山手线 秋叶原 → 新宿约 10 分钟；新宿站中央东口出 → 沿靖国通向南步行 3-5 分钟到新宿三丁目站旁。晚餐后回民宿：都营新宿线 新宿三丁目 → 马喰横山 1 站 5 分钟。', geo:'おでん屋たけし 新宿三丁目店'},
+        {id:'d7', time:'22:00', type:'hotel', title:'回民宿', loc:'新宿三丁目 → 小伝馬町', note:'🕐 **22:00 从おでん屋たけし出发**（吃满 2 小时，不必被 L.O. 赶）。都营新宿线 新宿三丁目 → 马喰横山 1 站 5 分钟，出站步行 3 分钟即到，**22:20 前到家**；末班车约 00:00，时间无忧。😴 今天秋叶原跑了 6 小时，回去早点睡。', geo:'東京都中央区日本橋小伝馬町16-6'},
+      ]},
+    { date:'11.22', weekday:'周日', theme:'明治神宫 · 原宿 · 涩谷',
+      note:'清晨先到涩谷 Katsuo Shokudo 吃现削鲣鱼饭早餐（08:30 开门、米其林推荐、约 12 席、现金；早到最稳），再银座线 涩谷→表参道→外苑前冲银杏并木（11 月下旬黄金期）；午后回涩谷看生化危机展 + 16:00 PARCO 10F 屋上免费日落（晴天或可见富士山）；夜逛涩谷十字路口 + 六本木 Jomon 晚餐后回民宿。',
+      wx:{lo:8,hi:14,label:'多云偶雨',pop:30},
+      wear:'逛街可轻便：卫衣＋外套；PARCO 屋上傍晚海风+城风体感低 3~5°C，日落 16:30 后速冷，厚外套随身',
+      items:[
+        {id:'eb', time:'08:30', type:'food', title:'Katsuo Shokudo 现削鲣鱼饭', loc:'涩谷区莺谷町 7-12 GranDuo 涩谷 B1（涩谷站步行 7 分钟）', note:'🐟 **米其林推荐的「鲣鱼食堂」**：老板娘在约 12 个座位的吧台前**现场手削鲣鱼节（katsuobushi）**盖在你的米饭上——薄如纸的鲣鱼片遇热缓缓融化，鲜味直接拉满，是一场关于「一味食材」的早餐表演。🍚 **招牌定食**：现削鲣鱼盖饭 + 生鸡蛋黄 + 时蔬 + 味噌汤（另有茶碗蒸、鲣鱼刺身 / 煮制 / 荒节 / 本枯节等多种吃法，定食约 **¥2,200（≈¥110 含税）**）。鲣鱼风味独特、算「后天养成的味道」，但一生至少试一次。🕐 **周日 08:30 开门**（部分资料写 09:00，建议 09:00 前到最稳），**只做早午餐、约 13:00 收**（卖完即止）。💺 约 12 席、常排队——**开门前就有人排**；以现场候位为主（网传已导入时段预约制，出发前查官方 IG 确认当周方式），早到最稳。💰 人均约 ¥110（含税）。💳 **只收现金**，备好日元现钞。🚶 吃完走 7 分钟回涩谷站，搭**银座线 涩谷 → 表参道 → 外苑前**（2 站）冲银杏并木，再回涩谷看展 + PARCO 屋上，完全顺路。', geo:'Katsuo Shokudo'},
+        {id:'e0', time:'10:00', type:'nature', title:'明治神宫外苑 · 银杏并木', loc:'外苑前站步行 5 分钟', geo:'神宮外苑いちょう並木', note:'11 月下旬黄金期（约 11.20~12.05），146 棵银杏织成金色隧道；上午人少、斜光仍好。结束后银座线外苑前 → 表参道转千代田线到明治神宫前，或沿青山通り步行约 20 分钟。'},
+        {id:'e1', time:'11:00', type:'sight', title:'明治神宫 · 参拜', loc:'原宿站', note:'上午参道尚清静，大鸟居前留影。⏱ **今天走紧凑版 50 分钟**（原 75 分钟）：大鸟居 → 参道 → 本殿参拜 → 授与所买御守，代代木公园红叶留到下次——省下的 25 分钟全给生化危机展。⛩️ 御守：開運木鈴「こだま」御神木制·每颗木纹声音独一无二·数量限定常售罄；みのり守（心愿成就）；相和守（姻缘安产·两枚合圆）。授与所 9:00 起，御朱印 500 円。🍁 出原宿口代代木公园红叶银杏顺看。', geo:'明治神宮'},
+        {id:'e2', time:'11:50', type:'shop', title:'竹下通', loc:'原宿', note:'可丽饼、古着小店，周末街头气氛最浓。', geo:'竹下通り'},
+        {id:'e3', time:'12:35', type:'food', title:'ローストビーフ大野 · 原宿店', loc:'涩谷区神宫前 4-31-10 YM スクウェア原宿 B1F', note:'💰 人均 ¥50-100（含税，A4 黑毛和牛烤牛肉盖饭，性价比之王，¥100 吃饱）｜A4 黑毛和牛烤牛肉盖饭专门店（只卖这一个菜！），原宿站表参道口步行 5 分钟 / 明治神宫前站 5 号出口步行 1 分钟。营业 11:00-22:00（L.O 21:00），11.22 周日营业 ✓。¥1,000-2,000 性价比超高（人均 100 元吃饱）。低温慢烤的粉红嫩切片+半熟蛋黄+特制酱汁+牛尾汤+泡菜套餐。可选1.5x/2x 增量肉；加饭免费、加肉另算。点餐流程：进店先在门口点菜单 → 出店门外等候座位 → 叫号入座；多国语言菜单会问哪国人。⚠️ 高峰期 11:30-13:00 可能要排队 20-40 分钟，建议 12:30 前或 13:30 后错峰。', geo:'ローストビーフ大野 原宿店'},
+        {id:'e4', time:'13:30', type:'shop', title:'Cat Street · 表参道', loc:'原宿 → 表参道', note:'潮牌买手店一路逛到表参道，建筑打卡（SunnyHills）。', geo:'キャットストリート'},
+        {id:'e5', time:'14:15', type:'museum', title:'生化危机 30 周年纪念展「THE WORLD OF BIOHAZARD」', loc:'涩谷 BEAM 画廊 4F（涩谷站徒步 5 分钟）', note:'🧟 11.22 周日营业 ✓ 平日 10:00-21:00 / 周末 9:00-21:00（最后入场 19:59）。展期 10.30-12.24 整整 56 天。涩谷站徒步 5 分钟，从 Cat Street 表参道端向北穿过即可达。门票 8/3 一般发售（已开售，**务必提前在 Lawson Ticket / e-plus / 现场买，11.22 周日黄金时段建议提前 1-2 周买定时段票**）。30 周年纪念展巨型原画 + 1:1 模型 + 等身装束 + 历代主角雕塑 + 限定周边店（🛍 限定 T 恤 ¥4,400、原作原画集 ¥6,600、安魂曲手办 ¥12,000+）。预计观展 1.5-2 小时（含周边店）。⏱ **我们 14:15 入场、给足 105 分钟**（明治神宫参拜已压缩到 50 分钟，时间全让给这里）；16:00 整离开去 PARCO 抢日落位，节奏刚好。⚠️ 周末下午最挤，14:15 已算错峰；19:30 后周边店可能售罄热门商品。', geo:'渋谷ビームギャラリー'},
+        {id:'e6', time:'16:00', type:'nature', title:'涩谷 PARCO 10F 屋上公园 · 免费日落观景台', loc:'涩谷 PARCO 10F（涩谷站徒步 4 分钟）', note:'🆓 完全免费的涩谷日落机位，11.22 日落约 16:30，16:00 抵达抢位。视野开阔，晴天可远眺富士山；另一侧正对东京塔方向。日落后顺路下到 6F Nintendo TOKYO / Pokémon Center SHIBUYA 扫货。', geo:'渋谷パルコ 屋上広場'},
+        {id:'e7', time:'16:50', type:'sight', title:'涩谷十字路口 · 忠犬八公像', loc:'涩谷站八公口', note:'PARCO 下来徒步 3 分钟，灯牌亮起后的夜景版本。', geo:'渋谷スクランブル交差点'},
+        {id:'e6b', time:'17:00', type:'shop', title:'户外扫货 · Mont-Bell 涩谷店', loc:'涩谷区宇田川町 11-5 Montbell 涩谷大楼（涩谷站八公口徒步 5 分钟）', note:'⛰ 涩谷 Mont-Bell 自有大楼，营业 10:30-21:00（全年无休）！涩谷站八公口出来沿文化村通向南步行约 5 分钟即达。**店面直办免税**（当场开退税单，比机场省时）。入口中庭有 13 米高攀岩墙可以试玩、拍照打卡。多楼层布局：2F 男装 / 3F 女装 / 4-5F 露营登山装备。🎁 必买：Expedition Down Parka 极地羽绒服（¥59,400 起，比国内便宜 30-40%）、轻薄防水冲锋衣（¥8,000-15,000）、美利奴羊毛内衣（¥5,000-8,000）、Alpine Thermo Bottle 保温瓶（¥3,740）、Down Jacket 折叠羽绒（¥14,000-25,000）。📌 看准再下手，户外装备体积大；扫 1 小时后出来步行 5 分钟回涩谷站坐地铁去六本木吃 Jomon。', geo:'モンベル 渋谷店'},
+        {id:'e8', time:'19:00', type:'food', title:'Jomon ジョウモン · 六本木店', loc:'港区六本木 5-9-17 藤森ビル 1F', note:'💰 人均 ¥250-350（含税，2 小时喝到饱コース ¥200 起、单点更贵）｜博多串烧专门店「Joumon」，九州系烧鸟的扛把子。营业 17:00-23:30（无公休），11.22 周日营业。从涩谷前往：JR 山手线/埼京线 涩谷 → 恵比寿（4 分钟）→ 换日比谷线 恵比寿 → 六本木（4 分钟）→ 3 号出口步行 3 分钟，**全程约 20 分钟**（涩谷站没有大江户线也没有日比谷线，别信「1 站」的说法）。50 席小店，4-8 人包厢。必点：炭烤鸡肉套餐（もも/ねぎま/つくね/レバー/砂肝/ぼんじり等 9 种），¥200-350/串；西班牙 Iberico 五花肉卷 ¥500/串；招牌蔬菜卷猪肉 ¥600/串；博多绿葱红姜厚蛋烧 ¥680；明太马铃薯沙拉。2 小时喝到饱コース ¥3,980 起。⚠️ 必提前 1 个月预约！电话 03-3405-2585 或 Tabelog 网上预约，周末靠窗位/吧台位要抢。晚餐后回民宿：**日比谷线 六本木 → 小伝馬町 直达约 22 分钟**（不用换乘），出站步行 3 分钟到家——比绕涩谷转银座线省一半时间。', geo:'ジョウモン 六本木店'},
+        {id:'e9', time:'21:00', type:'hotel', title:'回民宿', loc:'涩谷 → 日本桥', note:'**日比谷线 六本木 → 小伝馬町 直达约 22 分钟**（不换乘），出站步行 3 分钟到家；末班车约 00:00，时间无忧。', geo:'東京都中央区日本橋小伝馬町16-6'},
+      ]},
+    { date:'11.23', weekday:'周一', theme:'上野 · 池袋 → 回港',
+      note:'香港航空 20:25 成田 T1 起飞；清晨先到隔壁小舟町 Parklet Bakery 买酸种吐司/司康当退房前早餐（08:30 开门、grab & go），再池袋扫货（西口东武 Mont-Bell → 东口 PARCO/Animate → Sunshine 宝可梦），高田马场猪排午餐，上野扫尾，16:05 回民宿取行李赶机场。',
+      wx:{lo:8,hi:13,label:'晴偶云',pop:25},
+      wear:'返程日：卫衣＋外套方便穿脱；行李多，轻装解放双手',
+      items:[
+        {id:'f0a', time:'08:30', type:'food', title:'Parklet Bakery 酸種吐司', loc:'中央区日本桥小舟町 14-7 SOIL 日本桥 1F（小伝馬町步行约 8 分钟 / 人形町站徒步 5 分钟）', note:'🥖 **民宿隔壁的寶藏麵包房**：就在小舟町 SOIL 日本橋 1F，前 Tartine 師傅用自然酵母做酸種麵包，紐約加州風、空間挑高採光好，窗邊還能看公園。🕐 **08:30 開門**（平日 08:30-22:00、週末 08:30-18:00，我們 11.23 週一去正好開門），**早餐時段 08:30-11:00**——退房前順路散步 8 分鐘買來 grab & go 最香。🍞 招牌：酪梨吐司（牛油果＋香料，¥1,100）、香草腰果奶油吐司 ¥1,000、蘋果味噌司康 ¥450（很快賣光）、香蕉小米麵包、咖啡焦糖布丁；咖啡用 Single O 豆，冰美式 ¥450 / 拿鐵 ¥500。💰 人均約 ¥60-100（含稅）。💳 **信用卡 / 交通 IC 可用，但不收 QR（無 PayPay）**；店裡也賣 Wine 可以帶一瓶回家。📞 03-3527-2627，官網 parkletbakery.com。🚶 吃完走回民宿寄行李，再搭日比谷線去池袋，完全順路。', geo:'パークレット ベーカリー'},
+        {id:'f0', time:'09:00', type:'hotel', title:'民宿退房 · 寄存行李', loc:'日本桥小伝馬町 16-6', note:'行李寄存前台轻装出发；护照、贵重物品随身带。', geo:'東京都中央区日本橋小伝馬町16-6'},
+        {id:'f1', time:'09:30', type:'transport', title:'前往池袋', loc:'小伝馬町 → 上野转山手线', note:'日比谷线 3 站到上野，转 JR 山手线到池袋，约 40 分钟。🚶 **今天动线只穿越一次**：先西口（东武 Mont-Bell）→ 穿越到东口 → PARCO / Animate / 乙女路 → Sunshine 宝可梦，一路顺下来不再回头。'},
+        {id:'f2', time:'11:05', type:'shop', title:'池袋 · PARCO 百货 & 动漫扫货', loc:'池袋站东口', note:'从西口穿越过来后，**东口扫货约 40 分钟**：优先 PARCO、Animate 总店、乙女路。11:45 出发，沿 Sunshine City 通步行 10 分钟去宝可梦中心。', geo:'池袋パルコ'},
+        {id:'f2c', time:'10:15', type:'shop', title:'户外扫货 · Mont-Bell 池袋东武店', loc:'丰岛区西池袋 1-1-25 东武百货池袋店 5F（9-10 番区）', note:'⛰ 日本第一户外品牌池袋专柜！池袋站西口出站即达、东武百货 5F 9-10 番区，营业 10:00-20:00（周末 20:00 闭店）。2023.11 卖场扩大后外套/衣物/配件类最齐全，**店面直办免税**（买完当场开退税单，比机场省时）。🎁 必买：Expedition Down Parka 极地羽绒服（¥59,400 起，比国内便宜 30-40%）、Alpine Thermo Bottle 保温保冷瓶（¥3,740）、轻薄防水冲锋衣（¥8,000-15,000）、Mont-Bell 速干徒步 T 恤（¥3,000-5,000）、露营帐/睡袋/登山杖。⚠️ 户外装备体积大、建议放行李箱上座托运；**放在第一站**：扫完从西口穿越到东口约 12 分钟（池袋站很大，别信「5 分钟」），接着东口 PARCO → Animate → 乙女路 → Sunshine 一路顺下来，不再回头。', geo:'モンベル 池袋東武店'},
+        {id:'f2b', time:'11:55', type:'shop', title:'宝可梦中心 Mega Tokyo', loc:'Sunshine City alpa 2F（池袋站东口步行 10 分钟）', note:'🆕 关东地区规模最大的宝可梦中心！营业 10:00-20:00。Sunshine City alpa 2F，从池袋东口沿 Sunshine City 通向北步行约 10 分钟。店内分四块：主店（限定玩偶/手办）、Pokemon Card Station（卡牌对战免费玩）、Pokemon GO Lab、Pikachu Sweets（外带甜品店免预约）。🎁 东京限定周边比澀谷/晴空塔店更全，但 **本店不免税**（要去机场或其他免税店退税）。Pokemon Cafe（正餐）在日本桥高岛屋 TOKYO DX，不在此。11:55-12:35 主店约 40 分钟，12:35 走回池袋站（10 分钟）坐山手线去高田马场。', geo:'ポケモンセンターメガトウキョー'},
+        {id:'f3', time:'12:35', type:'transport', title:'池袋 → 高田马场', loc:'JR 山手线', note:'山手线 2 站约 5 分钟，为想去的とんかつ ひなた挪肚子。'},
+        {id:'f3b', time:'13:00', type:'food', title:'とんかつ ひなた · 炸猪排午餐', loc:'高田马场 2-13-9', note:'目标店！现炸厚切猪排外酥里嫩，午市套餐性价比高，约 2,000 日元起；山手线池袋与上野之间顺路插入。避开 12:30-13:30 高峰更省排队。', geo:'とんかつひなた 高田馬場'},
+        {id:'f4', time:'14:10', type:'transport', title:'前往上野', loc:'JR 山手线', note:'高田马场 → 上野山手线直达约 22 分钟，无需换乘。'},
+        {id:'f5', time:'14:40', type:'shop', title:'上野 · 阿美横町', loc:'上野站', note:'最后药妆零食扫货，比价后入手；唐吉诃德 24 小时。🎁 称重坚果果干实惠，唐吉诃德零食大包。🍁 上野公园红叶+银杏就在旁边，时间富余顺看。', geo:'アメ横商店街'},
+        {id:'f6', time:'15:25', type:'shop', title:'御徒町', loc:'御徒町站', note:'上野步行即达，珠宝街与高架下手作街区快逛。', geo:'御徒町駅'},
+        {id:'f7', time:'16:05', type:'hotel', title:'回民宿取行李', loc:'上野 → 小伝馬町', note:'日比谷线上野 → 小伝馬町仅 3 站约 5 分钟，出站步行 3 分钟到家。', geo:'東京都中央区日本橋小伝馬町16-6'},
+        {id:'f7b', time:'16:45', type:'transport', title:'前往成田机场', loc:'东日本桥 → 成田 T1', note:'京成 Sky Access 直达成田约 80 分钟，18:05 前后抵达；预留值机、退税、安检时间。'},
+        {id:'f9', time:'18:15', type:'shop', title:'机场免税店', loc:'成田 T1', note:'白色恋人、Royce\' 巧克力、Tokyo Banana 最后补货；退税商品托运前保持密封。', geo:'成田国際空港 第1旅客ターミナル'},
+        {id:'f8', time:'20:25', type:'flight', title:'香港航空 · 东京 → 香港', loc:'东京成田机场 T1 起飞', note:'20:25 起飞，00:50（次日）抵达香港 T1，飞行 5h25m。旅途愉快，お疲れ様でした！', geo:'成田国際空港 第1旅客ターミナル'},
+      ]},
+  ]
+};
+
+/* note 内容升级映射：仅当你没改过该条备注时才更新为最新内容 */
+const NOTE_UPDATES = [
+  {id:'e0', old:'11 月下旬黄金期（约 11.20~12.05），146 棵银杏织成金色隧道；清晨人少、斜光最出片。结束后银座线外苑前 → 表参道转千代田线到明治神宫前，或沿青山通り步行约 20 分钟。', now:'11 月下旬黄金期（约 11.20~12.05），146 棵银杏织成金色隧道；上午人少、斜光仍好。结束后银座线外苑前 → 表参道转千代田线到明治神宫前，或沿青山通り步行约 20 分钟。'},
+  {id:'c0', old:'步行约 7-8 分钟到**馬喰横山站**，搭都營新宿線直达新宿三丁目 / 新宿约 15-18 分钟，再步行 5-8 分钟到 **バスタ新宿（JR 新宿站南口）**，全程约 30-35 分钟。⚠️ 07:15 的巴士建议最晚 06:30 出门，留 10 分钟买水、找月台。🎫 出发前确认高速巴士票已取（网上预约的话在窗口或自助机取票）。', now:'步行约 7-8 分钟到**馬喰横山站**，搭都營新宿線直达新宿三丁目 / 新宿约 15-18 分钟，再步行 5-8 分钟到 **バスタ新宿（JR 新宿站南口）**，全程约 30-35 分钟。😴 **今天比原计划多睡 1 小时**——改搭 08:15 那班高速巴士，最晚 **07:30** 出门，留 10 分钟买水、找月台。🎫 出发前确认高速巴士票已取（网上预约的话在窗口或自助机取票）。'},
+  {id:'c1', old:'💰 单程 ¥2,300-2,600/人（≈¥115-130）｜**直达、全程不换乘**：这台车会先经停河口湖站（约 09:00）再继续开往山中湖，**不要下车，坐到底就是旭日丘**。**09:29 抵达山中湖旭日丘**，巴士站旁边就是自行车租赁点。⏱ 全程约 2 小时 25 分。🎫 参考班次：**07:15 发 → 09:29 旭日丘**（首选）；备选 07:55 → 10:09、08:15 → 10:37（这班终点就是旭日丘）。⚠️ **全指定席，必须提前网上预约**（发车前 1 个月开放，红叶季极易满席）；网上支付比窗口便宜（山中湖方向约 ¥2,350）。🎫 **买票买到「山中湖旭日丘」**，别只买到河口湖——差价只有几百日元，但省掉一次换乘 + 45 分钟。🎒 车上有卫生间，行李舱可放大件；建议备好晕车药和水。', now:'💰 单程 ¥2,300-2,600/人（≈¥115-130）｜**直达、全程不换乘**：这台车会先经停河口湖站（约 10:10）再继续开往山中湖，**不要下车，坐到底就是旭日丘**。**10:37 抵达山中湖旭日丘**，巴士站旁边就是自行车租赁点。⏱ 全程约 2 小时 22 分。🎫 参考班次：**08:15 发 → 10:37 旭日丘**（首选，终点就是旭日丘）；备选 07:55 → 10:09（终点山中湖平野，旭日丘有停，可多骑 30 分钟）、07:15 → 09:29（最早，能多骑 50 分钟）。⚠️ **全指定席，必须提前网上预约**（发车前 1 个月开放，红叶季极易满席）；网上支付比窗口便宜（山中湖方向约 ¥2,350）。🎫 **买票买到「山中湖旭日丘」**，别只买到河口湖——差价只有几百日元，但省掉一次换乘 + 45 分钟。🎒 车上有卫生间，行李舱可放大件；建议备好晕车药和水。'},
+  {id:'c2', old:'下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 11:10 之前还车（11:30 要搭 KABA BUS）。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。', now:'🕐 **10:37 抵达山中湖旭日丘**，下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 12:40 之前还车（13:00 要搭 KABA BUS）。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。'},
+  {id:'c3', old:'电动自行车约 2000-3000 日元/3 小时；白鸟滨看天鹅、长池滨拍富士山倒影。⏱ **11:10 前必须还车**——11:15 要到 2 楼 KABA BUS 柜台办手续，赶 11:30 那班水陆两用巴士。', now:'电动自行车约 2000-3000 日元/3 小时；白鸟滨看天鹅、长池滨拍富士山倒影。⏱ **骑到 12:40 前必须还车**——12:45 要到 2 楼 KABA BUS 柜台办手续，赶 13:00 那班水陆两用巴士。从 10:50 算起有 **110 分钟**，电动自行车环湖 20km 绰绰有余（比原来的 85 分钟还多 25 分钟）。'},
+  {id:'c16', old:'🦛 **水陆两用「河马巴士」直接开进山中湖里**——冲下水那一下水花四溅是全场高潮（怕湿可提前拉下透明窗帘）；之后在湖面绕行约 30 分钟，导览员讲富士山与山中湖的故事，有中／英／日等 5 语自动语音导览，湖上正对富士山，晴天视野极好。⏱ 全程约 40 分钟（含出发前讲解与拍照）。💰 成人 **¥2,800/人（≈¥140 含税）**，4 岁～小学生 ¥1,400。🕐 班次 9:15 / 10:00 / 10:45 / **11:30** / 13:00 / 13:45 / 14:30 / 15:15；我们搭 **11:30** 这班——骑完车还车后走过来刚好。📍 **乘车处就在「森の駅旭日丘」2 楼售票柜台旁**（山梨県南都留郡山中湖村平野 506-296），和还车点同一栋楼，**出站不到 100 米**。⚠️ **务必提前一个月上网预约**（cn.kaba-bus.com），红叶季极抢手、常一开放就只剩零星时段；也可电话 0555-73-8181（7:30-20:00）。⚠️ **出发前 15 分钟（11:15）要到柜台办手续**，迟到视为取消、巴士准时开走且不退票，所以 **11:10 前一定还完自行车**。⚠️ 遇大风／雷／雾或水位异常会停驶；当天专用电话 090-6160-4696（9:00-15:00）。', now:'🦛 **水陆两用「河马巴士」直接开进山中湖里**——冲下水那一下水花四溅是全场高潮（怕湿可提前拉下透明窗帘）；之后在湖面绕行约 30 分钟，导览员讲富士山与山中湖的故事，有中／英／日等 5 语自动语音导览，湖上正对富士山，晴天视野极好。⏱ 全程约 40 分钟（含出发前讲解与拍照）。💰 成人 **¥2,800/人（≈¥140 含税）**，4 岁～小学生 ¥1,400。🕐 班次 9:15 / 10:00 / 10:45 / 11:30 / **13:00** / 13:45 / 14:30 / 15:15；我们搭 **13:00** 这班——骑完车 12:40 还车后走过来刚好。📍 **乘车处就在「森の駅旭日丘」2 楼售票柜台旁**（山梨県南都留郡山中湖村平野 506-296），和还车点同一栋楼，**出站不到 100 米**。⚠️ **务必提前一个月上网预约**（cn.kaba-bus.com），红叶季极抢手、常一开放就只剩零星时段；也可电话 0555-73-8181（7:30-20:00）。⚠️ **出发前 15 分钟（12:45）要到柜台办手续**，迟到视为取消、巴士准时开走且不退票，所以 **12:40 前一定还完自行车**。⚠️ 遇大风／雷／雾或水位异常会停驶；当天专用电话 090-6160-4696（9:00-15:00）。'},
+  {id:'c5', old:'骑行结束先还车；富士急巴士约 45 分钟，13:15 前后抵河口湖站。班次约每小时 1 班，先看好时刻表。', now:'KABA BUS **13:40 结束**，走回站牌 5 分钟；搭 **14:00 前后**的富士急巴士约 45 分钟 → **14:45 前后抵河口湖站**。班次约每小时 1 班，上车前先看好时刻表；万一 14:00 那班错过，下一班要再等近 1 小时，会吃掉午餐时间。'},
+  {id:'c4', old:'💰 人均 ¥70-110（含税，招牌南瓜ほうとう ¥1,400 + 小菜/饮品）｜山梨最有名的乡土料理「ほうとう（馎饦）」专门店，门口大水车很好认。味噌汤底里炖着整块绵密南瓜 + 红薯、芋头、白菜、香菇和手打宽面，铁锅现煮、一人份量极大（女生两人分一锅也够）。必点：**かぼちゃほうとう（南瓜馎饦）¥1,400｜肉ほうとう（猪肉）¥1,400｜あずきほうとう（红豆）¥1,400｜もつ煮（炖内脏）¥550｜天ぷら定食**；有英文菜单，店内伴手礼区卖自社味噌、ほうとう 生面/速食装。营业 11:00-20:00（L.O. 19:30），全年无休。🚶 交通：**从河口湖站步行约 17 分钟**（沿国道 139 号往北）；行李多或风大建议门口打车，5 分钟 ¥1,000 上下（约 ¥50）。🍁 饭后怎么走：原路步行回河口湖站（约 17 分钟），开始下午「站前 → 罗森 → 富士吉田」的拍照路线。⚠️ **不接受预约**，只能现场取号排队——红叶季 13:00 前后可能等 1-2 小时，建议 11:00 开门或 15:00 后错峰，等位时先把伴手礼买齐。💳 现金 / 信用卡可用，**不支持电子钱包与扫码支付**，备好实体卡。', now:'💰 人均 ¥70-110（含税，招牌南瓜ほうとう ¥1,400 + 小菜/饮品）｜山梨最有名的乡土料理「ほうとう（馎饦）」专门店，门口大水车很好认。味噌汤底里炖着整块绵密南瓜 + 红薯、芋头、白菜、香菇和手打宽面，铁锅现煮、一人份量极大（女生两人分一锅也够）。必点：**かぼちゃほうとう（南瓜馎饦）¥1,400｜肉ほうとう（猪肉）¥1,400｜あずきほうとう（红豆）¥1,400｜もつ煮（炖内脏）¥550｜天ぷら定食**；有英文菜单，店内伴手礼区卖自社味噌、ほうとう 生面/速食装。营业 11:00-20:00（L.O. 19:30），全年无休。🚶 交通：14:45 到站后**从河口湖站步行约 17 分钟**（沿国道 139 号往北）；行李多或风大建议门口打车，5 分钟 ¥1,000 上下（约 ¥50）。🍁 饭后怎么走：**15:35 前一定离开**——原路步行 17 分钟回站（15:52 到），**不打车也来得及**；16:00 要准时在站前 6 号站牌搭 Red Line 去红叶回廊。⏱ **今天只给这顿 35 分钟**：ほうとう 铁锅上桌就能吃，两人点 1-2 锅（女生两人分一锅也够），节奏抓好 15:35 前收得了。⚠️ **不接受预约**，只能现场取号排队；红叶季 12:00-13:30 是地狱级人潮（等 1-2 小时），**我们 15:00 到正好是离峰，通常不用等**——这是把午餐挪到下午的额外好处。等位时先把伴手礼买齐。💳 现金 / 信用卡可用，**不支持电子钱包与扫码支付**，备好实体卡。'},
+  {id:'c6', old:'🚶 沿国道 139 号原路走回河口湖站，约 17 分钟（行李多或风大可在店门口打车，5 分钟 ¥1,000 上下、约 ¥50）。到站后先在**站前**扫一圈：河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 注意它是**公寓式旅馆、不是景点**，房间阳台和窗户正对富士山，只能在外面看一眼外观，或记下地址当作下次住河口湖的备选（携程 4.4 分、距站 190m、带厨房可做饭）。站前还有河口湖温泉、ほうとう不動（站前店）等。🎒 站前有投币储物柜，背包存了再轻装活动。🚏 逛完在**站前 6 号站牌**搭 **Red Line 周游巴士**去红叶回廊（15:20 那班，约 20 分钟到）。', now:'🚶 **15:35 前离开小作**，沿国道 139 号走回河口湖站约 17 分钟（15:52 到）；**这段不打车也来得及**（15:52 到站 → 16:00 上巴士，中间 8 分钟刚好够走到 6 号站牌）。⏱ **站前扫街改到傍晚回程后再逛**（已挪到 17:45 那张卡，那时有 25 分钟）：河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 注意它是**公寓式旅馆、不是景点**，房间阳台和窗户正对富士山，只能在外面看一眼外观，或记下地址当作下次住河口湖的备选（携程 4.4 分、距站 190m、带厨房可做饭）。站前还有河口湖温泉、ほうとう不動（站前店）等。🎒 站前有投币储物柜，背包存了再轻装活动。🚏 **16:00 整在站前 6 号站牌搭 Red Line 周游巴士**去红叶回廊（约 20 分钟，16:20 到）——这班不能错过，晚一班就少掉整段黄昏光。✅ 全程步行＋周游巴士，**今天一整天都不用打车**。'},
+  {id:'c9', old:'🍁 **2026 富士河口湖红叶祭 11.07-11.29，正好覆盖今天**！主会场就是红叶回廊：梨川沿岸约 150 棵枫树织成红色隧道，免费入场、24 小时开放。🚏 **交通（全程不打车）**：在**河口湖站前 6 号站牌**搭 **Red Line 周游巴士**（往河口湖北岸・紅葉回廊方向）约 20 分钟 → **「久保田一竹美術館」站**下车，步行 2-5 分钟即到；单程约 ¥200-400/人（≈¥10-20 含税），只坐这一趟买单程即可，不必买 ¥1,500 一日券。⏱ **今天最舒服的一点：我们 15:40 就到了**，先拍**白天光**（红叶＋富士山同框，白天红叶颜色最饱和，别只指望夜枫）→ **16:40 日落点灯** → 16:40-17:15 是「蓝调时刻」，天空深蓝、灯刚亮，是全场最好的 35 分钟 → 17:15 收工（把蓝调时刻拍满）。📷 **夜枫一定要走上木桥拍**——灯光是从桥上打下来的，站在步道上拍不出效果；桥上能同时拍到枫红隧道 + 底下落叶地毯。🎪 会场旁有美食摊贩与手作市集（9:00-19:00）。⚠️ 夜间常低于 5°C，厚外套 + 毛帽 + 围巾全上；人流中三脚架不好用，手持 + 拉高 ISO 更实际。🚌 **回程：17:25-17:35 在同一站牌搭 Red Line 回河口湖站**（约 20 分钟，17:45 前后到站），接着**站前扫街 + 便利店补给当晚餐**（见 17:45 那张卡，时间很充裕），再搭 18:10 的高速巴士。⚠️ 红叶季周游巴士极挤、末班约 18:00，上车前务必先拿一张时刻表确认末班；万一挤不上，就改搭 18:20 高速巴士（新宿 20:20），GOKU 相应推迟到 21:00。', now:'🍁 **2026 富士河口湖红叶祭 11.07-11.29，正好覆盖今天**！主会场就是红叶回廊：梨川沿岸约 150 棵枫树织成红色隧道，免费入场、24 小时开放。🚏 **交通（全程不打车）**：在**河口湖站前 6 号站牌**搭 **Red Line 周游巴士**（往河口湖北岸・紅葉回廊方向）约 20 分钟 → **「久保田一竹美術館」站**下车，步行 2-5 分钟即到；单程约 ¥200-400/人（≈¥10-20 含税），只坐这一趟买单程即可，不必买 ¥1,500 一日券。⏱ **节奏：16:20 到 → 16:20-16:40 先抢黄昏暖光**（红叶＋富士山同框，斜光的颜色比正午平光好看太多）→ **16:40 日落点灯** → 16:50-17:15 是「蓝调时刻」，天空深蓝、灯刚亮，是全场最好的 25 分钟 → 17:15 收工（把蓝调时刻拍满）。✅ 15:40-16:20 那段平光已经砍掉了，体力全留给点灯后——**一分钟都不浪费在普通光线上**。📷 **夜枫一定要走上木桥拍**——灯光是从桥上打下来的，站在步道上拍不出效果；桥上能同时拍到枫红隧道 + 底下落叶地毯。🎪 会场旁有美食摊贩与手作市集（9:00-19:00）。⚠️ 夜间常低于 5°C，厚外套 + 毛帽 + 围巾全上；人流中三脚架不好用，手持 + 拉高 ISO 更实际。🚌 **回程：17:25-17:35 在同一站牌搭 Red Line 回河口湖站**（约 20 分钟，17:45 前后到站），接着**站前扫街 + 便利店补给当晚餐**（见 17:45 那张卡，时间很充裕），再搭 18:10 的高速巴士。⚠️ 红叶季周游巴士极挤、末班约 18:00，上车前务必先拿一张时刻表确认末班；万一挤不上，就改搭 18:20 高速巴士（新宿 20:20），GOKU 相应推迟到 21:00。'},
+  {id:'c10', old:'🚌 **高速巴士（富士急 / 京王）**：河口湖站 18:10 发 → バスタ新宿约 20:10，车程约 2 小时，¥2,300-2,600/人（≈¥115-130），比富士回游便宜一半。🎫 备选班次 **18:20 / 18:40**（末班 20:15）——17:45 周游巴士回到河口湖站，买完炸物 18:05 回站，只有 5 分钟上车；**红叶回廊多待会儿就改 18:10，到新宿 20:10 也不影响 GOKU**。⚠️ 红叶季满席常见，建议提前网上预约，也可在河口湖站窗口现场买。🍱 **晚餐在站前便利店买好带上车**（饭团、热饮、山梨限定信玄饼冰淇淋），车上吃味道不重的手持食物（禁止饮酒）；原来的炸物店已取消，不用再赶。车上有卫生间；GOKU 已改约 20:45。⚠️ **不打车的话时间紧**：20:10 到バスタ新宿 → 丸之内线到银座约 20 分钟 → 步行 8 分钟 = 20:38 到店，只剩 7 分钟；**巴士晚点请立刻电话 070-3206-1079 说明**，或改约 21:00（L.O. 21:30 前入座即可）。', now:'🚌 **高速巴士（富士急 / 京王）**：河口湖站 18:10 发 → バスタ新宿约 20:10，车程约 2 小时，¥2,300-2,600/人（≈¥115-130），比富士回游便宜一半。🎫 备选班次 **18:20 / 18:40**（末班 20:15）——17:45 周游巴士回到河口湖站，买完炸物 18:05 回站，只有 5 分钟上车；**回廊拍满 17:15 也完全来得及**，18:10 发车、20:10 到新宿，GOKU 20:45 不受影响。⚠️ 红叶季满席常见，建议提前网上预约，也可在河口湖站窗口现场买。🍱 **晚餐在站前便利店买好带上车**（饭团、热饮、山梨限定信玄饼冰淇淋），车上吃味道不重的手持食物（禁止饮酒）；原来的炸物店已取消，不用再赶。车上有卫生间；GOKU 已改约 20:45。⚠️ **不打车的话时间紧**：20:10 到バスタ新宿 → 丸之内线到银座约 20 分钟 → 步行 8 分钟 = 20:38 到店，只剩 7 分钟；**巴士晚点请立刻电话 070-3206-1079 说明**，或改约 21:00（L.O. 21:30 前入座即可）。'},
+  {id:'c2', old:'下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 12:15 之前还车。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。', now:'🕐 **10:37 抵达山中湖旭日丘**，下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 12:40 之前还车（13:00 要搭 KABA BUS）。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。'},
+  {id:'c3', old:'电动自行车约 2000-3000 日元/3 小时；白鸟滨看天鹅、长池滨拍富士山倒影。', now:'电动自行车约 2000-3000 日元/3 小时；白鸟滨看天鹅、长池滨拍富士山倒影。⏱ **骑到 12:40 前必须还车**——12:45 要到 2 楼 KABA BUS 柜台办手续，赶 13:00 那班水陆两用巴士。从 10:50 算起有 **110 分钟**，电动自行车环湖 20km 绰绰有余（比原来的 85 分钟还多 25 分钟）。'},
+  {id:'e1', old:'清晨参道最清静，大鸟居前留影。⛩️ 御守：開運木鈴「こだま」御神木制·每颗木纹声音独一无二·数量限定常售罄；みのり守（心愿成就）；相和守（姻缘安产·两枚合圆）。授与所 9:00 起，御朱印 500 円。', now:'上午参道尚清静，大鸟居前留影。⏱ **今天走紧凑版 50 分钟**（原 75 分钟）：大鸟居 → 参道 → 本殿参拜 → 授与所买御守，代代木公园红叶留到下次——省下的 25 分钟全给生化危机展。⛩️ 御守：開運木鈴「こだま」御神木制·每颗木纹声音独一无二·数量限定常售罄；みのり守（心愿成就）；相和守（姻缘安产·两枚合圆）。授与所 9:00 起，御朱印 500 円。🍁 出原宿口代代木公园红叶银杏顺看。'},
+  {id:'f5', old:'最后药妆零食扫货，比价后入手；唐吉诃德 24 小时。🎁 称重坚果果干实惠，唐吉诃德零食大包。', now:'最后药妆零食扫货，比价后入手；唐吉诃德 24 小时。🎁 称重坚果果干实惠，唐吉诃德零食大包。🍁 上野公园红叶+银杏就在旁边，时间富余顺看。'},
+  {id:'d1', old:'德川家菩提寺；大殿与东京塔同框机位。', now:'德川家菩提寺；大殿与东京塔同框机位。⛩️ 御守：勝運御守（黑底金葵纹·德川将军家·500 円·求胜运事业）；大殿右侧「千躰子育地藏尊」红帽小地藏顺看。'},
+  {id:'e1', old:'清晨参道最清静，大鸟居前留影。🎁 御守/绘马/御朱印帐（正规神社手信）。', now:'清晨参道最清静，大鸟居前留影。⛩️ 御守：開運木鈴「こだま」御神木制·每颗木纹声音独一无二·数量限定常售罄；みのり守（心愿成就）；相和守（姻缘安产·两枚合圆）。授与所 9:00 起，御朱印 500 円。'},
+  {id:'e1', old:'清晨参道最清静，大鸟居前留影。', now:'清晨参道最清静，大鸟居前留影。⛩️ 御守：開運木鈴「こだま」御神木制·每颗木纹声音独一无二·数量限定常售罄；みのり守（心愿成就）；相和守（姻缘安产·两枚合圆）。授与所 9:00 起，御朱印 500 円。'},
+  {id:'b13', old:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。🎁 手信：常盤堂 雷おこし（雷门米果）、木村家本店 人形烧（1870 年老铺）。', now:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。🎁 手信：常盤堂 雷おこし（雷门米果）、木村家本店 人形烧（1870 年老铺）。⛩️ 御守：金龙铃守（开运·金色铃铛）、雷门合格守；抽签 100 円，凶签当场绑掉留好运。'},
+  {id:'b13', old:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。', now:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。🎁 手信：常盤堂 雷おこし（雷门米果）、木村家本店 人形烧（1870 年老铺）。⛩️ 御守：金龙铃守（开运·金色铃铛）、雷门合格守；抽签 100 円，凶签当场绑掉留好运。'},
+  {id:'b7', old:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。🎁 迷你熊手钥匙圈，祭典限定开运小物。', now:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。🎁 迷你熊手钥匙圈，祭典限定开运小物。⛩️ 熊手御守「かっこめ」仅酉之市期间授与（招福聚财）；「なでおかめ」摸鼻招金运、右颊招恋爱；当日限定御朱印。'},
+  {id:'b7', old:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。', now:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。🎁 迷你熊手钥匙圈，祭典限定开运小物。⛩️ 熊手御守「かっこめ」仅酉之市期间授与（招福聚财）；「なでおかめ」摸鼻招金运、右颊招恋爱；当日限定御朱印。'},
+  {id:'a7', old:'每月 10 日开售下月门票，官网抢票；按预约场次入场，馆内禁摄影。', now:'每月 10 日开售下月门票，官网抢票；按预约场次入场，馆内禁摄影。🎁 馆内商店 Mamma Aiuto 有美术馆限定周边（馆外买不到），出馆前必逛。'},
+  {id:'b2', old:'数码宝贝朝圣机位：自由女神×彩虹大桥同框；DiverCity 前独角兽高达立像别错过。', now:'数码宝贝朝圣机位：自由女神×彩虹大桥同框。⚠️ 独角兽高达立像 2026.8.31 已结束展示；DiverCity 7F 的 Gundam Base Tokyo 仍营业，店限模型可淘（周末人多需整理券）。'},
+  {id:'b9', old:'百年鳗鱼老店，鳗重午市性价比高。', now:'名古屋ひつまぶし名店「備長」的银座二号店，在银座三越**新馆 11F** 餐厅层。招牌吃法是「ひつまぶし三吃」：第一碗吃原味，第二碗拌海苔・葱花・山葵，第三碗浇高汤做成茶泡饭（出汁可免费续），一碗三变、收尾最香。鳗鱼炭火直烤，皮焦脆肉细嫩，酱汁渗进米饭特别下饭。⏰ 营业 11:00-15:30（L.O. 14:45）/ 17:00-21:00（L.O. 20:00），休馆日随银座三越；11.19 周四正常营业。🚉 交通：地铁银座线・丸之内线・日比谷线 **银座站 A6/A7 出口即到**（百货直通）；或都营浅草线/日比谷线东银座站经地下通道步行 2 分钟；JR 有乐町站步行 9 分钟。⚠️ 位置在**新馆 11F 不是本馆**，注意电梯分区（同一层店外有吸烟室）。⚠️ 百货餐厅层中午排队常见，**人多时会在最后点餐前提前截止排队**，建议 13:30 前到；店内要求**每人至少点一份鳗鱼套餐**（单点碗只限外带）。📞 03-6263-2157，建议提前电话预约。💳 信用卡・电子钱包・扫码支付全都可用。'},
+  {id:'c2', old:'富士急巴士约 45 分钟，班次约每小时 1 班，出发前查好往返时刻。', now:'🕐 **10:37 抵达山中湖旭日丘**，下车就是租赁点，先去柜台确认还车时间再拿车——电动自行车约 2,000-3,000 日元/3 小时，可踩到 12:40 之前还车（13:00 要搭 KABA BUS）。⚠️ 旺季中午前车容易被租完，建议下车直奔柜台；取车时一并问清「山中湖 → 河口湖」的巴士班次与站牌位置。'},
+  {id:'c1', old:'高速巴士需提前网上预约；直达河口湖站约 2 小时，车上补眠。', now:'💰 单程 ¥2,300-2,600/人（≈¥115-130）｜**直达、全程不换乘**：这台车会先经停河口湖站（约 10:10）再继续开往山中湖，**不要下车，坐到底就是旭日丘**。**10:37 抵达山中湖旭日丘**，巴士站旁边就是自行车租赁点。⏱ 全程约 2 小时 22 分。🎫 参考班次：**08:15 发 → 10:37 旭日丘**（首选，终点就是旭日丘）；备选 07:55 → 10:09（终点山中湖平野，旭日丘有停，可多骑 30 分钟）、07:15 → 09:29（最早，能多骑 50 分钟）。⚠️ **全指定席，必须提前网上预约**（发车前 1 个月开放，红叶季极易满席）；网上支付比窗口便宜（山中湖方向约 ¥2,350）。🎫 **买票买到「山中湖旭日丘」**，别只买到河口湖——差价只有几百日元，但省掉一次换乘 + 45 分钟。🎒 车上有卫生间，行李舱可放大件；建议备好晕车药和水。'},
+  {id:'b10', old:'GINZA SIX 艺术中庭、优衣库全球旗舰店、无印旗舰、银座 Loft 一条线。', now:'GINZA SIX 艺术中庭、优衣库全球旗舰店、无印旗舰、银座 Loft 一条线。🎁 手信：Press Butter Sand 银座本店（店限口味）、銀のぶどう 葡萄干黄油夹心。'},
+  {id:'b11', old:'电器药妆免税扫货；Ginza Nagano 长野物产市场选信州伴手礼。', now:'电器药妆免税扫货主力，购物清单集中火力。⏱ **14:50-15:35 有 45 分钟**（原计划只有 10 分钟，把上午台场段的冗余挪过来了）。'},
+  {id:'b13', old:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。', now:'傍晚灯笼点亮；仲见世店铺约 18 点打烊，先逛商店街再入寺。🎁 手信：常盤堂 雷おこし（雷门米果）、木村家本店 人形烧（1870 年老铺）。'},
+  {id:'b7', old:'11 月酉日祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。', now:'11 月酉之市祭典，熊手招福开运，晚上 7 点后人潮最旺，注意随身财物。🎁 迷你熊手钥匙圈，祭典限定开运小物。'},
+  {id:'c6', old:'11 月下旬红叶隧道最美；湖畔巴士至河口湖なぎさの木公园站下车。', now:'11 月下旬红叶隧道最美；湖畔巴士至河口湖なぎさの木公园站下车。🎁 信玄饼（山梨名物）、ほうとう 速食装、富士山造型点心（站前商店街）。'},
+  {id:'d4b', old:'约 50 家文字烧店的老牌商店街，老铺推荐「近藤本店」「はざま」「もん吉」；明太子年糕味最入门，第一份可请店员示范下料。', now:'约 50 家文字烧店的老牌商店街，老铺推荐「近藤本店」「はざま」「もん吉」；明太子年糕味最入门，第一份可请店员示范下料。🎁 文字烧粉 DIY 套装，月岛限定。'},
+  {id:'d3', old:'Main Deck 150m；天气好可加购 Top Deck 250m。', now:'Main Deck 150m；天气好可加购 Top Deck 250m。🎁 官方店 Noppon 限定周边；增上寺御守顺路。'},
+  {id:'d5', old:'电器街、动漫周边、手办扭蛋、女仆咖啡；Bic Camera 免税扫货。', now:'电器街、动漫周边、手办扭蛋、女仆咖啡；Bic Camera 免税扫货。🎁 神田明神「電気堂」御守（IT 情报御守）就在旁边。'},
+  {id:'e1', old:'清晨参道最清静，大鸟居前留影。', now:'清晨参道最清静，大鸟居前留影。🎁 御守/绘马/御朱印帐（正规神社手信）。'},
+  {id:'e5', old:'提前购票，留意展览场馆与入场场次。', now:'🧟 11.22 周日营业 ✓ 平日 10:00-21:00 / 周末 9:00-21:00（最后入场 19:59）。展期 10.30-12.24 整整 56 天。涩谷站徒步 5 分钟，从 Cat Street 表参道端向北穿过即可达。门票 8/3 一般发售（已开售，**务必提前在 Lawson Ticket / e-plus / 现场买，11.22 周日黄金时段建议提前 1-2 周买定时段票**）。30 周年纪念展巨型原画 + 1:1 模型 + 等身装束 + 历代主角雕塑 + 限定周边店（🛍 限定 T 恤 ¥4,400、原作原画集 ¥6,600、安魂曲手办 ¥12,000+）。预计观展 1.5-2 小时（含周边店）。⏱ **我们 14:15 入场、给足 105 分钟**（明治神宫参拜已压缩到 50 分钟，时间全让给这里）；16:00 整离开去 PARCO 抢日落位，节奏刚好。⚠️ 周末下午最挤，14:15 已算错峰；19:30 后周边店可能售罄热门商品。'},
+  {id:'c8', old:'饭后步行约 10 分钟到家，夜风散步刚好；一日游圆满收官。', now:'日比谷线 银座 → 小伝馬町直达约 5 分钟（无需换乘），出站步行 3 分钟到家；比原来去人形町更近。GOKU 20:45 入店、L.O. 21:30，21:50 前收尾，约 22:00 到家。'},
+  {id:'e6', old:'11 月下旬日落约 16:30，提前 2-3 周预约日落时段票！', now:'11 月下旬日落约 16:30，提前 2-3 周预约日落时段票！🎁 展望台官方 Shop 限定明信片/周边。'},
+  {id:'e8', old:'拉面、烤肉、甜品收尾这趟旅程前最后一晚。🎁 Tokyo Banana 芭娜（东京手信之王，涩谷/机场有店）。', now:'博多串烧专门店「Joumon」，九州系烧鸟的扛把子。营业 17:00-23:30（无公休），11.22 周日营业。从涩谷前往：JR 山手线/埼京线 涩谷 → 恵比寿（4 分钟）→ 换日比谷线 恵比寿 → 六本木（4 分钟）→ 3 号出口步行 3 分钟，**全程约 20 分钟**（涩谷站没有大江户线也没有日比谷线，别信「1 站」的说法）。50 席小店，4-8 人包厢。必点：炭烤鸡肉套餐（もも/ねぎま/つくね/レバー/砂肝/ぼんじり等 9 种），¥200-350/串；西班牙 Iberico五肉卷 ¥500/串；招牌蔬菜卷猪肉 ¥600/串；博多绿葱红姜厚蛋烧 ¥680；明太马铃薯沙拉。2 小时喝到饱コース ¥3,980 起。⚠️ 必提前 1 个月预约！电话 03-3405-2585 或 Tabelog 网上预约，周末靠窗位/吧台位要抢。晚餐后回民宿：**日比谷线 六本木 → 小伝馬町 直达约 22 分钟**（不用换乘），出站步行 3 分钟到家——比绕涩谷转银座线省一半时间。'},
+  {id:'f2', old:'约 2.5 小时扫货：优先 PARCO、Animate 总店、乙女路；宝可梦中心 Mega Tokyo 在 Sunshine City 较远，酌情取舍。12:20 前收手，去高田马场吃猪排。', now:'约 2.5 小时扫货：优先 PARCO、Animate 总店、乙女路；宝可梦中心 Mega Tokyo 在 Sunshine City 较远，酌情取舍（🎁 有东京限定周边，值得跑一趟）。12:20 前收手，去高田马场吃猪排。'},
+  {id:'f5', old:'最后药妆零食扫货，比价后入手；唐吉诃德 24 小时。', now:'最后药妆零食扫货，比价后入手；唐吉诃德 24 小时。🎁 称重坚果果干实惠，唐吉诃德零食大包。'},
+  {id:'f9', old:'白色恋人、Royce\' 巧克力；退税商品托运前保持密封。', now:'白色恋人、Royce\' 巧克力、Tokyo Banana 最后补货；退税商品托运前保持密封。'},
+  {id:'f2', old:'约 2.5 小时扫货：优先 PARCO、Animate 总店、乙女路；宝可梦中心 Mega Tokyo 在 Sunshine City 较远，酌情取舍（🎁 有东京限定周边，值得跑一趟）。12:20 前收手，去高田马场吃猪排。', now:'从西口穿越过来后，**东口扫货约 40 分钟**：优先 PARCO、Animate 总店、乙女路。11:45 出发，沿 Sunshine City 通步行 10 分钟去宝可梦中心。'},
+  {id:'e6', old:'11 月下旬日落约 16:30，提前 2-3 周预约日落时段票！🎁 展望台官方 Shop 限定明信片/周边。', now:'🆓 涩谷 PARCO 10F 屋上公园免费观景，11.22 日落约 16:30，16:00 抵达抢位。晴天可远眺富士山，另一侧正对东京塔方向。日落后顺路下到 6F Nintendo TOKYO / Pokémon Center SHIBUYA 扫货。'},
+  {id:'e7', old:'展望台下来顺路打卡，灯牌亮起后的夜景版本。', now:'PARCO 下来徒步 3 分钟，灯牌亮起后的夜景版本。'},
+  {id:'p5', old:'台场海边、SHIBUYA SKY 屋顶风大速冷', now:'台场海边、PARCO 屋上风大速冷'},
+  {id:'d6', old:'推荐：鶏王けいすけ鸡白汤拉面（配整只低温鸡腿）、Hotate Biyori 帆立贝沾面（拉面百名店）、たん清炭火牛舌定食；想体验女仆咖啡可选 @home cafe 或 2001 年元祖 Cure Maid Cafe。', now:'新宿三丁目站徒步 1 分钟的关东煮专门店，11.21 周六营业 13:00-23:00。智慧点餐系统（扫桌 QR 看多语言菜单），开放吧台 + 上班族气氛热闹。人均约 ¥4,000；必点慢炖带骨鸡腿（お通しも含）、大根 286 円（柚子胡椒推荐）、牛すじ 330 円、トマト（番茄关东煮）462 円、厚炸豆腐 264 円、玉子 220 円、车麩 220 円、奶油烤马铃薯 275 円、香菇蒟蒻 220 円；お通し 275 円。瓶啤酒 748 円、乌龙茶/可乐 418 円。预约可选（Tabelog/电话 03-6384-1356），20:00 后没预约等位约 15 分钟。从秋叶原前往：JR 山手线 秋叶原 → 新宿约 10 分钟；新宿站中央东口出 → 沿靖国通向南步行 3-5 分钟到新宿三丁目站旁。晚餐后回民宿：都营新宿线 新宿三丁目 → 马喰横山 1 站 5 分钟。'},
+  {id:'d6', old:'秋叶原站附近人气炭火串烧专门店，使用国产土鸡、每天早上现串现烤、备长炭近红外线烤制。11.21 周六营业 17:00-23:30（周日定休），从秋叶原步行 5 分钟直达（JR 电气街口北侧）。人均约 ¥3,500；推荐 8 道コース ¥4,500（含地鸡水炊き鍋 + だし巻き玉子 + 串焼き 2 种 + 自选 + 2 小时喝到饱）。17:00-19:00 早场啤酒套餐更划算。座位仅 35 席，建议 Rakuten GURUNAVI 或电话 050-5595-1516 提前预约，コース 当日取消收 100% 取消费（2 天前免费取消）。', now:'新宿三丁目站徒步 1 分钟的关东煮专门店，11.21 周六营业 13:00-23:00。智慧点餐系统（扫桌 QR 看多语言菜单），开放吧台 + 上班族气氛热闹。人均约 ¥4,000；必点慢炖带骨鸡腿（お通しも含）、大根 286 円（柚子胡椒推荐）、牛すじ 330 円、トマト（番茄关东煮）462 円、厚炸豆腐 264 円、玉子 220 円、车麩 220 円、奶油烤马铃薯 275 円、香菇蒟蒻 220 円；お通し 275 円。瓶啤酒 748 円、乌龙茶/可乐 418 円。预约可选（Tabelog/电话 03-6384-1356），20:00 后没预约等位约 15 分钟。从秋叶原前往：JR 山手线 秋叶原 → 新宿约 10 分钟；新宿站中央东口出 → 沿靖国通向南步行 3-5 分钟到新宿三丁目站旁。晚餐后回民宿：都营新宿线 新宿三丁目 → 马喰横山 1 站 5 分钟。'},
+  {id:'b11b', old:'长野县官方特产店，10:30-19:00 营业免费入场；从 Bic Camera 沿有乐町通向南步行约 8-10 分钟可达。1F 信州苹果、葡萄干、果汁、味噌、信州荞麦面零食；2F 投币式品酒区（可试饮长野葡萄酒/清酒）。', now:'ちいかわ/吉伊卡哇作者插画师 NAGANO 的官方商店！免入场，商场营业 11:00-21:00。银座一丁目站 4 号出口步行 2 分钟；从 Bic Camera 沿银座中央通向东步行约 6-8 分钟可达。角色：自嘲熊（ナガノのくま）、ちいかわ 小八猫/兔兔联名、帕格 Pug、鼹鼠可乐饼等。🎁 必买：ちいかわ×NAGANO Friends 联名帆布袋 ¥2,970、Nagano Friends 不锈钢随行杯 ¥2,860、毛绒纸巾套 ¥3,300、自嘲熊干发浴帽 ¥1,980；大福袋 ¥11,000 含大手提袋/达摩公仔/特大毛巾/环保袋/针织帽等。📌 早 11:00 入场最不挤；热门新品/新发售发番号券（LINE 派发，关注官方 X）。本店不免税（机场退税）；同款部分商品可 nagano-market.jp 官网网购直邮。'},
+  {id:'e3', old:'AFURI 柚子盐拉面、人气早午餐店。', now:'A4 黑毛和牛烤牛肉盖饭专门店（只卖这一个菜！），原宿站表参道口步行 5 分钟 / 明治神宫前站 5 号出口步行 1 分钟。营业 11:00-22:00（L.O 21:00），11.22 周日营业 ✓。¥1,000-2,000 性价比超高（人均 100 元吃饱）。低温慢烤的粉红嫩切片+半熟蛋黄+特制酱汁+牛尾汤+泡菜套餐。可选1.5x/2x 增量肉；加饭免费、加肉另算。点餐流程：进店先在门口点菜单 → 出店门外等候座位 → 叫号入座；多国语言菜单会问哪国人。⚠️ 高峰期 11:30-13:00 可能要排队 20-40 分钟，建议 12:30 前或 13:30 后错峰。'},
+  {id:'a4', old:'都营新宿线到新宿，转 JR 中央线快速，全程约 1 小时。', now:'JR 中央线水道桥 → 吉祥寺直达约 25 分钟（各停）；吃完 10 DIXANS 走 10 分钟到水道桥站上车。'},
+  {id:'e9', old:'银座线 涩谷 → 日本桥站直达约 22 分钟，步行约 10 分钟；末班车约 00:00，时间无忧。', now:'**日比谷线 六本木 → 小伝馬町 直达约 22 分钟**（不换乘），出站步行 3 分钟到家；末班车约 00:00，时间无忧。'},
+  {id:'f1', old:'日比谷线 3 站到上野，转 JR 山手线到池袋，约 40 分钟。', now:'日比谷线 3 站到上野，转 JR 山手线到池袋，约 40 分钟。🚶 **今天动线只穿越一次**：先西口（东武 Mont-Bell）→ 穿越到东口 → PARCO / Animate / 乙女路 → Sunshine 宝可梦，一路顺下来不再回头。'},
+];
+
+/* 行程结构升级：日期备注 / 新增行程卡 / 时间与标题（仅在你没改过时更新） */
+const DAY_NOTE_UPDATES = [
+  {date:'11.22', old:'清晨先冲外苑银杏并木（11 月下旬黄金期）；16:10 PARCO 10F 屋上免费看日落（晴天或可见富士山）；夜逛涩谷十字路口+晚餐后回民宿。', now:'清晨先到涩谷 Katsuo Shokudo 吃现削鲣鱼饭早餐（08:30 开门、米其林推荐、约 12 席、现金；早到最稳），再银座线 涩谷→表参道→外苑前冲银杏并木（11 月下旬黄金期）；午后回涩谷看生化危机展 + 16:00 PARCO 10F 屋上免费日落（晴天或可见富士山）；夜逛涩谷十字路口 + 六本木 Jomon 晚餐后回民宿。'},
+  {date:'11.19', old:'今晚浅草酉之市（二之酉），先正餐牛舌檸檬再逛熊手+屋台补吃。', now:'早上民宿步行 10 分钟到人形町 Unison Tailor 吃冰淇淋黄油吐司当早餐（08:00 开门，吃完人形町站直达新桥，顺路）；白天台场—银座—六义园夜枫；今晚浅草酉之市（二之酉），先正餐牛舌檸檬再逛熊手+屋台补吃。'},
+  {date:'11.20', old:'上午山中湖骑行＋11:30 KABA BUS 水陆两用巴士；中午河口湖乡土午餐 → 15:40 红叶回廊（白天光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行；中午河口湖乡土午餐 → 15:40 红叶回廊（白天光＋16:40 夜枫点灯，全程步行＋周游巴士，不打车）→ 17:35 买 ふるや 炸物当车上晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行；中午河口湖乡土午餐，下车先买 ふるや 炸物当车上晚餐 → 15:40 红叶回廊（白天光＋16:40 夜枫点灯，全程步行＋周游巴士，不打车）；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行；下午站前 → 町役場前罗森 → 16:30 红叶回廊夜枫（全程步行＋周游巴士，不打车）；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行；下午站前 → 町役場前罗森 → 日川時計店，16:50 赶河口湖红叶回廊夜枫点灯；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行；下午转战富士吉田拍「便利店 + 富士山」与日川時計店，16:40 在新倉山淺間公園忠灵塔看日落；晚上银座和牛寿喜烧。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.20', old:'上午山中湖骑行、下午河口湖步行；晚上人形町和牛寿喜烧犒劳。山间冷，备手套防风衣。', now:'上午山中湖骑行＋13:00 KABA BUS 水陆两用巴士；下午 15:00 河口湖乡土午餐（晚午餐避人潮）→ 16:20 红叶回廊（黄昏暖光＋16:40 夜枫点灯，蓝调拍到 17:15，全程步行＋周游巴士，不打车）→ 17:45 回站前扫街 + 便利店补给当晚餐；晚上银座和牛寿喜烧。山间冷，备手套防风衣。'},
+  {date:'11.22', old:'涩谷 Sky 日落约 16:30，场次票提前 2-3 周预约；今天步数会爆表。', now:'清晨先冲外苑银杏并木（11 月下旬黄金期）；16:10 PARCO 10F 屋上免费看日落（晴天或可见富士山）；夜逛涩谷十字路口+晚餐后回民宿。'},
+  {date:'11.19', old:'今晚浅草酉之市（二之酉），熊手招福+屋台小吃别错过。', now:'今晚浅草酉之市（二之酉），熊手招福+屋台小吃别错过。'},
+  {date:'11.21', old:'增上寺—芝公园—东京塔步行串联，中午月岛文字烧，午后秋叶原。', now:'增上寺—芝公园—东京塔步行串联，中午月岛文字烧，午后秋叶原。'},
+  {date:'11.21', old:'增上寺—芝公园—东京塔步行串联，中午月岛文字烧，午后秋叶原；傍晚坐电车去浅草吃牛たんの檸檬。', now:'增上寺—芝公园—东京塔步行串联，中午月岛文字烧，午后秋叶原。'},
+  {date:'11.21', old:'增上寺—芝公园—东京塔步行串联，中午月岛文字烧，午后秋叶原。', now:'清晨先到浅草 Ginza Brazil（銀座ブラジル，名字骗人、其实在浅草雷门旁）吃炸猪排三明治早餐（09:00 开门、只收现金、周三周四休；我们周六去；民宿搭都营浅草线直达浅草约 12 分钟），再浅草→御成门直奔增上寺—芝公园—东京塔步行串联，町月岛文字烧，午后秋叶原。'},
+  {date:'11.23', old:'香港航空 20:25 成田 T1 起飞；先池袋扫货，高田马场猪排午餐，再上野扫尾，16:05 回民宿取行李赶机场。', now:'香港航空 20:25 成田 T1 起飞；清晨先到隔壁小舟町 Parklet Bakery 买酸种吐司/司康当退房前早餐（08:30 开门、grab & go），再池袋扫货（西口东武 Mont-Bell → 东口 PARCO/Animate → Sunshine 宝可梦），高田马场猪排午餐，上野扫尾，16:05 回民宿取行李赶机场。'},
+  {date:'11.18', old:'HX606 07:15 落地成田 T1，凌晨航班记得机上补眠；吉卜力门票每月 10 日开售下月。', now:'HX606 07:15 落地成田 T1，凌晨航班记得机上补眠；吉卜力门票每月 10 日开售下月。清晨先放行李，再到水道桥 10 DIXANS（JR 中央线，名字デゾン）吃厚切生火腿起司吐司早餐，顺路直奔吉祥寺。'},
+];
+const NEW_ITEMS = [
+  {date:'11.22', item:{id:'eb', time:'08:30', type:'food', title:'Katsuo Shokudo 现削鲣鱼饭', loc:'涩谷区莺谷町 7-12 GranDuo 涩谷 B1（涩谷站步行 7 分钟）', note:'🐟 **米其林推荐的「鲣鱼食堂」**：老板娘在约 12 个座位的吧台前**现场手削鲣鱼节（katsuobushi）**盖在你的米饭上——薄如纸的鲣鱼片遇热缓缓融化，鲜味直接拉满，是一场关于「一味食材」的早餐表演。🍚 **招牌定食**：现削鲣鱼盖饭 + 生鸡蛋黄 + 时蔬 + 味噌汤（另有茶碗蒸、鲣鱼刺身 / 煮制 / 荒节 / 本枯节等多种吃法，定食约 **¥2,200（≈¥110 含税）**）。鲣鱼风味独特、算「后天养成的味道」，但一生至少试一次。🕐 **周日 08:30 开门**（部分资料写 09:00，建议 09:00 前到最稳），**只做早午餐、约 13:00 收**（卖完即止）。💺 约 12 席、常排队——**开门前就有人排**；以现场候位为主（网传已导入时段预约制，出发前查官方 IG 确认当周方式），早到最稳。💰 人均约 ¥110（含税）。💳 **只收现金**，备好日元现钞。🚶 吃完走 7 分钟回涩谷站，搭**银座线 涩谷 → 表参道 → 外苑前**（2 站）冲银杏并木，再回涩谷看展 + PARCO 屋上，完全顺路。', geo:'Katsuo Shokudo'}},
+  {date:'11.19', item:{id:'b0', time:'08:00', type:'food', title:'Unison Tailor Ningyocho 冰淇淋黄油吐司', loc:'中央区日本桥人形町 3-9-8（人形町站 A4 出口步行 1 分钟）', note:'🍞 **招牌「アイスバタートースト」＝ 冰淇淋黄油法式吐司**：厚切吐司浸满蛋奶液煎到外脆内软，上桌再叠一球**冰黄油**，遇热慢慢化开渗进面包里，口感松软湿润、奶香直接拉满——店里毫无争议的第一名。🍮 **焦糖布丁（プリン）** 是第二招牌：蛋香浓、奶味足，焦糖汁带微苦，所以**完全不甜腻**。☕ 咖啡豆来自本地名店 PASSAGE COFFEE NIHOMBASHI，水出しコーヒー（冷萃）干净顺口，也供应精酿啤酒。💰 人均 ¥75-100（含税）：法式吐司整份 **¥1,080（≈¥54）**、吐司＋饮料 Set **¥1,450**（单点吐司加咖啡原价 ¥1,640，Set 省 ¥190）、布丁 **¥580（≈¥29）**、冷萃 (L) **¥680** / 卡布奇诺 ¥600 / 摩卡 ¥660 / 巴斯克芝士蛋糕 ¥600。🕐 **周四 08:00 开门**（周一 10:00 · 周二 09:00 · 周三～五 08:00 · 周末 08:30，**每月最后一个周一休**），L.O. 17:30；我们 08:00 准点到、08:45 前离开，避开 09 点后的上班人潮。🚶 **完全顺路**：从民宿步行约 10 分钟就到（人形町就在小伝馬町隔壁），吃完走出店门 **1 分钟进人形町站**，搭**都营浅草线直达新桥**（约 7 分钟、4 站不用换车）再转百合鸥线去台场——原本从民宿去新桥还得绕，这样反而更顺。⚠️ **一人一项低消**（两人只点一份吐司会被提醒加单），**客满时限时 60 分钟**、必须全员到齐才能入座。⚠️ 禁止长时间拍摄、禁止拍到其他客人、禁连拍快门声、禁拍门口长椅（门口排队时会挡到邻居）。💳 现金 / 信用卡 / 交通 IC / PayPay 都可用。📞 03-3527-2507。约 20 席，部分座位带插座。', geo:'Unison Tailor Ningyocho'}},
+  {date:'11.20', item:{id:'c16', time:'13:00', type:'fun', title:'KABA BUS 水陆两用巴士 · 冲进山中湖', loc:'森の駅旭日丘 2 楼（山中湖旭日丘巴士总站，出站 <100 米）', note:'🦛 **水陆两用「河马巴士」直接开进山中湖里**——冲下水那一下水花四溅是全场高潮（怕湿可提前拉下透明窗帘）；之后在湖面绕行约 30 分钟，导览员讲富士山与山中湖的故事，有中／英／日等 5 语自动语音导览，湖上正对富士山，晴天视野极好。⏱ 全程约 40 分钟（含出发前讲解与拍照）。💰 成人 **¥2,800/人（≈¥140 含税）**，4 岁～小学生 ¥1,400。🕐 班次 9:15 / 10:00 / 10:45 / 11:30 / **13:00** / 13:45 / 14:30 / 15:15；我们搭 **13:00** 这班——骑完车 12:40 还车后走过来刚好。📍 **乘车处就在「森の駅旭日丘」2 楼售票柜台旁**（山梨県南都留郡山中湖村平野 506-296），和还车点同一栋楼，**出站不到 100 米**。⚠️ **务必提前一个月上网预约**（cn.kaba-bus.com），红叶季极抢手、常一开放就只剩零星时段；也可电话 0555-73-8181（7:30-20:00）。⚠️ **出发前 15 分钟（12:45）要到柜台办手续**，迟到视为取消、巴士准时开走且不退票，所以 **12:40 前一定还完自行车**。⚠️ 遇大风／雷／雾或水位异常会停驶；当天专用电话 090-6160-4696（9:00-15:00）。', geo:'森の駅旭日丘'}},
+  {date:'11.20', item:{id:'c15', time:'17:50', type:'food', title:'お惣菜の店 ふるや · 河口湖第一炸物', loc:'山梨県南都留郡富士河口湖町船津4120-1（河口湖站步行 5 分钟）', note:'🥇 **河口湖 Tabelog 炸物类第一名**、开了 20 多年的外带老店，只卖五种炸物、做到极致：可乐饼 **¥90**（≈¥4.5）起、炸土豆饼、**鳕鱼饼（炸银鳕鱼，最多人推）**、炸猪排、火腿排、竹筴鱼；人均 ¥999 以下（≈¥50 含税）。下单后才现炸，报纸＋橡皮筋一包，很昭和。🕐 **营业 10:00-14:00 / 16:00-19:00，卖完即止**——我们排在看完红叶回廊之后，落在 16:00-19:00 这个时段内，时间对得上；11.20 是周五，正常营业（定休日多为周二／周日）。📞 **建议上午先电 0555-72-0862 预约 17:50 取货**（店家接受预约），能省掉排队——这一年里最挤的红叶季，排队是最大的风险。💳 **只收现金**：信用卡、电子货币、QR 支付全不接受，备好日元现钞。🍱 **仅外带、没有座位**；买完直接带上 18:10 的高速巴士当晚餐（车上可以吃味道不重的手持食物，禁止饮酒）。🚶 从河口湖站步行 5 分钟／约 350 米。⚠️ **时间很紧**：17:45 周游巴士到站 → 17:50 到店 → **18:05 必须动身走回车站**赶 18:10 的巴士。若现场排队或已卖完，立刻放弃、改去站前便利店买饭团，千万别误车——误车就改 18:20／18:40（末班 20:15 前都有车），GOKU 要电话顺延。', geo:'お惣菜の店 ふるや'}},
+  {date:'11.20', item:{id:'c0', time:'07:30', type:'transport', title:'民宿出发 · 前往バスタ新宿', loc:'日本桥小伝馬町 → 馬喰横山 → 新宿', note:'步行约 7-8 分钟到**馬喰横山站**，搭都營新宿線直达新宿三丁目 / 新宿约 15-18 分钟，再步行 5-8 分钟到 **バスタ新宿（JR 新宿站南口）**，全程约 30-35 分钟。😴 **今天比原计划多睡 1 小时**——改搭 08:15 那班高速巴士，最晚 **07:30** 出门，留 10 分钟买水、找月台。🎫 出发前确认高速巴士票已取（网上预约的话在窗口或自助机取票）。', geo:'馬喰横山駅'}},
+  {date:'11.22', item:{id:'e0', time:'08:30', type:'nature', title:'明治神宫外苑 · 银杏并木', loc:'外苑前站步行 5 分钟', geo:'神宮外苑いちょう並木', note:'11 月下旬黄金期（约 11.20~12.05），146 棵银杏织成金色隧道；清晨人少、斜光最出片。结束后银座线外苑前 → 表参道转千代田线到明治神宫前，或沿青山通り步行约 20 分钟。', done:false}},
+  {date:'11.23', item:{id:'f2b', time:'11:00', type:'shop', title:'宝可梦中心 Mega Tokyo', loc:'Sunshine City alpa 2F（池袋站东口步行 10 分钟）', note:'关东地区规模最大的宝可梦中心！营业 10:00-20:00。Sunshine City alpa 2F，从池袋东口沿 Sunshine City 通向北步行约 10 分钟。店内分四块：主店（限定玩偶/手办）、Pokemon Card Station（卡牌对战免费玩）、Pokemon GO Lab、Pikachu Sweets（外带甜品店免预约）。东京限定周边比澀谷/晴空塔店更全，但本店不免税（要去机场或其他免税店退税）。Pokemon Cafe（正餐）在日本桥高岛屋 TOKYO DX，不在此。11:55-12:35 主店约 40 分钟，12:35 走回池袋站（10 分钟）坐山手线去高田马场。', geo:'ポケモンセンターメガトウキョー'}},
+  {date:'11.23', item:{id:'f2c', time:'10:15', type:'shop', title:'户外扫货 · Mont-Bell 池袋东武店', loc:'丰岛区西池袋 1-1-25 东武百货池袋店 5F（9-10 番区）', note:'⛰ 日本第一户外品牌池袋专柜！池袋站西口出站即达、东武百货 5F 9-10 番区，营业 10:00-20:00（周末 20:00 闭店）。2023.11 卖场扩大后外套/衣物/配件类最齐全，**店面直办免税**（买完当场开退税单，比机场省时）。🎁 必买：Expedition Down Parka 极地羽绒服（¥59,400 起，比国内便宜 30-40%）、Alpine Thermo Bottle 保温保冷瓶（¥3,740）、轻薄防水冲锋衣（¥8,000-15,000）、Mont-Bell 速干徒步 T 恤（¥3,000-5,000）、露营帐/睡袋/登山杖。⚠️ 户外装备体积大、建议放行李箱上座托运；**放在第一站**：扫完从西口穿越到东口约 12 分钟（池袋站很大，别信「5 分钟」），接着东口 PARCO → Animate → 乙女路 → Sunshine 一路顺下来，不再回头。', geo:'モンベル 池袋東武店'}},
+  {date:'11.22', item:{id:'e6b', time:'17:00', type:'shop', title:'户外扫货 · Mont-Bell 涩谷店', loc:'涩谷区宇田川町 11-5 Montbell 涩谷大楼（涩谷站八公口徒步 5 分钟）', note:'⛰ 涩谷 Mont-Bell 自有大楼，营业 10:30-21:00（全年无休）！涩谷站八公口出来沿文化村通向南步行约 5 分钟即达。**店面直办免税**（当场开退税单，比机场省时）。入口中庭有 13 米高攀岩墙可以试玩、拍照打卡。多楼层布局：2F 男装 / 3F 女装 / 4-5F 露营登山装备。🎁 必买：Expedition Down Parka 极地羽绒服（¥59,400 起，比国内便宜 30-40%）、轻薄防水冲锋衣（¥8,000-15,000）、美利奴羊毛内衣（¥5,000-8,000）、Alpine Thermo Bottle 保温瓶（¥3,740）、Down Jacket 折叠羽绒（¥14,000-25,000）。📌 看准再下手，户外装备体积大；扫 1 小时后出来步行 5 分钟回涩谷站坐地铁去六本木吃 Jomon。', geo:'モンベル 渋谷店'}},
+,
+  {date:'11.19', item:{id:'b11b', time:'15:35', type:'shop', title:'Nagano Market GINZA · ちいかわ周边', loc:'中央区银座 2-2-14 マロニエゲート銀座1 4F', note:'ちいかわ/吉伊卡哇作者插画师 NAGANO 的官方商店！免入场，商场营业 11:00-21:00。银座一丁目站 4 号出口步行 2 分钟；从 Bic Camera 沿银座中央通向东步行约 6-8 分钟可达。角色：自嘲熊（ナガノのくま）、ちいかわ 小八猫/兔兔联名、帕格 Pug、鼹鼠可乐饼等。🎁 必买：ちいかわ×NAGANO Friends 联名帆布袋 ¥2,970、Nagano Friends 不锈钢随行杯 ¥2,860、毛绒纸巾套 ¥3,300、自嘲熊干发浴帽 ¥1,980；大福袋 ¥11,000 含大手提袋/达摩公仔/特大毛巾/环保袋/针织帽等。📌 早 11:00 入场最不挤；热门新品/新发售发番号券（LINE 派发，关注官方 X）。本店不免税（机场退税）；同款部分商品可 nagano-market.jp 官网网购直邮。', geo:'マロニエゲート銀座1'}},
+  {date:'11.19', item:{id:'b14', time:'16:20', type:'sight', title:'六义园 · 夜枫点灯', loc:'文京区本驹込 6-16-3', note:'🍁 **东京夜枫名所前三甲**！展期 11.18-12.6（**正好覆盖行程 11.19 周四**）；夜间点灯日落-21:00（最后入场 20:30），票价预售 ¥1,000 / 当日 ¥1,200。500+ 棵枫树+银杏+野漆树，11 月下旬-12 月上旬最佳品赏期，「水香江」周边机位绝杀。**从 Nagano Market 走 2 分钟到银座一丁目站** → 银座线到上野（8 分钟）→ 南北线驹込（6 分钟）N14 出口步行 7 分钟，**全程约 25 分钟到园，16:20 抵达**。⏱ 16:20-18:15 足足 **115 分钟**（比原计划多 20 分钟）：先逛白天红叶，再等 16:30 前后的点灯与蓝调时刻，18:15 出门 → 19:00 前到达浅草。⚠️ 周末人山人海；**周四属于工作日，人少机位好**！三脚架禁用，11 月夜晚山手线/南北线有暖气但夜间山区风冷，建议带薄羽绒/围巾。', geo:'六義園'}},
+  {date:'11.20', item:{id:'c12', time:'15:20', type:'sight', title:'ローソン 富士河口湖町役場前店 · 真正的便利店机位', loc:'山梨县南都留郡富士河口湖町船津（町役場前）', note:'📷 **现在真正能拍到「便利店 + 富士山」的机位**！从站前店步行约 12-15 分钟（或搭河口湖周游巴士 / 打车 5 分钟）。这家店前没有挡板，屋顶 + 富士山 + LAWSON 招牌的经典构图一次到位，白天顺光、傍晚侧光都好看。⚠️ 同样热门，**只能站在人行道上拍，绝不能进车道**；路口有警备员，高峰期要排队（每人给的拍摄时间很短，先想好构图再上前）。🎒 顺手补给：热饮、饭团、山梨限定信玄饼冰淇淋。⏱ 停留 30 分钟（15:20-15:50），然后原路走回河口湖站约 15 分钟，16:10 在站前搭 Red Line 周游巴士去红叶回廊。', geo:'ローソン 富士河口湖町役場前店'}},
+  {date:'11.20', item:{id:'c13', time:'16:00', type:'sight', title:'日川時計店 · 街道正对富士山', loc:'山梨县富士吉田市本町 2-4-1 一带', note:'📷 又一个爆红机位：最普通的商店街一路延伸，**正中央正对着巨大的富士山**，电线杆、信号灯、店铺招牌层层叠叠做前景，超现实感拉满。🚕 交通：从罗森町役場前**打车约 12 分钟、¥1,800-2,200（两人分摊很划算）**；公交要绕回河口湖站换车至少 40 分钟，时间不够。也可从下吉田站步行约 10 分钟。⚠️ **现场有警备员维持秩序，绝对不能站到马路中央**，只能在人行道上拍；已多次发生游客冲出车道被劝离，当地设有中英日韩文告示牌。📷 器材：手机广角拍不全，**70-200mm 长焦压缩感最好**（手机开 2x-3x 也行），人站侧边、相机贴人行道边缘。⏱ 停留 20 分钟，16:20 准时上车打车去红叶回廊（约 30 分钟）。', geo:'日川時計店'}},
+  {date:'11.20', item:{id:'c14', time:'16:15', type:'nature', title:'新倉山淺間公園 · 登 398 级台阶', loc:'山梨县富士吉田市新倉 3353-1（浅间神社境内）', note:'🗻 **富士山最具代表性的明信片机位**：红色五重塔「忠灵塔」+ 富士山 + 樱花/红叶同框。从日川時計店打车约 5-8 分钟（¥1,000-1,200）直达山脚鸟居。⛩️ 登顶要爬 **398 级台阶**（约 12-15 分钟，有扶手但挺陡，喘就慢点），越往上人越少、机位越好。🍁 11 月下旬红叶季，运气好能拍到「红叶 + 五重塔 + 雪顶富士」。🧤 山顶风大、比山下冷 3-5°C，务必把厚外套和手套拿出来。⚠️ 台阶照明有限，下山一定要在天黑前开始（今天 16:40 日落）。', geo:'新倉山浅間公園'}},
+  {date:'11.21', item:{id:'d0', time:'09:00', type:'food', title:'Ginza Brazil 銀座ブラジル 炸豬排三明治', loc:'台東区浅草1-28-2 シカゴビル 2F（雷門旁、浅草站步行 2 分钟）', note:'🍳 **銀座ブラジル（Ginza Brazil）**：名字騙人——它其實在**淺草**（雷門旁、1948 年創業的昭和洋食老店），根本不是銀座！🥪 **招牌「元祖炸豬排三明治」**：厚切豬排夾進烤吐司、淋秘製醬汁，外酥內軟、麵包完全不濕爛，是淺草在地人的早餐第一名；**起司吐司**（煎過的起司＋奶油香吐司）跟**炸雞籃**也超推。🕐 **09:00 開門、15:00 收（賣完提早）**，**週三週四休**——我們 11.21 週六去剛好；店裡只有一位廚師、**出餐超慢，建議開門前就到排隊**（08:50 前人潮就湧現）。💰 人均 ¥1,000-2,000（≈¥50-100 含稅）：炸豬排三明治約 ¥1,300、起司吐司 ¥800、雞肉飯 ¥1,200。💳 **只收現金**！備好日圓現鈔。🚶 **完全順路**：民宿走到小伝馬町站，搭**都營淺草線直達淺草**（4 站約 12 分鐘），下車走 2 分鐘到雷門旁店門（芝加哥大樓 2F）；吃完 淺草（銀座線）→ 日本橋 → 銀座 → 霞ヶ関 轉都營三田線 1 站到**御成門**，直奔增上寺，約 25 分鐘——整個上午把東側舊東京串成一氣，超順。📞 03-3841-1473。', geo:'銀座ブラジル'}},
+  {date:'11.23', item:{id:'f0a', time:'08:30', type:'food', title:'Parklet Bakery 酸種吐司', loc:'中央区日本桥小舟町 14-7 SOIL 日本桥 1F（小伝馬町步行约 8 分钟 / 人形町站徒步 5 分钟）', note:'🥖 **民宿隔壁的寶藏麵包房**：就在小舟町 SOIL 日本橋 1F，前 Tartine 師傅用自然酵母做酸種麵包，紐約加州風、空間挑高採光好，窗邊還能看公園。🕐 **08:30 開門**（平日 08:30-22:00、週末 08:30-18:00，我們 11.23 週一去正好開門），**早餐時段 08:30-11:00**——退房前順路散步 8 分鐘買來 grab & go 最香。🍞 招牌：酪梨吐司（牛油果＋香料，¥1,100）、香草腰果奶油吐司 ¥1,000、蘋果味噌司康 ¥450（很快賣光）、香蕉小米麵包、咖啡焦糖布丁；咖啡用 Single O 豆，冰美式 ¥450 / 拿鐵 ¥500。💰 人均約 ¥60-100（含稅）。💳 **信用卡 / 交通 IC 可用，但不收 QR（無 PayPay）**；店裡也賣 Wine 可以帶一瓶回家。📞 03-3527-2627，官網 parkletbakery.com。🚶 吃完走回民宿寄行李，再搭日比谷線去池袋，完全順路。', geo:'パークレット ベーカリー'}},
+  {date:'11.18', item:{id:'a3b', time:'09:45', type:'food', title:'10 DIXANS 厚切吐司', loc:'千代田区西神田 2-7-11 北村ビル 1F（神保町站徒步 8 分 / 水道桥站徒步 10 分）', note:'🥪 **10 DIXANS（ディゾン）水道橋**：Tabelog 百名店咖啡廳，JR 中央線水道橋站旁（千代田區西神田 2-7-11 北村ビル 1F，神保町站徒步 8 分），昭和摩登裝潢＋爵士樂＋內庭綠意，被譽為「想一訪再訪的咖啡館」。🍞 **招牌厚切吐司**：生火腿起司厚切吐司（超市場火腿＋融起司夾厚切吐司，鹹香滿分）、An Butter 吐司（奶油＋煉乳）、法式吐司、布丁（firm purin 必點）、法式蛋糕；單點 ¥900、飲料套餐 ¥1,300。🕐 **平日 08:00 開門**（我們 11.18 週三去正好），建議開店左右到避排隊（中午後人潮不斷）。💳 收 Visa/Master/AMEX/JCB/Diners（建議帶現金備用）；不開放預約、無用餐時間限制。🚶 **完全順路**：放完行李從小伝馬町搭地鐵到神保町（都営新宿線約 15 分），走 8 分到店；吃完走到水道橋站搭 **JR 中央線直達吉祥寺**（約 25 分），跟 a4 去吉祥寺同一條線，零繞路。📞 03-6256-8417，IG @dixans.tokyo。', geo:'10 DIXANS（ディゾン）'}},
+  {date:'11.20', item:{id:'c17', time:'17:45', type:'sight', title:'河口湖站前扫街 · 便利店补给当晚餐', loc:'河口湖站站前（出站即达）', note:'🚉 **红叶回廊看完回来，这里才有空慢慢逛**：17:45 周游巴士到站，到 18:10 发车有整整 25 分钟。河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 注意它是**公寓式旅馆、不是景点**，房间阳台和窗户正对富士山，只能在外面看一眼外观，或记下地址当作下次住河口湖的备选（携程 4.4 分、距站 190m、带厨房可做饭）。站前还有河口湖温泉、ほうとう不動（站前店）等。🍱 **晚餐就在这解决**：站前便利店买饭团、热饮、山梨限定信玄饼冰淇淋，带上 18:10 的高速巴士当晚餐（车上可以吃味道不重的手持食物，禁止饮酒）——比原来赶着买炸物从容太多。🎒 站前有投币储物柜，背包存了再轻装活动。⏱ **18:05 前回到站前等车**（18:10 发车）。', geo:'河口湖駅'}},
+];
+const TIME_UPDATES = [
+  {id:'e0', old:'08:30', now:'10:00'},
+  {id:'e1', old:'09:30', now:'11:00'},
+  {id:'e2', old:'10:45', now:'12:15'},
+  {id:'e3', old:'12:00', now:'13:30'},
+  {id:'e4', old:'13:30', now:'14:45'},
+  {id:'b1', old:'09:00', now:'08:50'},
+  {id:'c0', old:'06:30', now:'07:30'},
+  {id:'c1', old:'07:15', now:'08:15'},
+  {id:'c2', old:'09:35', now:'10:45'},
+  {id:'c3', old:'09:45', now:'10:50'},
+  {id:'c16', old:'11:30', now:'13:00'},
+  {id:'c5', old:'12:30', now:'14:00'},
+  {id:'c4', old:'13:30', now:'15:00'},
+  {id:'c6', old:'14:35', now:'15:45'},
+  {id:'c9', old:'15:40', now:'16:20'},
+  {id:'c9', old:'16:50', now:'16:20'},
+  {id:'c13', old:'15:50', now:'16:00'},
+  {id:'c10', old:'17:53', now:'18:10'},
+  {id:'c10', old:'18:00', now:'18:10'},
+  {id:'c11', old:'20:15', now:'20:45'},
+  {id:'c11', old:'20:45', now:'20:45'},
+  {id:'c15', old:'12:45', now:'17:35'},
+  {id:'c8', old:'21:45', now:'22:00'},
+  {id:'c6', old:'15:00', now:'15:45'},
+  {id:'c7', old:'15:40', now:'14:55'},
+  {id:'c9', old:'16:30', now:'16:20'},
+  {id:'e1', old:'08:30', now:'09:30'},
+  {id:'e2', old:'10:00', now:'10:45'},
+  {id:'e3', old:'11:30', now:'12:00'},
+  {id:'e4', old:'13:00', now:'13:30'},
+  {id:'e6', old:'16:30', now:'16:10'},
+  {id:'e7', old:'17:45', now:'16:50'},
+  {id:'b12', old:'16:30', now:'16:40'},
+  {id:'b12', old:'16:40', now:'18:30'},
+  {id:'b13', old:'17:00', now:'19:00'},
+  {id:'b6', old:'18:00', now:'19:45'},
+  {id:'b7', old:'19:30', now:'20:30'},
+  {id:'c5', old:'13:30', now:'14:00'},
+  {id:'c1', old:'07:00', now:'08:15'},
+  {id:'c2', old:'09:30', now:'10:45'},
+  {id:'c3', old:'10:15', now:'10:50'},
+  {id:'c6', old:'14:30', now:'15:00'},
+  {id:'c7', old:'15:30', now:'15:40'},
+  {id:'b8', old:'21:30', now:'22:00'},
+  {id:'d1', old:'09:00', now:'10:30'},
+  {id:'d2', old:'10:00', now:'11:30'},
+  {id:'d3', old:'11:00', now:'12:30'},
+  {id:'d4', old:'12:30', now:'14:00'},
+  {id:'d4b', old:'12:45', now:'14:15'},
+  {id:'d4c', old:'14:15', now:'15:30'},
+  {id:'d5', old:'14:45', now:'16:00'},
+  {id:'f0', old:'08:30', now:'09:00'},
+  {id:'f1', old:'09:00', now:'09:30'},
+  {id:'f2c', old:'10:15', now:'10:45'},
+  {id:'f2b', old:'11:00', now:'11:30'},
+  {id:'f2', old:'09:45', now:'10:15'},
+  {id:'a3', old:'10:00', now:'09:00'},
+  {id:'a4', old:'10:45', now:'11:00'},
+  {id:'a5', old:'11:30', now:'11:45'},
+  {id:'a6', old:'12:00', now:'12:15'},
+  {id:'e6', old:'16:10', now:'16:00'},
+  {id:'b2', old:'10:00', now:'09:25'},
+  {id:'b3', old:'11:00', now:'10:25'},
+  {id:'b4', old:'12:00', now:'11:25'},
+  {id:'b5', old:'12:30', now:'11:55'},
+  {id:'b9', old:'13:30', now:'12:50'},
+  {id:'b10', old:'14:30', now:'13:50'},
+  {id:'b11', old:'15:45', now:'14:50'},
+  {id:'b11b', old:'15:55', now:'15:35'},
+  {id:'b14', old:'16:40', now:'16:20'},
+  {id:'c6', old:'15:45', now:'15:35'},
+  {id:'e2', old:'12:15', now:'11:50'},
+  {id:'e3', old:'13:30', now:'12:35'},
+  {id:'e4', old:'14:45', now:'13:30'},
+  {id:'e5', old:'15:00', now:'14:15'},
+  {id:'f2c', old:'10:45', now:'10:15'},
+  {id:'f2', old:'10:15', now:'11:05'},
+  {id:'f2b', old:'11:30', now:'11:55'},
+  {id:'f3', old:'12:30', now:'12:35'},
+];
+const TITLE_UPDATES = [
+  {id:'e1', old:'明治神宫 · 晨间参拜', now:'明治神宫 · 参拜'},
+  {id:'c1', old:'新宿出发 · 前往河口湖', now:'高速巴士 · バスタ新宿 → 山中湖旭日丘（直达）'},
+  {id:'c2', old:'巴士前往山中湖', now:'抵达山中湖旭日丘 · 租电动自行车'},
+  {id:'e3', old:'午餐 · 原宿/猫街', now:'ローストビーフ大野 · 原宿店'},
+  {id:'e6', old:'SHIBUYA SKY · 日落场次', now:'涩谷 PARCO 10F 屋上公园 · 免费日落观景台'},
+  {id:'d6', old:'秋叶原晚餐', now:'おでん屋たけし · 新宿三丁目店'},
+  {id:'d6', old:'炭の魂 · 秋叶原店', now:'おでん屋たけし · 新宿三丁目店'},
+  {id:'e8', old:'涩谷晚餐', now:'Jomon ジョウモン · 六本木店'},
+  {id:'b9', old:'鳗鱼饭 备长 · 三越银座店', now:'鳗鱼饭 · 鰻ひつまぶし備長 三越銀座店'},
+  {id:'b11b', old:'银座 Nagano Market · 长野物产', now:'Nagano Market GINZA · ちいかわ周边'},
+  {id:'a3b', old:'早餐 · 10 DIXANS 厚切吐司', now:'10 DIXANS 厚切吐司'},
+  {id:'b0', old:'早餐 · Unison Tailor Ningyocho 冰淇淋黄油吐司', now:'Unison Tailor Ningyocho 冰淇淋黄油吐司'},
+  {id:'d0', old:'早餐 · Ginza Brazil 銀座ブラジル 炸豬排三明治', now:'Ginza Brazil 銀座ブラジル 炸豬排三明治'},
+  {id:'eb', old:'早餐 · Katsuo Shokudo 现削鲣鱼饭', now:'Katsuo Shokudo 现削鲣鱼饭'},
+  {id:'f0a', old:'早餐 · Parklet Bakery 酸種吐司', now:'Parklet Bakery 酸種吐司'},
+  {id:'c6', old:'步行回河口湖站 · 站前扫街', now:'步行回河口湖站 · 赶 16:00 巴士'},
+];
+/* ================= 人均价格升级（只追加前缀，不动原有正文） ================= */
+const PRICE_UPDATES = [
+  {id:'a5',  prefix:'💰 人均 ¥40-60（含税，站前小吃+炸肉饼）｜'},
+  {id:'a8',  prefix:'💰 人均 ¥70-90（含税，汤咖喱+时蔬+烤鸡腿套餐）｜'},
+  {id:'a14', prefix:'💰 人均 ¥250-350（含税，荷尔蒙拼盘+和牛+饮品）｜'},
+  {id:'b9',  prefix:'💰 人均 ¥180-250（含税，鳗重午市套餐）｜'},
+  {id:'b6',  prefix:'💰 人均 ¥80-130（含税，屋台边逛边吃，丰俭由人）｜'},
+  {id:'e8',  prefix:'💰 人均 ¥250-350（含税，2 小时喝到饱コース ¥200 起、单点更贵）｜'},
+  {id:'f3b', prefix:'💰 人均 ¥100-150（含税，厚切炸猪排+味噌汤+小菜定食）｜'},
+  {id:'d4b', prefix:'💰 人均 ¥80-130（含税，文字烧+饮品，1 份主菜够 2 人分）｜'},
+  {id:'d6',  prefix:'💰 人均 ¥180-230（含税，关东煮+饮品 1-2 杯）｜'},
+  {id:'e3',  prefix:'💰 人均 ¥50-100（含税，A4 黑毛和牛烤牛肉盖饭，性价比之王，¥100 吃饱）｜'},
+];
+
+/* ================= 状态管理 ================= */
+const STORAGE_KEY = 'tokyo-trip-v2';
+let state = load() || JSON.parse(JSON.stringify(DEFAULT_DATA));
+let currentDay = 0;
+let expandedIds = new Set();
+let editing = null;          // {day, idx|null}
+let editingType = 'sight';
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function save(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+function load(){
+  try{
+    const d = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(d && d.days && d.days.length){
+      if(d.version !== DEFAULT_DATA.version){
+        // 版本迁移：按 id 补充 geo 导航字段与行前待办，不动你的勾选与修改
+        d.version = DEFAULT_DATA.version;
+        const geoMap = {};
+        DEFAULT_DATA.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(it.geo) geoMap[it.id] = it.geo; }); });
+        d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(geoMap[it.id] && !it.geo) it.geo = geoMap[it.id]; }); });
+        if(!Array.isArray(d.todos)) d.todos = [];
+        const todoIds = {};
+        d.todos.forEach(t=>{ todoIds[t.id] = 1; });
+        DEFAULT_DATA.todos.forEach(t=>{ if(!todoIds[t.id]) d.todos.push(JSON.parse(JSON.stringify(t))); });
+        if(!Array.isArray(d.packing)) d.packing = [];
+        const packIds = {};
+        d.packing.forEach(t=>{ packIds[t.id] = 1; });
+        DEFAULT_DATA.packing.forEach(t=>{ if(!packIds[t.id]) d.packing.push(JSON.parse(JSON.stringify(t))); });
+        NOTE_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(it.id === u.id && it.note === u.old) it.note = u.now; }); });
+        });
+        DAY_NOTE_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ if(day.date === u.date && day.note === u.old) day.note = u.now; });
+        });
+        NEW_ITEMS.forEach(ni=>{
+          d.days.forEach(day=>{
+            if(day.date === ni.date && !day.items.some(it=>it.id === ni.item.id)){
+              day.items.push(JSON.parse(JSON.stringify(ni.item)));
+            }
+          });
+        });
+        /* v33: Day3 下午精简 —— 删除「罗森河口湖站前店」「新倉山登台阶」；v34 再删「日川時計店」（改不打车方案）；v45 再删「町役場前罗森」（改 ふるや 方案） */
+        const DELETE_ITEMS = [
+          {date:'11.20', id:'c7'},
+          {date:'11.20', id:'c14'},
+          {date:'11.20', id:'c13'},
+          {date:'11.20', id:'c12'},
+          {date:'11.20', id:'c15'},
+        ];
+        DELETE_ITEMS.forEach(di=>{
+          d.days.forEach(day=>{ if(day.date === di.date){ day.items = (day.items||[]).filter(it => it.id !== di.id); } });
+        });
+        TIME_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(it.id === u.id && it.time === u.old) it.time = u.now; }); });
+        });
+        TITLE_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(it.id === u.id && it.title === u.old) it.title = u.now; }); });
+        });
+        /* 餐厅人均价格：仅在 note 还没有 💰 前缀时追加；先清掉旧的 ¥ 数字前缀（¥5,000-7,000 等） */
+        if(typeof PRICE_UPDATES !== 'undefined' && PRICE_UPDATES){
+          // 清理老用户已有的旧前缀（如 "💰 人均 ¥5,000-7,000（...）｜"），避免重复
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{
+            if(typeof it.note === 'string' && it.note.startsWith('💰 人均 ¥')){
+              it.note = it.note.replace(/^💰 人均 ¥[\d,]+(-[\d,]+)?（[^）]*）｜/, '');
+            }
+          }); });
+          PRICE_UPDATES.forEach(u=>{
+            d.days.forEach(day=>{ (day.items||[]).forEach(it=>{
+              if(it.id === u.id && typeof it.note === 'string' && it.note.indexOf('💰 人均') !== 0){
+                it.note = u.prefix + it.note;
+              }
+            }); });
+          });
+        }
+        /* 待办事项文案升级：仅当你没改过该条时才更新 */
+        const TODO_UPDATES = [
+          {id:'t4', old:'富士回游号 / 高速巴士往返票 11.20', now:'预约高速巴士 新宿 → 山中湖旭日丘（11.20 07:15 班次）', now_tag:'⚠️ 全指定席、发车前 1 个月开放预约；网上支付约 ¥2,350 比窗口便宜；红叶季极易满席。票要买到「山中湖旭日丘」不是河口湖', urgent:true},
+          {id:'t5', old:'日山寿喜烧预约 11.20 晚餐', now:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:00 预约', now_tag:'TableCheck 网上预约或电话 070-3206-1079；只有 12 席，务必提前', urgent:true},
+        ];
+        TODO_UPDATES.push({id:'t12', old:'预约富士回游 48 号 下吉田 → 新宿（11.20 17:53）', now:'预约高速巴士 河口湖站 → 新宿（11.20 18:10 班次）', now_tag:'红叶季满席常见，建议提前网上预约；也可河口湖站窗口现场买。备选 18:20 / 18:40 班次', urgent:false});
+        TODO_UPDATES.push({id:'t5', old:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:00 预约', now:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:45 预约', now_tag:'TableCheck 网上预约或电话 070-3206-1079；只有 12 席、L.O. 21:30，务必提前；迟到 15 分钟以上座位可能被取消', urgent:true});
+        TODO_UPDATES.push({id:'t5', old:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:15 预约', now:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:45 预约', now_tag:'TableCheck 网上预约或电话 070-3206-1079；只有 12 席、L.O. 21:30，务必提前；迟到 15 分钟以上座位可能被取消', urgent:true});
+        TODO_UPDATES.push({id:'t5', old:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:30 预约', now:'WAGYU SUKIYAKI 極〜GOKU〜 銀座 11.20 20:45 预约'});
+        TODO_UPDATES.push({id:'t4', old:'预约高速巴士 新宿 → 山中湖旭日丘（11.20 07:15 班次）', now:'预约高速巴士 新宿 → 山中湖旭日丘（11.20 08:15 班次）'});
+        TODO_UPDATES.push({id:'t13', old:'预约 KABA BUS 山中湖水陆两用巴士（11.20 11:30 班次）', now:'预约 KABA BUS 山中湖水陆两用巴士（11.20 13:00 班次）'});
+        TODO_UPDATES.push({id:'t13', text:'预约 KABA BUS 山中湖水陆两用巴士（11.20 13:00 班次）', tag:'⚠️ 提前整整 1 个月开放预约，红叶季极抢手 · cn.kaba-bus.com / 0555-73-8181', urgent:true});
+        TODO_UPDATES.forEach(u=>{
+          d.todos.forEach(t=>{ if(t.id===u.id && t.text===u.old){ t.text=u.now; t.tag=u.now_tag; if(typeof u.urgent==='boolean') t.urgent=u.urgent; } });
+        });
+        /* 位置/坐标升级：仅当你没改过时更新为最新地址 */
+        const LOC_UPDATES = [
+          {id:'b1', old_loc:'新桥站转百合鸥线', now_loc:'人形町站 → 新桥站转百合鸥线', now_geo:'人形町駅'},
+          {id:'b11b', old_loc:'中央区银座 5-6-5 NOCO Building 1F/2F', now_loc:'中央区银座 2-2-14 マロニエゲート銀座1 4F', now_geo:'マロニエゲート銀座1'},
+          {id:'d6', old_loc:'秋叶原', now_loc:'新宿区新宿 3-6-12', now_geo:'おでん屋たけし 新宿三丁目店'},
+          {id:'d6', old_loc:'千代田区外神田 3-1-3 秋叶原 PARK ビル 1F', now_loc:'新宿区新宿 3-6-12', now_geo:'おでん屋たけし 新宿三丁目店'},
+          {id:'d7', old_loc:'秋叶原 → 小伝馬町', now_loc:'新宿三丁目 → 小伝馬町'},
+        {id:'e3', old_loc:'原宿', now_loc:'涩谷区神宫前 4-31-10 YM スクウェア原宿 B1F', now_geo:'ローストビーフ大野 原宿店'},
+        {id:'e8', old_loc:'中心街', now_loc:'港区六本木 5-9-17 藤森ビル 1F', now_geo:'ジョウモン 六本木店'},
+        {id:'b9', old_loc:'银座三越', now_loc:'中央区银座 4-6-16 银座三越新馆 11F', now_geo:'鰻ひつまぶし備長 三越銀座店'},
+        {id:'b9', old_loc:'銀座三越', now_loc:'中央区银座 4-6-16 银座三越新馆 11F', now_geo:'鰻ひつまぶし備長 三越銀座店'},
+        {id:'e5', old_loc:'场馆以票面为准', now_loc:'涩谷 BEAM 画廊 4F（涩谷站徒步 5 分钟）', now_geo:'渋谷ビームギャラリー'},
+        {id:'c8', old_loc:'人形町 → 小伝馬町', now_loc:'银座 → 小伝馬町', now_geo:'東京都中央区日本橋小伝馬町16-6'},
+        {id:'c1', old_loc:'高速巴士 / 富士回游号', now_loc:'新宿〜富士五湖线（京王 / 富士急）', now_geo:'バスタ新宿'},
+        {id:'c2', old_loc:'河口湖站 → 山中湖', now_loc:'山中湖旭日丘巴士站 · 租赁点', now_geo:'山中湖 旭日丘'},
+          {id:'a4', old_loc:'马喰横山 → 新宿转中央线', now_loc:'水道桥站 → JR 中央线直达吉祥寺', now_geo:'水道橋駅'},
+        ];
+        LOC_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ if(it.id === u.id && it.loc === u.old_loc){ it.loc = u.now_loc; it.geo = u.now_geo; } }); });
+        });
+        /* v26: Day3 晚餐餐厅整套替换 日山 → WAGYU SUKIYAKI 極 GOKU 銀座 */
+        const SWAP_UPDATES = [
+          {
+            id:'c11', old_geo:'すき焼き 日山 日本橋人形町', match:['日山','HIYAMA','人形町','19:00 到新宿','预约 20:00 场次'], now_time:'20:15',
+            now_title:'和牛寿喜烧 · WAGYU SUKIYAKI 極〜GOKU〜 銀座',
+            now_loc:'中央区银座 8-2-14 银座竜王ビル 1F', now_geo:'WAGYU SUKIYAKI 極 銀座',
+            now_note:'💰 人均 ¥290-390（含税，150g/250g 套餐）｜可以一人一锅吃 A5 和牛寿喜烧的特色店，Google 4.9 分、2025.6.26 开业的人气新店。营业 10:30-22:00（全年无休）。只有 12 席的小店，**务必提前预约**（TableCheck 网上预约 / 电话 070-3206-1079）。套餐均含时令蔬菜 + 生鸡蛋 + 米饭 + 味噌汤 + **松露鸡蛋拌饭，米饭/味噌汤/鸡蛋全部免费续**：国产 A5 和牛 100g ¥240｜150g ¥290（推荐）｜250g ¥390｜1 磅 ¥540。汤底是偏甜酱油基底，很好入口；餐后松露蛋拌饭是招牌收尾。🍽 从新宿出发：丸之内线 新宿 → 银座 约 25 分钟，或 JR 山手线/中央线 新宿 → 有乐町 约 20 分钟再步行 8 分钟；**用银座站 C2 出口最近**（也可新桥站银座口 / 内幸町站 309m）。🚉 バスタ新宿约 20:10 到站 → 丸之内线 新宿 → 银座 约 20 分钟（或 JR 到有乐町 20 分钟 + 步行 8 分钟），**20:35-20:45 可到店，20:45 场次刚好**（🚕 想更稳就バスタ新宿直接打车去银座，约 15-20 分钟、¥1,500-2,000 ≈ ¥75-100）。⚠️ 只有 12 席、L.O. 21:30、22:00 闭店，**迟到 15 分钟以上座位可能被取消**；万一红叶回廊拍超时或巴士晚点，立刻电话 070-3206-1079 说明。💳 可用信用卡（VISA/Master/JCB），**不接受电子货币与扫码支付**，备好实体卡。',
+          },
+          {
+            id:'c6', old_geo:'河口湖もみじ回廊', match:['红叶回廊','もみじ回廊','なぎさの木公园'], now_time:'15:45', now_type:'sight',
+            now_title:'步行回河口湖站 · 赶 16:00 巴士',
+            now_loc:'小作 河口湖店 → 河口湖站（步行 17 分钟）', now_geo:'河口湖駅',
+            now_note:'🚶 **15:35 前离开小作**，沿国道 139 号走回河口湖站约 17 分钟（15:52 到）；**这段不打车也来得及**（15:52 到站 → 16:00 上巴士，中间 8 分钟刚好够走到 6 号站牌）。⏱ **站前扫街改到傍晚回程后再逛**（已挪到 17:45 那张卡，那时有 25 分钟）：河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 注意它是**公寓式旅馆、不是景点**，房间阳台和窗户正对富士山，只能在外面看一眼外观，或记下地址当作下次住河口湖的备选（携程 4.4 分、距站 190m、带厨房可做饭）。站前还有河口湖温泉、ほうとう不動（站前店）等。🎒 站前有投币储物柜，背包存了再轻装活动。🚏 **16:00 整在站前 6 号站牌搭 Red Line 周游巴士**去红叶回廊（约 20 分钟，16:20 到）——这班不能错过，晚一班就少掉整段黄昏光。✅ 全程步行＋周游巴士，**今天一整天都不用打车**。',
+          },
+          {
+            id:'c7', old_geo:'大石公園', match:['大石公园','大石公園','河口湖北岸'], now_time:'14:55', now_type:'sight',
+            now_title:'罗森 河口湖站前店 · 黑色挡板机位',
+            now_loc:'山梨县南都留郡富士河口湖町船津（河口湖站前）', now_geo:'ローソン 河口湖駅前店',
+            now_note:'📷 网红「便利店 + 富士山」机位之一，但 **2024 年起店前架起了约 2.5 米高的黑色挡板**——因为游客涌入、站到马路上拍照造成「观光公害」，当地被迫加装。所以现在**站前店基本拍不到富士山同框**，隔着挡板意思一下、买瓶热饮打个卡就可以撤。⚠️ 绝对不要站到车道上：现场有警备员和志愿者驱离，富士河口湖町对违规拍摄已经很敏感，也有过罚款案例。🚶 真正的机位在下一站「ローソン 富士河口湖町役場前店」，步行约 12-15 分钟（或搭河口湖周游巴士、打车 5 分钟）。',
+          },
+          {
+            id:'c9', old_geo:'大石公園', match:['大石公园','大石公園','湖畔日落','富士山剪影'], now_time:'16:20', now_type:'night',
+            now_title:'忠灵塔展望台 · 富士山日落',
+            now_loc:'新倉山淺間公園 展望台', now_geo:'新倉山浅間公園 忠霊塔',
+            now_note:'🌇 **今天最值得守的一刻**：11 月下旬日落约 16:40，夕阳把富士山染成金红色，展望台正对富士山、五重塔在左下角做前景。等到 16:55 左右天空转成粉紫色再走。📷 展望台狭窄，三脚架不好架，手持 + 栏杆借力更实际；长焦 70-200mm 压缩山体，手机开 HDR。⏱ **17:00 准时开始下山**（台阶无灯，天黑后危险），10 分钟到山脚，再步行约 12-15 分钟到**下吉田站**搭 17:53 的富士回游 48 号。🍁 到得早、天色尚亮的话，可先在新倉山境内浅间神社参道上拍红叶。',
+          },
+          {
+            id:'c10', old_geo:'河口湖駅', match:['末班高速巴士','约 2 小时到新宿'], now_time:'17:53', now_type:'transport',
+            now_title:'返回东京 · 富士回游 48 号（末班）',
+            now_loc:'下吉田站 17:53 → 新宿 19:40', now_geo:'下吉田駅',
+            now_note:'🎫 **富士回游 48 号（末班）**：河口湖 17:41 发 → 富士山 17:49 → **下吉田 17:53** → 新宿 19:40，全程约 1 小时 47 分，大月并结、无需换乘。💰 单程 ¥4,200/人（≈¥210，含特急券）。⚠️ **11.20 是周五：上行平日只有 14:08 / 14:58 / 16:48 / 17:41 四班**，48 号是末班，**全车指定席、必须提前预约**（发车前 1 个月开放，红叶季必满）。下吉田是小站，上车前确认站台方向与车厢号。🚌 没抢到就改高速巴士：富士山站 17:59 / 18:14 / 18:29 发 → バスタ新宿约 20:00-20:30（¥2,300-2,600/人）；或河口湖站 18:00 / 18:10 / 18:20 发。⚠️ 计划 B 会晚到 20-50 分钟，GOKU 要相应再往后推。',
+          },
+          {
+            id:'c8', old_geo:'東京都中央区日本橋小伝馬町16-6', match:['GOKU 营业到 22:00','21:30 前收尾'], now_time:'22:00', now_type:'hotel',
+            now_title:'回民宿',
+            now_loc:'银座 → 小伝馬町', now_geo:'東京都中央区日本橋小伝馬町16-6',
+            now_note:'日比谷线 银座 → 小伝馬町**直达约 5 分钟**（无需换乘），出站步行 3 分钟到家；比原来去人形町更近。GOKU 20:45 入店、L.O. 21:30，21:50 前收尾，约 22:00 到家。',
+          },
+          {
+            id:'c6', old_geo:'河口湖駅', match:['拍完罗森回来再补给','Fuji Scenic House 73'], now_time:'15:45', now_type:'sight',
+            now_title:'步行回河口湖站 · 赶 16:00 巴士',
+            now_loc:'小作 河口湖店 → 河口湖站（步行 17 分钟）', now_geo:'河口湖駅',
+            now_note:'🚶 **15:35 前离开小作**，沿国道 139 号走回河口湖站约 17 分钟（15:52 到）；**这段不打车也来得及**（15:52 到站 → 16:00 上巴士，中间 8 分钟刚好够走到 6 号站牌）。⏱ **站前扫街改到傍晚回程后再逛**（已挪到 17:45 那张卡，那时有 25 分钟）：河口湖站本身就是复古木造站房，站前广场就有机位；**Fuji Scenic House 73（富士山景 73 号公寓，船津 3647-8）**就在车站步行 1-2 分钟处——⚠️ 注意它是**公寓式旅馆、不是景点**，房间阳台和窗户正对富士山，只能在外面看一眼外观，或记下地址当作下次住河口湖的备选（携程 4.4 分、距站 190m、带厨房可做饭）。站前还有河口湖温泉、ほうとう不動（站前店）等。🎒 站前有投币储物柜，背包存了再轻装活动。🚏 **16:00 整在站前 6 号站牌搭 Red Line 周游巴士**去红叶回廊（约 20 分钟，16:20 到）——这班不能错过，晚一班就少掉整段黄昏光。✅ 全程步行＋周游巴士，**今天一整天都不用打车**。',
+          },
+          {
+            id:'c13', old_geo:'日川時計店', match:['新倉山','70-200mm'], now_time:'16:00', now_type:'sight',
+            now_title:'日川時計店 · 街道正对富士山',
+            now_loc:'山梨县富士吉田市本町 2-4-1 一带', now_geo:'日川時計店',
+            now_note:'📷 又一个爆红机位：最普通的商店街一路延伸，**正中央正对着巨大的富士山**，电线杆、信号灯、店铺招牌层层叠叠做前景，超现实感拉满。🚕 交通：从罗森町役場前**打车约 12 分钟、¥1,800-2,200（两人分摊很划算）**；公交要绕回河口湖站换车至少 40 分钟，时间不够。也可从下吉田站步行约 10 分钟。⚠️ **现场有警备员维持秩序，绝对不能站到马路中央**，只能在人行道上拍；已多次发生游客冲出车道被劝离，当地设有中英日韩文告示牌。📷 器材：手机广角拍不全，**70-200mm 长焦压缩感最好**（手机开 2x-3x 也行），人站侧边、相机贴人行道边缘。⏱ 停留 20 分钟，16:20 准时上车打车去红叶回廊（约 30 分钟）。',
+          },
+          {
+            id:'c9', old_geo:'新倉山浅間公園 忠霊塔', match:['忠灵塔','新倉山'], now_time:'16:20', now_type:'night',
+            now_title:'河口湖红叶回廊 · 夜枫点灯',
+            now_loc:'山梨县南都留郡富士河口湖町河口 · 梨川沿岸', now_geo:'河口湖もみじ回廊',
+            now_note:'🍁 **2026 富士河口湖红叶祭 11.07-11.29，正好覆盖今天**！主会场就是红叶回廊：梨川沿岸约 150 棵枫树织成红色隧道，免费入场、24 小时开放。🚏 **交通（全程不打车）**：在**河口湖站前 6 号站牌**搭 **Red Line 周游巴士**（往河口湖北岸・紅葉回廊方向）约 20 分钟 → **「久保田一竹美術館」站**下车，步行 2-5 分钟即到；单程约 ¥200-400/人（≈¥10-20 含税），只坐这一趟买单程即可，不必买 ¥1,500 一日券。⏱ **节奏：16:20 到 → 16:20-16:40 先抢黄昏暖光**（红叶＋富士山同框，斜光的颜色比正午平光好看太多）→ **16:40 日落点灯** → 16:50-17:15 是「蓝调时刻」，天空深蓝、灯刚亮，是全场最好的 25 分钟 → 17:15 收工（把蓝调时刻拍满）。✅ 15:40-16:20 那段平光已经砍掉了，体力全留给点灯后——**一分钟都不浪费在普通光线上**。📷 **夜枫一定要走上木桥拍**——灯光是从桥上打下来的，站在步道上拍不出效果；桥上能同时拍到枫红隧道 + 底下落叶地毯。🎪 会场旁有美食摊贩与手作市集（9:00-19:00）。⚠️ 夜间常低于 5°C，厚外套 + 毛帽 + 围巾全上；人流中三脚架不好用，手持 + 拉高 ISO 更实际。🚌 **回程：17:25-17:35 在同一站牌搭 Red Line 回河口湖站**（约 20 分钟，17:45 前后到站），接着**站前扫街 + 便利店补给当晚餐**（见 17:45 那张卡，时间很充裕），再搭 18:10 的高速巴士。⚠️ 红叶季周游巴士极挤、末班约 18:00，上车前务必先拿一张时刻表确认末班；万一挤不上，就改搭 18:20 高速巴士（新宿 20:20），GOKU 相应推迟到 21:00。',
+          },
+          {
+            id:'c10', old_geo:'下吉田駅', match:['富士回游 48 号','下吉田 17:53'], now_time:'18:10', now_type:'transport',
+            now_title:'返回东京 · 高速巴士 河口湖站 → 新宿',
+            now_loc:'河口湖站 18:10 → バスタ新宿 约 20:10', now_geo:'河口湖駅',
+            now_note:'🚌 **高速巴士（富士急 / 京王）**：河口湖站 18:10 发 → バスタ新宿约 20:10，车程约 2 小时，¥2,300-2,600/人（≈¥115-130），比富士回游便宜一半。🎫 备选班次 **18:20 / 18:40**（末班 20:15）——17:45 周游巴士回到河口湖站，买完炸物 18:05 回站，只有 5 分钟上车；**回廊拍满 17:15 也完全来得及**，18:10 发车、20:10 到新宿，GOKU 20:45 不受影响。⚠️ 红叶季满席常见，建议提前网上预约，也可在河口湖站窗口现场买。🍱 **晚餐在站前便利店买好带上车**（饭团、热饮、山梨限定信玄饼冰淇淋），车上吃味道不重的手持食物（禁止饮酒）；原来的炸物店已取消，不用再赶。车上有卫生间；GOKU 已改约 20:45。⚠️ **不打车的话时间紧**：20:10 到バスタ新宿 → 丸之内线到银座约 20 分钟 → 步行 8 分钟 = 20:38 到店，只剩 7 分钟；**巴士晚点请立刻电话 070-3206-1079 说明**，或改约 21:00（L.O. 21:30 前入座即可）。',
+          },
+          {
+            id:'c11', old_geo:'WAGYU SUKIYAKI 極 銀座', match:['新宿 19:40 到站','20:15 场次刚好','下吉田那班车'], now_time:'20:45', now_type:'food',
+            now_title:'和牛寿喜烧 · WAGYU SUKIYAKI 極〜GOKU〜 銀座',
+            now_loc:'中央区银座 8-2-14 银座竜王ビル 1F', now_geo:'WAGYU SUKIYAKI 極 銀座',
+            now_note:'💰 人均 ¥290-390（含税，150g/250g 套餐）｜可以一人一锅吃 A5 和牛寿喜烧的特色店，Google 4.9 分、2025.6.26 开业的人气新店。营业 10:30-22:00（全年无休）。只有 12 席的小店，**务必提前预约**（TableCheck 网上预约 / 电话 070-3206-1079）。套餐均含时令蔬菜 + 生鸡蛋 + 米饭 + 味噌汤 + **松露鸡蛋拌饭，米饭/味噌汤/鸡蛋全部免费续**：国产 A5 和牛 100g ¥240｜150g ¥290（推荐）｜250g ¥390｜1 磅 ¥540。汤底是偏甜酱油基底，很好入口；餐后松露蛋拌饭是招牌收尾。🍽 从新宿出发：丸之内线 新宿 → 银座 约 25 分钟，或 JR 山手线/中央线 新宿 → 有乐町 约 20 分钟再步行 8 分钟；**用银座站 C2 出口最近**（也可新桥站银座口 / 内幸町站 309m）。🚉 バスタ新宿约 20:10 到站 → 丸之内线 新宿 → 银座 约 20 分钟（或 JR 到有乐町 20 分钟 + 步行 8 分钟），**20:35-20:45 可到店，20:45 场次刚好**（🚕 想更稳就バスタ新宿直接打车去银座，约 15-20 分钟、¥1,500-2,000 ≈ ¥75-100）。⚠️ 只有 12 席、L.O. 21:30、22:00 闭店，**迟到 15 分钟以上座位可能被取消**；万一红叶回廊拍超时或巴士晚点，立刻电话 070-3206-1079 说明。💳 可用信用卡（VISA/Master/JCB），**不接受电子货币与扫码支付**，备好实体卡。',
+          },
+          {
+            id:'c8', old_geo:'東京都中央区日本橋小伝馬町16-6', match:['GOKU L.O. 21:30','21:45 前收尾'], now_time:'22:00', now_type:'hotel',
+            now_title:'回民宿',
+            now_loc:'银座 → 小伝馬町', now_geo:'東京都中央区日本橋小伝馬町16-6',
+            now_note:'日比谷线 银座 → 小伝馬町**直达约 5 分钟**（无需换乘），出站步行 3 分钟到家；比原来去人形町更近。GOKU 20:45 入店、L.O. 21:30，21:50 前收尾，约 22:00 到家。',
+          },
+          {
+            id:'c12', old_geo:'ローソン 富士河口湖町役場前店', match:['拍完打车去日川時計店','停留 20-25 分钟'], now_time:'15:20', now_type:'sight',
+            now_title:'ローソン 富士河口湖町役場前店 · 真正的便利店机位',
+            now_loc:'山梨县南都留郡富士河口湖町船津（町役場前）', now_geo:'ローソン 富士河口湖町役場前店',
+            now_note:'📷 **现在真正能拍到「便利店 + 富士山」的机位**！从河口湖站步行约 12-15 分钟（或搭河口湖周游巴士）。这家店前没有挡板，屋顶 + 富士山 + LAWSON 招牌的经典构图一次到位，白天顺光、傍晚侧光都好看。⚠️ 同样热门，**只能站在人行道上拍，绝不能进车道**；路口有警备员，高峰期要排队（每人给的拍摄时间很短，先想好构图再上前）。🎒 顺手补给：热饮、饭团、山梨限定信玄饼冰淇淋。⏱ 停留 30 分钟（15:20-15:50），然后原路走回河口湖站约 15 分钟，16:10 在站前搭 Red Line 周游巴士去红叶回廊。',
+          },
+          {
+            id:'c4', old_geo:'山中湖', match:['山中湖畔午餐','湖畔餐厅','山中湖畔','红叶回廊'], now_time:'15:00',
+            now_title:'山梨乡土料理 · 甲州ほうとう小作 河口湖店',
+            now_loc:'山梨县南都留郡富士河口湖町船津 1638-1', now_geo:'甲州ほうとう小作 河口湖店',
+            now_note:'💰 人均 ¥70-110（含税，招牌南瓜ほうとう ¥1,400 + 小菜/饮品）｜山梨最有名的乡土料理「ほうとう（馎饦）」专门店，门口大水车很好认。味噌汤底里炖着整块绵密南瓜 + 红薯、芋头、白菜、香菇和手打宽面，铁锅现煮、一人份量极大（女生两人分一锅也够）。必点：**かぼちゃほうとう（南瓜馎饦）¥1,400｜肉ほうとう（猪肉）¥1,400｜あずきほうとう（红豆）¥1,400｜もつ煮（炖内脏）¥550｜天ぷら定食**；有英文菜单，店内伴手礼区卖自社味噌、ほうとう 生面/速食装。营业 11:00-20:00（L.O. 19:30），全年无休。🚶 交通：14:45 到站后**从河口湖站步行约 17 分钟**（沿国道 139 号往北）；行李多或风大建议门口打车，5 分钟 ¥1,000 上下（约 ¥50）。🍁 饭后怎么走：**15:35 前一定离开**——原路步行 17 分钟回站（15:52 到），**不打车也来得及**；16:00 要准时在站前 6 号站牌搭 Red Line 去红叶回廊。⏱ **今天只给这顿 35 分钟**：ほうとう 铁锅上桌就能吃，两人点 1-2 锅（女生两人分一锅也够），节奏抓好 15:35 前收得了。⚠️ **不接受预约**，只能现场取号排队；红叶季 12:00-13:30 是地狱级人潮（等 1-2 小时），**我们 15:00 到正好是离峰，通常不用等**——这是把午餐挪到下午的额外好处。等位时先把伴手礼买齐。💳 现金 / 信用卡可用，**不支持电子钱包与扫码支付**，备好实体卡。',
+          },
+          {
+            id:'c9', old_geo:'河口湖もみじ回廊', match:['打车约 30 分钟','日川時計店','16:50 到正好赶上点灯','17:35 准时打车回河口湖站','16:30 到'], now_time:'16:20', now_type:'night',
+            now_title:'河口湖红叶回廊 · 夜枫点灯',
+            now_loc:'山梨县南都留郡富士河口湖町河口 · 梨川沿岸', now_geo:'河口湖もみじ回廊',
+            now_note:'🍁 **2026 富士河口湖红叶祭 11.07-11.29，正好覆盖今天**！主会场就是红叶回廊：梨川沿岸约 150 棵枫树织成红色隧道，免费入场、24 小时开放。🚏 **交通（全程不打车）**：在**河口湖站前 6 号站牌**搭 **Red Line 周游巴士**（往河口湖北岸・紅葉回廊方向）约 20 分钟 → **「久保田一竹美術館」站**下车，步行 2-5 分钟即到；单程约 ¥200-400/人（≈¥10-20 含税），只坐这一趟买单程即可，不必买 ¥1,500 一日券。⏱ **节奏：16:20 到 → 16:20-16:40 先抢黄昏暖光**（红叶＋富士山同框，斜光的颜色比正午平光好看太多）→ **16:40 日落点灯** → 16:50-17:15 是「蓝调时刻」，天空深蓝、灯刚亮，是全场最好的 25 分钟 → 17:15 收工（把蓝调时刻拍满）。✅ 15:40-16:20 那段平光已经砍掉了，体力全留给点灯后——**一分钟都不浪费在普通光线上**。📷 **夜枫一定要走上木桥拍**——灯光是从桥上打下来的，站在步道上拍不出效果；桥上能同时拍到枫红隧道 + 底下落叶地毯。🎪 会场旁有美食摊贩与手作市集（9:00-19:00）。⚠️ 夜间常低于 5°C，厚外套 + 毛帽 + 围巾全上；人流中三脚架不好用，手持 + 拉高 ISO 更实际。🚌 **回程：17:25-17:35 在同一站牌搭 Red Line 回河口湖站**（约 20 分钟，17:45 前后到站），接着**站前扫街 + 便利店补给当晚餐**（见 17:45 那张卡，时间很充裕），再搭 18:10 的高速巴士。⚠️ 红叶季周游巴士极挤、末班约 18:00，上车前务必先拿一张时刻表确认末班；万一挤不上，就改搭 18:20 高速巴士（新宿 20:20），GOKU 相应推迟到 21:00。',
+          },
+          {
+            id:'c10', old_geo:'河口湖駅', match:['红叶回廊','打车回站','富士回游','17:53','末班高速巴士'], now_time:'18:10', now_type:'transport',
+            now_title:'返回东京 · 高速巴士 河口湖站 → 新宿',
+            now_loc:'河口湖站 18:10 → バスタ新宿 约 20:10', now_geo:'河口湖駅',
+            now_note:'🚌 **高速巴士（富士急 / 京王）**：河口湖站 18:10 发 → バスタ新宿约 20:10，车程约 2 小时，¥2,300-2,600/人（≈¥115-130），比富士回游便宜一半。🎫 备选班次 **18:20 / 18:40**（末班 20:15）——17:45 周游巴士回到河口湖站，买完炸物 18:05 回站，只有 5 分钟上车；**回廊拍满 17:15 也完全来得及**，18:10 发车、20:10 到新宿，GOKU 20:45 不受影响。⚠️ 红叶季满席常见，建议提前网上预约，也可在河口湖站窗口现场买。🍱 **晚餐在站前便利店买好带上车**（饭团、热饮、山梨限定信玄饼冰淇淋），车上吃味道不重的手持食物（禁止饮酒）；原来的炸物店已取消，不用再赶。车上有卫生间；GOKU 已改约 20:45。⚠️ **不打车的话时间紧**：20:10 到バスタ新宿 → 丸之内线到银座约 20 分钟 → 步行 8 分钟 = 20:38 到店，只剩 7 分钟；**巴士晚点请立刻电话 070-3206-1079 说明**，或改约 21:00（L.O. 21:30 前入座即可）。',
+          },
+          {
+            id:'c15', old_geo:'お惣菜の店 ふるや', match:['ふるや','可乐饼','鳕鱼饼','炸物'], now_time:'17:50', now_type:'food',
+            now_title:'お惣菜の店 ふるや · 河口湖第一炸物',
+            now_loc:'山梨県南都留郡富士河口湖町船津4120-1（河口湖站步行 5 分钟）', now_geo:'お惣菜の店 ふるや',
+            now_note:'🥇 **河口湖 Tabelog 炸物类第一名**、开了 20 多年的外带老店，只卖五种炸物、做到极致：可乐饼 **¥90**（≈¥4.5）起、炸土豆饼、**鳕鱼饼（炸银鳕鱼，最多人推）**、炸猪排、火腿排、竹筴鱼；人均 ¥999 以下（≈¥50 含税）。下单后才现炸，报纸＋橡皮筋一包，很昭和。🕐 **营业 10:00-14:00 / 16:00-19:00，卖完即止**——我们排在看完红叶回廊之后，落在 16:00-19:00 这个时段内，时间对得上；11.20 是周五，正常营业（定休日多为周二／周日）。📞 **建议上午先电 0555-72-0862 预约 17:50 取货**（店家接受预约），能省掉排队——这一年里最挤的红叶季，排队是最大的风险。💳 **只收现金**：信用卡、电子货币、QR 支付全不接受，备好日元现钞。🍱 **仅外带、没有座位**；买完直接带上 18:10 的高速巴士当晚餐（车上可以吃味道不重的手持食物，禁止饮酒）。🚶 从河口湖站步行 5 分钟／约 350 米。⚠️ **时间很紧**：17:45 周游巴士到站 → 17:50 到店 → **18:05 必须动身走回车站**赶 18:10 的巴士。若现场排队或已卖完，立刻放弃、改去站前便利店买饭团，千万别误车——误车就改 18:20／18:40（末班 20:15 前都有车），GOKU 要电话顺延。',
+          },
+        ];
+        SWAP_UPDATES.forEach(u=>{
+          d.days.forEach(day=>{ (day.items||[]).forEach(it=>{
+            if(it.id !== u.id) return;
+            // 多条件兜底：geo 匹配 或 title/loc/note 里还残留旧店名，任一命中即整套替换
+            const geoHit = it.geo === u.old_geo;
+            const txt = (it.title||'') + (it.loc||'') + (it.note||'');
+            const nameHit = (u.match||[]).some(k => txt.indexOf(k) !== -1);
+            if(geoHit || nameHit){
+              it.title = u.now_title; it.loc = u.now_loc; it.geo = u.now_geo; it.note = u.now_note;
+              if(u.now_time) it.time = u.now_time;
+              if(u.now_type) it.type = u.now_type;
+            }
+          }); });
+        });
+        /* v60: Day3（11.20）全面重排 —— 以 DEFAULT 为准：移除 KABA、小作改ほうとう不動駅前店、保留炸物店、全程不打车 */
+        (function(){
+          const src = DEFAULT_DATA.days.find(x=>x.date==='11.20');
+          if(src){ d.days.forEach(day=>{ if(day.date==='11.20'){ day.items = JSON.parse(JSON.stringify(src.items)); day.note = src.note; day.theme = src.theme; } }); d.todos=(d.todos||[]).filter(t=>t.id!=='t13'); }
+        })();
+        /* v61: Day4（11.21）秋叶原 7 店大改版 —— 以 DEFAULT 为准：上午压缩、东京塔改远眺、新增 7 家店、晚餐推迟到 21:20 */
+        (function(){
+          const src4 = DEFAULT_DATA.days.find(x=>x.date==='11.21');
+          if(src4){ d.days.forEach(day=>{ if(day.date==='11.21'){ day.items = JSON.parse(JSON.stringify(src4.items)); day.note = src4.note; day.theme = src4.theme; } }); }
+        })();
+        /* v63: Day2（11.19）上午改数码宝贝圣地巡礼路线 —— 以 DEFAULT 为准：台场段重排、Bic Camera 拉长到 80 分钟 */
+        (function(){
+          const src2 = DEFAULT_DATA.days.find(x=>x.date==='11.19');
+          if(src2){ d.days.forEach(day=>{ if(day.date==='11.19'){ day.items = JSON.parse(JSON.stringify(src2.items)); day.note = src2.note; day.theme = src2.theme; } }); }
+        })();
+        d.days.forEach(day=>{ (day.items||[]).sort((a,b)=> String(a.time).localeCompare(String(b.time))); });
+        // v19: 行程里取消勾选完成态，清掉旧用户已勾选的位置
+        d.days.forEach(day=>{ (day.items||[]).forEach(it=>{ delete it.done; }); });
+        const wxMap = {};
+        DEFAULT_DATA.days.forEach(day=>{ if(day.wx) wxMap[day.date] = {wx: day.wx, wear: day.wear}; });
+        d.days.forEach(day=>{ if(wxMap[day.date]){ if(!day.wx) day.wx = JSON.parse(JSON.stringify(wxMap[day.date].wx)); if(!day.wear) day.wear = wxMap[day.date].wear; } });
+        try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }catch(e){}
+      }
+      return d;
+    }
+    return null;
+  }catch(e){ return null; }
+}
+
+/* ================= 天气：实时预报（不写入 localStorage） ================= */
+let liveWx = {};   // { '11.18': {lo,hi,label,pop,live:true}, ... }
+
+function fetchWeather(){
+  var now = new Date();
+  var from = new Date(2026, 10, 11);   // 11.11 起进入 7 天预报窗口
+  var to   = new Date(2026, 10, 24);
+  if(now < from || now > to) return;
+  var base = 'https://api.open-meteo.com/v1/forecast?daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weathercode&timezone=Asia%2FTokyo&start_date=2026-11-18&end_date=2026-11-23';
+  var urls = [
+    base + '&latitude=35.6895&longitude=139.6917',   // 东京
+    base + '&latitude=35.4995&longitude=138.7567'    // 河口湖（Day3 山区）
+  ];
+  var codes = {0:'晴',1:'大致晴',2:'多云',3:'阴',45:'雾',48:'雾凇',51:'毛毛雨',53:'毛毛雨',55:'毛毛雨',56:'冻雨',57:'冻雨',61:'小雨',63:'中雨',65:'大雨',66:'冻雨',67:'冻雨',71:'小雪',73:'中雪',75:'大雪',77:'雪粒',80:'小阵雨',81:'阵雨',82:'强阵雨',85:'小阵雪',86:'阵雪',95:'雷雨',96:'雷雨冰雹',99:'雷雨冰雹'};
+  Promise.all(urls.map(function(u){ return fetch(u).then(function(r){ return r.json(); }); }))
+    .then(function(res){
+      var tk = res[0], fk = res[1];
+      if(!tk || !tk.daily || !tk.daily.time) return;
+      state.days.forEach(function(d){
+        var iso = '2026-11-' + d.date.slice(3);
+        var src = (d.date === '11.20' && fk && fk.daily && fk.daily.time) ? fk : tk;
+        var i = src.daily.time.indexOf(iso);
+        if(i < 0) return;
+        var pop = src.daily.precipitation_probability_max;
+        liveWx[d.date] = {
+          lo: Math.round(src.daily.temperature_2m_min[i]),
+          hi: Math.round(src.daily.temperature_2m_max[i]),
+          label: codes[src.daily.weathercode[i]] || '—',
+          pop: (pop && pop[i] != null) ? Math.round(pop[i]) : 0,
+          live: true
+        };
+      });
+      renderDay();
+    }).catch(function(){});
+}
+
+/* ================= 渲染 ================= */
+function renderAll(){ renderTodos(); renderPacking(); renderTabs(); renderDay(); }
+
+function renderTodos(){
+  const todos = state.todos || [];
+  const card = $('todoCard');
+  if(!todos.length){ card.style.display = 'none'; return; }
+  card.style.display = '';
+  const done = todos.filter(t=>t.done).length;
+  $('todoNum').textContent = done + ' / ' + todos.length;
+  $('todoBar').style.width = Math.round(done / todos.length * 100) + '%';
+  const open = state.todoOpen !== false;
+  $('todoBody').classList.toggle('closed', !open);
+  $('todoChev').style.transform = open ? '' : 'rotate(-90deg)';
+  $('todoBody').innerHTML = todos.map((t,i)=>`
+    <div class="todo-item ${t.done?'is-done':''}" data-i="${i}">
+      <button class="todo-check" aria-label="完成"></button>
+      <div class="todo-main">
+        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${esc(t.text)}</div>
+        ${t.tag ? `<div class="todo-tag">${esc(t.tag)}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderPacking(){
+  const pack = state.packing || [];
+  const card = $('packCard');
+  if(!pack.length){ card.style.display = 'none'; return; }
+  card.style.display = '';
+  const done = pack.filter(t=>t.done).length;
+  $('packNum').textContent = done + ' / ' + pack.length;
+  $('packBar').style.width = Math.round(done / pack.length * 100) + '%';
+  const open = state.packOpen !== false;
+  $('packBody').classList.toggle('closed', !open);
+  $('packChev').style.transform = open ? '' : 'rotate(-90deg)';
+  $('packBody').innerHTML = pack.map((t,i)=>`
+    <div class="todo-item ${t.done?'is-done':''}" data-i="${i}">
+      <button class="todo-check" aria-label="装包"></button>
+      <div class="todo-main">
+        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${esc(t.text)}</div>
+        ${t.tag ? `<div class="todo-tag">${esc(t.tag)}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderTabs(){
+  $('tabs').innerHTML = state.days.map((d,i)=>`
+    <button class="tab ${i===currentDay?'active':''}" data-i="${i}">
+      <span class="t1">Day ${i+1}</span>
+      <span class="t2">${esc(d.date)} ${esc(d.weekday)}</span>
+    </button>`).join('');
+}
+
+function renderDay(){
+  const d = state.days[currentDay];
+  const total = d.items.length;
+  const done = d.items.filter(x=>x.done).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  $('ov').innerHTML = `
+    <div class="ov-top">
+      <div class="ov-day">DAY ${currentDay+1} · ${esc(d.date)} ${esc(d.weekday)}</div>
+      <button class="ov-edit" data-act="editDay">✎ 编辑主题</button>
+    </div>
+    <div class="ov-theme">${esc(d.theme)}</div>
+    ${(function(){ const wx = liveWx[d.date] || d.wx; return wx ? `<div class="ov-wx"><span class="wx-t">🌡 ${wx.lo} ~ ${wx.hi}°C</span><span>· ${esc(wx.label)}</span><span>· ☔ ${wx.pop}%</span>${wx.live ? '<span class="wx-badge live">实时预报</span>' : '<span class="wx-badge ref">气候参考</span>'}</div>` : ''; })()}
+    <div class="ov-progress">
+      <div class="ov-bar"><i style="width:${pct}%"></i></div>
+      <div class="ov-num">${done} / ${total}</div>
+    </div>
+    ${d.wear ? `<div class="ov-wear">🧥 <b>穿搭</b>：${esc(d.wear)}</div>` : ''}
+    ${d.note ? `<div class="ov-note">💡 ${esc(d.note)}</div>` : ''}
+  `;
+
+  $('tl').innerHTML = d.items.map((it, idx)=>{
+    const t = TYPES[it.type] || TYPES.other;
+    return `
+    <div class="tl-row" data-idx="${idx}" data-id="${it.id}" style="animation-delay:${Math.min(idx*40,300)}ms">
+      <div class="tl-time">${esc(it.time)}</div>
+      <div class="tl-rail"><span class="tl-dot" style="--c:${t.color}">${t.icon}</span></div>
+      <div class="tl-card ${expandedIds.has(it.id)?'expanded':''}">
+        <div class="tl-top">
+          <div class="tl-info">
+            <div class="tl-title">${esc(it.title)}</div>
+            ${it.loc ? (it.geo ? `<a class="tl-loc" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(it.geo)}&travelmode=transit">📍 ${esc(it.loc)}<span class="nav-go">导航</span></a>` : `<div class="tl-loc">· ${esc(it.loc)}</div>`) : ''}
+          </div>
+          <button class="tl-chev" data-act="exp" aria-label="展开"></button>
+        </div>
+        <div class="tl-more">
+          ${it.note ? `<div class="tl-note">${esc(it.note)}</div>` : ''}
+          <div class="tl-acts">
+            ${it.geo ? `<button class="mini-btn" data-act="nav">🧭 地图导航</button>` : ''}
+            ${`<button class="mini-btn" data-act="xhs">📕 小红书</button>`}
+            <button class="mini-btn" data-act="edit">✏️ 编辑</button>
+            <button class="mini-btn danger" data-act="del">🗑 删除</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('') || `<div style="text-align:center;color:var(--ink3);font-size:13px;padding:30px 0">这一天还没有安排，点右下角 ＋ 添加</div>`;
+
+  $('tlEnd').textContent = total ? `— 今日共 ${total} 项 · 已完成 ${done} —` : '';
+}
+
+/* ================= Sheet 管理 ================= */
+const sheets = ['itemSheet','daySheet','tipsSheet','exportSheet','cfmSheet'].map($);
+let onCfmOk = null;
+
+function openSheet(el){
+  sheets.forEach(s => s.classList.remove('show'));
+  el.classList.add('show');
+  $('overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeSheets(){
+  sheets.forEach(s => s.classList.remove('show'));
+  $('overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+$('overlay').addEventListener('click', closeSheets);
+
+function askConfirm(title, text, onOk){
+  $('cfmTitle').textContent = title;
+  $('cfmText').textContent = text;
+  onCfmOk = onOk;
+  openSheet($('cfmSheet'));
+}
+$('cfmCancel').addEventListener('click', closeSheets);
+$('cfmOk').addEventListener('click', ()=>{ if(onCfmOk) onCfmOk(); closeSheets(); });
+
+/* ================= Toast ================= */
+let toastTimer = null;
+function toast(msg){
+  const t = $('toastEl');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2000);
+}
+
+/* ================= 行程编辑 ================= */
+function renderTypeGrid(){
+  $('typeGrid').innerHTML = Object.entries(TYPES).map(([k,v])=>`
+    <button class="type-chip ${k===editingType?'sel':''}" data-type="${k}" style="--c:${v.color};--cs:${lighten(v.color,.86)}">
+      <span class="emo">${v.icon}</span>${v.name}
+    </button>`).join('');
+}
+$('typeGrid').addEventListener('click', e=>{
+  const chip = e.target.closest('.type-chip');
+  if(!chip) return;
+  editingType = chip.dataset.type;
+  renderTypeGrid();
+});
+
+function openItemSheet(dayIdx, idx){
+  editing = { day: dayIdx, idx };
+  const d = state.days[dayIdx];
+  if(idx == null){
+    $('itemSheetTitle').textContent = `添加行程 · Day ${dayIdx+1}`;
+    editingType = 'sight';
+    $('fTime').value = '09:00';
+    $('fTitle').value = '';
+    $('fLoc').value = '';
+    $('fGeo').value = '';
+    $('fNote').value = '';
+    $('btnDel').style.display = 'none';
+  }else{
+    const it = d.items[idx];
+    $('itemSheetTitle').textContent = '编辑行程';
+    editingType = it.type;
+    $('fTime').value = it.time;
+    $('fTitle').value = it.title;
+    $('fLoc').value = it.loc || '';
+    $('fGeo').value = it.geo || '';
+    $('fNote').value = it.note || '';
+    $('btnDel').style.display = '';
+  }
+  renderTypeGrid();
+  openSheet($('itemSheet'));
+}
+
+$('btnSave').addEventListener('click', ()=>{
+  const title = $('fTitle').value.trim();
+  if(!title){
+    $('fTitle').classList.add('err');
+    $('fTitle').focus();
+    toast('请填写标题');
+    return;
+  }
+  $('fTitle').classList.remove('err');
+  const time = $('fTime').value || '09:00';
+  const d = state.days[editing.day];
+  const data = {
+    type: editingType,
+    time,
+    title,
+    loc: $('fLoc').value.trim(),
+    geo: $('fGeo').value.trim(),
+    note: $('fNote').value.trim(),
+  };
+  if(editing.idx == null){
+    d.items.push({ id:'i'+Date.now()+Math.floor(Math.random()*999), done:false, ...data });
+  }else{
+    d.items[editing.idx] = { ...d.items[editing.idx], ...data };
+  }
+  d.items.sort((a,b)=> String(a.time).localeCompare(String(b.time)));
+  save(); closeSheets(); renderDay();
+  toast('已保存 ✓');
+});
+
+$('btnDel').addEventListener('click', ()=>{
+  const it = state.days[editing.day].items[editing.idx];
+  askConfirm('删除行程', `确定删除「${it.title}」吗？`, ()=>{
+    state.days[editing.day].items.splice(editing.idx, 1);
+    save(); closeSheets(); renderDay();
+    toast('已删除');
+  });
+});
+
+/* ================= 每日主题编辑 ================= */
+$('ov').addEventListener('click', e=>{
+  if(e.target.closest('[data-act="editDay"]')){
+    const d = state.days[currentDay];
+    $('dTheme').value = d.theme;
+    $('dNote').value = d.note || '';
+    openSheet($('daySheet'));
+  }
+});
+$('btnDaySave').addEventListener('click', ()=>{
+  const d = state.days[currentDay];
+  d.theme = $('dTheme').value.trim() || d.theme;
+  d.note = $('dNote').value.trim();
+  save(); closeSheets(); renderDay();
+  toast('已保存 ✓');
+});
+
+/* ================= 待办交互 ================= */
+$('todoCard').addEventListener('click', e=>{
+  if(e.target.closest('.todo-head')){
+    state.todoOpen = state.todoOpen === false;
+    save(); renderTodos();
+    return;
+  }
+  const chk = e.target.closest('.todo-check');
+  if(chk){
+    const li = chk.closest('.todo-item');
+    const t = state.todos[+li.dataset.i];
+    t.done = !t.done;
+    save(); renderTodos();
+    if(t.done){
+      const left = state.todos.filter(x=>!x.done).length;
+      toast(left ? '又搞定一项 💪 还剩 ' + left + ' 项' : '全部搞定，出发！🎉');
+    }
+  }
+});
+
+$('packCard').addEventListener('click', e=>{
+  if(e.target.closest('.todo-head')){
+    state.packOpen = state.packOpen === false;
+    save(); renderPacking();
+    return;
+  }
+  const chk = e.target.closest('.todo-check');
+  if(chk){
+    const li = chk.closest('.todo-item');
+    const t = state.packing[+li.dataset.i];
+    t.done = !t.done;
+    save(); renderPacking();
+    if(t.done){
+      const left = state.packing.filter(x=>!x.done).length;
+      toast(left ? '又装包一件 🎒 还剩 ' + left + ' 件' : '行李齐活，出发！✈️');
+    }
+  }
+});
+
+/* ================= 时间线交互 ================= */
+$('tabs').addEventListener('click', e=>{
+  const tab = e.target.closest('.tab');
+  if(!tab) return;
+  currentDay = +tab.dataset.i;
+  expandedIds.clear();
+  renderTabs(); renderDay();
+  tab.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+});
+
+$('tl').addEventListener('click', e=>{
+  if(e.target.closest('a')) return; // 地点链接：交给浏览器跳转 Google 地图
+  const row = e.target.closest('.tl-row');
+  if(!row) return;
+  const idx = +row.dataset.idx;
+  const id = row.dataset.id;
+  const it = state.days[currentDay].items[idx];
+  const btn = e.target.closest('[data-act]');
+  const card = row.querySelector('.tl-card');
+
+  if(btn){
+    const act = btn.dataset.act;
+    if(act === 'nav'){
+      window.open('https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(it.geo || it.loc) + '&travelmode=transit', '_blank');
+    }else if(act === 'xhs'){
+      // 关键词：优先用更精准的店名/地点，去掉「早餐·/午餐：/晚餐：」等时段前缀与「东京 」前缀
+      const raw = it.title || it.loc || it.geo || '';
+      const kwText = raw.replace(/^(早午餐|早餐|午餐|晚餐|早饭|午饭|晚饭)[：:·\s]*/, '').replace(/^东京\s*/, '');
+      const kw = encodeURIComponent(kwText);
+      // 优先唤起小红书 App 直接搜索；未装 App 则打开网页版 /search（稳定可用）
+      const scheme = 'xhsdiscover://search/result?keyword=' + kw;
+      const fallback = 'https://www.xiaohongshu.com/search?keyword=' + kw;
+      const t0 = Date.now();
+      const onHide = () => { window.__xhs_appOpened = (Date.now() - t0) < 2500; };
+      document.addEventListener('visibilitychange', onHide, {once: true});
+      try{ window.location.href = scheme; }catch(e){ /* 部分浏览器 scheme 唤起会抛错，忽略即可 */ }
+      setTimeout(()=>{
+        document.removeEventListener('visibilitychange', onHide);
+        if(!window.__xhs_appOpened){
+          window.open(fallback, '_blank');
+          try{ navigator.clipboard.writeText(kwText); toast('已复制「'+kwText+'」，可粘贴到小红书搜索'); }
+          catch(e){ toast('已打开小红书网页搜索'); }
+        }
+      }, 2000);
+    }else if(act === 'edit'){
+      openItemSheet(currentDay, idx);
+    }else if(act === 'del'){
+      askConfirm('删除行程', `确定删除「${it.title}」吗？`, ()=>{
+        state.days[currentDay].items.splice(idx,1);
+        save(); renderDay(); toast('已删除');
+      });
+    }else if(act === 'exp'){
+      card.classList.toggle('expanded');
+      expandedIds.has(id) ? expandedIds.delete(id) : expandedIds.add(id);
+    }
+    return;
+  }
+  // 点击卡片其他区域 → 展开/收起
+  if(e.target.closest('.tl-card')){
+    card.classList.toggle('expanded');
+    expandedIds.has(id) ? expandedIds.delete(id) : expandedIds.add(id);
+  }
+});
+
+/* ================= FAB / 底栏 ================= */
+$('fab').addEventListener('click', ()=> openItemSheet(currentDay, null));
+
+$('bbTips').addEventListener('click', ()=> openSheet($('tipsSheet')));
+$('tipsClose').addEventListener('click', closeSheets);
+
+$('bbExport').addEventListener('click', ()=>{
+  let out = '🗼 东京 6 日行程（2026.11.18 - 11.23）\n';
+  state.days.forEach((d,i)=>{
+    out += `\n【Day ${i+1} · ${d.date} ${d.weekday}】${d.theme}\n`;
+    d.items.forEach(it=>{
+      out += `  ${it.time}  ${it.title}${it.loc ? '（'+it.loc+'）' : ''}\n`;
+    });
+  });
+  $('exportTa').value = out;
+  openSheet($('exportSheet'));
+  setTimeout(()=>{ $('exportTa').select(); }, 350);
+});
+$('exportClose').addEventListener('click', closeSheets);
+$('exportCopy').addEventListener('click', async ()=>{
+  const ok = await copyText($('exportTa').value);
+  toast(ok ? '已复制到剪贴板 ✓' : '复制失败，请长按文本手动复制');
+});
+
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); return true; }
+  catch(e){
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = t; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      return ok;
+    }catch(e2){ return false; }
+  }
+}
+
+$('bbReset').addEventListener('click', ()=>{
+  askConfirm('恢复默认行程', '将清空你的所有修改，恢复到默认行程，确定吗？', ()=>{
+    state = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    currentDay = 0; expandedIds.clear();
+    save(); renderAll();
+    toast('已恢复默认行程 ✓');
+  });
+});
+
+/* ================= 启动 ================= */
+renderAll();
+fetchWeather();
+
+/* ================= 出发倒计时 ================= */
+(function(){
+  var DEPART = new Date('2026-11-18T07:15:00+08:00');
+  var row = document.getElementById('countdownRow');
+  if(!row) return;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    var now = Date.now();
+    var diff = DEPART.getTime() - now;
+    if(diff <= 0){
+      row.innerHTML = '<span class="cd-gone">✈️ 已出发！祝旅途愉快 🎌</span>';
+      clearInterval(timer);
+      return;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+
+    // 超過 1 天：顯示「X天 HH:MM:SS」
+    // 不到 1 天：顯示「HH:MM:SS」
+    if(d > 0){
+      row.innerHTML =
+        '<span class="cd-num">'+d+'</span><span class="cd-unit">天</span> ' +
+        '<span class="cd-num">'+pad(h)+':'+pad(m)+':'+pad(s)+'</span>' +
+        '<span class="cd-suffix">后</span>';
+    } else {
+      row.innerHTML =
+        '<span class="cd-num">'+pad(h)+':'+pad(m)+':'+pad(s)+'</span>' +
+        '<span class="cd-suffix">后出发</span>';
+    }
+  }
+  tick();
+  var timer = setInterval(tick, 1000);
+})();
+
+// 一切正常，隐藏加载层
+var _ld = document.getElementById('loading');
+if(_ld){ _ld.classList.add('hide'); setTimeout(function(){ _ld.style.display='none'; }, 400); }
+</script>
+</body>
+</html>
