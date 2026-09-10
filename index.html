@@ -107,10 +107,22 @@
   }
   .todo-bar{height:3px;background:var(--line);position:relative}
   .todo-bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--red),#D97A5E);transition:width .35s ease;border-radius:99px}
-  .todo-body{max-height:640px;transition:max-height .3s ease;overflow:hidden}
+  /* v91: 待办／行李清单过长时，限制高度并让卡片内部可滚动（页面本身不锁滚动，两种拖法都通） */
+  .todo-body{max-height:min(52vh,460px);transition:max-height .3s ease;overflow:hidden;overscroll-behavior:contain}
   .todo-body.closed{max-height:0}
-  .todo-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-top:1px solid var(--line)}
+  .todo-body.scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  /* 顶到上限时的渐隐提示，让用户知道下面还有内容 */
+  .todo-card.has-more .todo-body.scroll::-webkit-scrollbar{width:4px}
+  .todo-card.has-more .todo-body.scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+  .todo-shadow{
+    height:22px;margin-top:-22px;position:relative;pointer-events:none;
+    opacity:0;transition:opacity .2s ease;
+    background:linear-gradient(to bottom,rgba(255,255,255,0),var(--card));
+  }
+  .todo-card.has-more:not(.at-end) .todo-shadow{opacity:1}
+  .todo-item{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border-top:1px solid var(--line);cursor:pointer}
   .todo-item:first-child{border-top:none}
+  .todo-check{cursor:pointer}
   .todo-check{
     flex:0 0 auto;width:19px;height:19px;margin-top:2px;border-radius:50%;
     border:1.5px solid var(--ink3);background:#fff;padding:0;position:relative;
@@ -125,6 +137,11 @@
   .todo-item.is-done .todo-text{text-decoration:line-through;color:var(--ink3)}
   .todo-item.is-done .todo-tag{color:var(--ink3)}
   .todo-tag{font-size:11.5px;color:var(--ink2);margin-top:2px;line-height:1.5}
+  .todo-text b,.todo-tag b{font-weight:800;color:var(--ink)}
+  .todo-text code,.todo-tag code{
+    font-family:'SF Mono',SFMono-Regular,Menlo,Monaco,'Courier New',monospace;
+    font-size:.94em;background:rgba(0,0,0,.045);border-radius:4px;padding:0 3px;
+  }
   .todo-urgent{
     display:inline-block;background:var(--red);color:#fff;border-radius:5px;
     font-size:10px;font-weight:700;padding:0 5px;margin-right:6px;line-height:17px;vertical-align:1px;letter-spacing:1px;
@@ -398,6 +415,7 @@
     </div>
     <div class="todo-bar"><i id="todoBar" style="width:0%"></i></div>
     <div class="todo-body" id="todoBody"></div>
+    <div class="todo-shadow"></div>
   </section>
 
   <section class="todo-card" id="packCard" style="display:none">
@@ -408,6 +426,7 @@
     </div>
     <div class="todo-bar"><i id="packBar" style="width:0%"></i></div>
     <div class="todo-body" id="packBody"></div>
+    <div class="todo-shadow"></div>
   </section>
 
   <nav class="tabs" id="tabs"></nav>
@@ -502,7 +521,7 @@
 <div class="sheet" id="tipsSheet">
   <div class="grip"></div>
   <h3>东京旅行贴士</h3>
-  <div class="sub">当前行程版本 <b style="color:#C2433D">v90</b> · 2026.09.10 23:05 更新</div>
+  <div class="sub">当前行程版本 <b style="color:#C2433D">v91</b> · 2026.09.11 07:45 更新</div>
   <div class="tips-list">
     <div class="tip"><span class="emo">✈️</span><div><b>航班信息</b>：去程 <b>HX606</b> 香港 01:50 → 成田 07:15（4h25m）；回程成田 20:25 → 香港 00:50+1（5h25m）。<span>香港航空 · 成田 T1 航站楼</span>。</div></div>
     <div class="tip"><span class="emo">🏠</span><div><b>民宿</b>：中央区日本桥小伝馬町 16-6（〒103-0001）；最近车站：日比谷线「小伝馬町」步行 3 分钟、JR「新日本桥」5 分钟、都营浅草线「东日本桥」7 分钟。</div></div>
@@ -575,7 +594,7 @@ function lighten(hex, t){
 
 /* ================= 默认行程数据 ================= */
 const DEFAULT_DATA = {
-  version: 81,
+  version: 82,
   todos: [
     {id:'t1', text:'三鹰之森吉卜力美术馆门票（本版行程已移除该景点）', tag:'🗑 **本版行程已删除吉卜力美术馆**——Day4（11.21）改排「西郊链」（水道桥 10 DIXANS → 池袋 → 高田马场 → 吉祥寺 → 新宿补逛），Day6（11.23）改排「上野 → 银座 → 日比谷 → 上野 → 成田」，**已无吉卜力行程**，此待办作废、可勾掉或忽略。', urgent:false, done:false},
     {id:'t2', text:'生化危机展览门票', tag:'官网购票，留意场馆与入场场次（11.22）', urgent:false, done:false},
@@ -1387,6 +1406,23 @@ function fetchWeather(){
 /* ================= 渲染 ================= */
 function renderAll(){ renderTodos(); renderPacking(); renderTabs(); renderDay(); }
 
+/* v91: 清单文字支持 **粗体** / `代码`（原本只做转义，** 会原样显示，让条目看起来又长又乱） */
+function escMd(str){
+  return esc(String(str==null?'':str))
+    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+}
+
+/* v91: 清单过长时的滚动状态判定 —— 决定要不要开「内部滚动」与底部渐隐 */
+function syncScrollHint(cardId, bodyEl){
+  const card = $(cardId);
+  if(!card || !bodyEl) return;
+  const overflowing = bodyEl.scrollHeight - bodyEl.clientHeight > 4;
+  card.classList.toggle('has-more', overflowing);
+  bodyEl.classList.toggle('scroll', overflowing);
+  card.classList.toggle('at-end', overflowing && bodyEl.scrollTop + bodyEl.clientHeight >= bodyEl.scrollHeight - 4);
+}
+
 function renderTodos(){
   const todos = state.todos || [];
   const card = $('todoCard');
@@ -1402,10 +1438,11 @@ function renderTodos(){
     <div class="todo-item ${t.done?'is-done':''}" data-i="${i}">
       <button class="todo-check" aria-label="完成"></button>
       <div class="todo-main">
-        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${esc(t.text)}</div>
-        ${t.tag ? `<div class="todo-tag">${esc(t.tag)}</div>` : ''}
+        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${escMd(t.text)}</div>
+        ${t.tag ? `<div class="todo-tag">${escMd(t.tag)}</div>` : ''}
       </div>
     </div>`).join('');
+  syncScrollHint('todoCard', $('todoBody'));
 }
 
 function renderPacking(){
@@ -1423,10 +1460,11 @@ function renderPacking(){
     <div class="todo-item ${t.done?'is-done':''}" data-i="${i}">
       <button class="todo-check" aria-label="装包"></button>
       <div class="todo-main">
-        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${esc(t.text)}</div>
-        ${t.tag ? `<div class="todo-tag">${esc(t.tag)}</div>` : ''}
+        <div class="todo-text">${(t.urgent && !t.done) ? '<span class="todo-urgent">急</span>' : ''}${escMd(t.text)}</div>
+        ${t.tag ? `<div class="todo-tag">${escMd(t.tag)}</div>` : ''}
       </div>
     </div>`).join('');
+  syncScrollHint('packCard', $('packBody'));
 }
 
 function renderTabs(){
@@ -1621,15 +1659,19 @@ $('btnDaySave').addEventListener('click', ()=>{
 });
 
 /* ================= 待办交互 ================= */
+/* v91: 滚动渐隐提示随滚动位置更新 */
+$('todoBody').addEventListener('scroll', ()=>{ syncScrollHint('todoCard', $('todoBody')); }, {passive:true});
+$('packBody').addEventListener('scroll', ()=>{ syncScrollHint('packCard', $('packBody')); }, {passive:true});
+window.addEventListener('resize', ()=>{ syncScrollHint('todoCard', $('todoBody')); syncScrollHint('packCard', $('packBody')); });
+
 $('todoCard').addEventListener('click', e=>{
   if(e.target.closest('.todo-head')){
     state.todoOpen = state.todoOpen === false;
     save(); renderTodos();
     return;
   }
-  const chk = e.target.closest('.todo-check');
-  if(chk){
-    const li = chk.closest('.todo-item');
+  const li = e.target.closest('.todo-item');
+  if(li){
     const t = state.todos[+li.dataset.i];
     t.done = !t.done;
     save(); renderTodos();
@@ -1646,9 +1688,8 @@ $('packCard').addEventListener('click', e=>{
     save(); renderPacking();
     return;
   }
-  const chk = e.target.closest('.todo-check');
-  if(chk){
-    const li = chk.closest('.todo-item');
+  const li = e.target.closest('.todo-item');
+  if(li){
     const t = state.packing[+li.dataset.i];
     t.done = !t.done;
     save(); renderPacking();
