@@ -524,7 +524,7 @@
 <div class="sheet" id="tipsSheet">
   <div class="grip"></div>
   <h3>东京旅行贴士</h3>
-  <div class="sub">当前行程版本 <b style="color:#C2433D">v91</b> · 2026.09.11 07:45 更新</div>
+  <div class="sub">当前行程版本 <b style="color:#C2433D">v96</b> · 2026.09.11 12:01 更新</div>
   <div class="tips-list">
     <div class="tip"><span class="emo">✈️</span><div><b>航班信息</b>：去程 <b>HX606</b> 香港 01:50 → 成田 07:15（4h25m）；回程成田 20:25 → 香港 00:50+1（5h25m）。<span>香港航空 · 成田 T1 航站楼</span>。</div></div>
     <div class="tip"><span class="emo">🏠</span><div><b>民宿</b>：中央区日本桥小伝馬町 16-6（〒103-0001）；最近车站：日比谷线「小伝馬町」步行 3 分钟、JR「新日本桥」5 分钟、都营浅草线「东日本桥」7 分钟。</div></div>
@@ -2013,6 +2013,16 @@ fetchWeather();
 // 一切正常，隐藏加载层
 var _ld = document.getElementById('loading');
 if(_ld){ _ld.classList.add('hide'); setTimeout(function(){ _ld.style.display='none'; }, 400); }
+
+/* 版本标签自动同步：永远显示真实的 DEFAULT_DATA.version，避免手写文字漂移 */
+(function(){
+  try{
+    var el = document.querySelector('#tipsSheet .sub b');
+    if(el && typeof DEFAULT_DATA !== 'undefined' && DEFAULT_DATA.version){
+      el.textContent = 'v' + DEFAULT_DATA.version;
+    }
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
